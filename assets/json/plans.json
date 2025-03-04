@@ -1,0 +1,276 @@
+{
+    "plans": {
+        "Recommended": {
+            "R001": {
+                "title": "₹299",
+                "calls": "Truly Unlimited Calls",
+                "data": "1GB/Day",
+                "sms": "100 SMS/Day",
+                "validity": "28 Days",
+                "additional_benefits": [
+                    "Free OTT Subscription (28 Days)",
+                    "Free Music Streaming",
+                    "Priority Customer Support"
+                ]
+            },
+            "R002": {
+                "title": "₹599",
+                "calls": "Truly Unlimited Calls",
+                "data": "1.5GB/Day",
+                "sms": "100 SMS/Day",
+                "validity": "56 Days",
+                "additional_benefits": [
+                    "Free OTT Subscription (56 Days)",
+                    "Free Data Rollover",
+                    "Access to Premium Games"
+                ]
+            },
+            "R003": {
+                "title": "₹899",
+                "calls": "Truly Unlimited Calls",
+                "data": "2GB/Day",
+                "sms": "100 SMS/Day",
+                "validity": "84 Days",
+                "additional_benefits": [
+                    "Free OTT Subscription (84 Days)",
+                    "Exclusive Cashback Offers",
+                    "International Roaming Discounts"
+                ]
+            }
+        },
+        "Popular": {
+            "P001": {
+                "title": "₹249",
+                "calls": "Truly Unlimited Calls",
+                "data": "1GB/Day",
+                "sms": "100 SMS/Day",
+                "validity": "24 Days",
+                "additional_benefits": [
+                    "Free OTT Subscription (24 Days)",
+                    "Free Music Streaming"
+                ]
+            },
+            "P002": {
+                "title": "₹479",
+                "calls": "Truly Unlimited Calls",
+                "data": "1.5GB/Day",
+                "sms": "100 SMS/Day",
+                "validity": "56 Days",
+                "additional_benefits": [
+                    "Free OTT Subscription (56 Days)",
+                    "Priority Customer Support"
+                ]
+            },
+            "P003": {
+                "title": "₹799",
+                "calls": "Truly Unlimited Calls",
+                "data": "2GB/Day",
+                "sms": "100 SMS/Day",
+                "validity": "84 Days",
+                "additional_benefits": [
+                    "Free OTT Subscription (84 Days)",
+                    "Free Data Rollover",
+                    "Access to Exclusive Deals"
+                ]
+            }
+        },
+        "Data Packs": {
+            "D001": {
+                "title": "₹149",
+                "calls": "Local & STD Calls at 1p/sec",
+                "data": "2GB/Day",
+                "sms": "50 SMS/Day",
+                "validity": "28 Days",
+                "additional_benefits": [
+                    "Free Data Rollover"
+                ]
+            },
+            "D002": {
+                "title": "₹349",
+                "calls": "Local & STD Calls at 1p/sec",
+                "data": "3GB/Day",
+                "sms": "50 SMS/Day",
+                "validity": "28 Days",
+                "additional_benefits": [
+                    "Free OTT Subscription (28 Days)"
+                ]
+            },
+            "D003": {
+                "title": "₹549",
+                "calls": "Truly Unlimited Calls",
+                "data": "2.5GB/Day",
+                "sms": "100 SMS/Day",
+                "validity": "56 Days",
+                "additional_benefits": [
+                    "Free OTT Subscription (56 Days)",
+                    "Priority Customer Support"
+                ]
+            }
+        },
+        "Unlimited Packs": {
+            "U001": {
+                "title": "₹399",
+                "calls": "Truly Unlimited Calls",
+                "data": "1.5GB/Day",
+                "sms": "100 SMS/Day",
+                "validity": "28 Days",
+                "additional_benefits": [
+                    "Free OTT Subscription (28 Days)",
+                    "Free Music Streaming"
+                ]
+            },
+            "U002": {
+                "title": "₹699",
+                "calls": "Truly Unlimited Calls",
+                "data": "2GB/Day",
+                "sms": "100 SMS/Day",
+                "validity": "56 Days",
+                "additional_benefits": [
+                    "Free OTT Subscription (56 Days)",
+                    "Free Data Rollover"
+                ]
+            },
+            "U003": {
+                "title": "₹999",
+                "calls": "Truly Unlimited Calls",
+                "data": "3GB/Day",
+                "sms": "100 SMS/Day",
+                "validity": "84 Days",
+                "additional_benefits": [
+                    "Free OTT Subscription (84 Days)",
+                    "Priority Customer Support",
+                    "International Roaming Discounts"
+                ]
+            }
+        },
+        "Talktime Packs": {
+            "T001": {
+                "title": "₹99",
+                "calls": "Talktime: ₹80",
+                "data": "200MB",
+                "sms": "20 SMS",
+                "validity": "28 Days",
+                "additional_benefits": [
+                    "Discount on Data Add-ons"
+                ]
+            },
+            "T002": {
+                "title": "₹199",
+                "calls": "Talktime: ₹160",
+                "data": "500MB",
+                "sms": "30 SMS",
+                "validity": "28 Days",
+                "additional_benefits": [
+                    "Free Music Streaming"
+                ]
+            },
+            "T003": {
+                "title": "₹299",
+                "calls": "Talktime: ₹250",
+                "data": "1GB",
+                "sms": "50 SMS",
+                "validity": "28 Days",
+                "additional_benefits": [
+                    "Access to Premium Games"
+                ]
+            }
+        },
+        "Combo Packs": {
+            "C001": {
+                "title": "₹449",
+                "calls": "Truly Unlimited Calls",
+                "data": "1.5GB/Day",
+                "sms": "100 SMS/Day",
+                "validity": "45 Days",
+                "additional_benefits": [
+                    "Free OTT Subscription (45 Days)",
+                    "Exclusive Cashback Offers"
+                ]
+            },
+            "C002": {
+                "title": "₹649",
+                "calls": "Truly Unlimited Calls",
+                "data": "2GB/Day",
+                "sms": "100 SMS/Day",
+                "validity": "56 Days",
+                "additional_benefits": [
+                    "Free OTT Subscription (56 Days)",
+                    "Free Data Rollover"
+                ]
+            },
+            "C003": {
+                "title": "₹949",
+                "calls": "Truly Unlimited Calls",
+                "data": "2.5GB/Day",
+                "sms": "100 SMS/Day",
+                "validity": "84 Days",
+                "additional_benefits": [
+                    "Free OTT Subscription (84 Days)",
+                    "Access to Exclusive Deals"
+                ]
+            }
+        },
+        "ISD Packs": {
+            "I001": {
+                "title": "₹49",
+                "calls": "ISD Calls at ₹1/min (select countries)",
+                "data": "None",
+                "sms": "None",
+                "validity": "28 Days",
+                "additional_benefits": [
+                    "Discount on International Roaming"
+                ]
+            },
+            "I002": {
+                "title": "₹99",
+                "calls": "ISD Calls at 50p/min (select countries)",
+                "data": "100MB",
+                "sms": "10 SMS",
+                "validity": "28 Days",
+                "additional_benefits": [
+                    "Free Music Streaming"
+                ]
+            },
+            "I003": {
+                "title": "₹199",
+                "calls": "ISD Calls at 30p/min (select countries)",
+                "data": "500MB",
+                "sms": "20 SMS",
+                "validity": "28 Days",
+                "additional_benefits": [
+                    "Priority Customer Support"
+                ]
+            }
+        },
+        "Add-On Packs": {
+            "A001": {
+                "title": "₹29",
+                "calls": "No Additional Calls",
+                "data": "1GB",
+                "sms": "No Additional SMS",
+                "validity": "Existing Plan Validity",
+                "additional_benefits": []
+            },
+            "A002": {
+                "title": "₹49",
+                "calls": "No Additional Calls",
+                "data": "2GB",
+                "sms": "No Additional SMS",
+                "validity": "Existing Plan Validity",
+                "additional_benefits": [
+                    "Free Data Rollover"
+                ]
+            },
+            "A003": {
+                "title": "₹99",
+                "calls": "Talktime: ₹50",
+                "data": "1.5GB",
+                "sms": "20 SMS",
+                "validity": "Existing Plan Validity",
+                "additional_benefits": [
+                    "Access to Premium Games"
+                ]
+            }
+        }
+    }
+  }

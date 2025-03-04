@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobi-Comm</title>
+    <link rel="stylesheet" href="Assests/css/user.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+    <style>
+        @media (max-width: 991px) {
+            #sidebar {
+                display: none;
+            }
+
+            .container-fluid {
+                margin-left: 0 !important;
+                max-width: 100% !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="d-none d-lg-block bg-dark text-white p-4" id="sidebar"
+        style="width: 250px; min-height: 100vh; position: fixed;">
+        <h3 class="text-center py-3">Admin Panel</h3>
+        <div class="list-group">
+            <a href="admindashboard.html"
+                class="list-group-item list-group-item-action bg-dark text-white">Dashboard</a>
+            <a href="user.html" class="list-group-item active list-group-item-action bg-dark text-white">All Users</a>
+            <a href="planmanagement.html" class="list-group-item list-group-item-action bg-dark text-white">Plan
+                Management</a>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <div class="container-fluid" style="margin-left: 250px; max-width: calc(100% - 250px);">
+        <nav class="navbar navbar-dark bg-dark">
+            <div class="container-fluid">
+                <button class="btn btn-dark d-lg-none" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="home.html">Mobi-Comm</a>
+                <div class="dropdown">
+                    <button class="btn btn-dark dropdown-toggle" type="button" id="adminDropdown"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Admin Profile
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+                        <li><a class="dropdown-item" href="admin.html">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Sidebar as Offcanvas in Mobile -->
+        <div class="offcanvas offcanvas-start text-white bg-dark" tabindex="-1" id="offcanvasSidebar">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title">Admin Panel</h5>
+                <button type="button" class="btn-close text-white" data-bs-dismiss="offcanvas"
+                    aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <div class="list-group">
+                    <a href="admindashboard.html"
+                        class="list-group-item list-group-item-action bg-dark text-white">Dashboard</a>
+                    <a href="user.html" class="list-group-item list-group-item-action bg-dark text-white">All Users</a>
+                    <a href="planmanagement.html" class="list-group-item list-group-item-action bg-dark text-white">Plan
+                        Management</a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container">
+            <h4 class="text-center py-3">Users Plan Expires In 3 Days</h4>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>S.No</th>
+                            <th>Name</th>
+                            <th>Mobile Number</th>
+                            <th>Expiry Date</th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userTableBody"></tbody>
+                </table>
+                <nav>
+                    <ul class="pagination justify-content-center" id="pagination"></ul>
+                </nav>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    </div>
+
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const usersPerPage = 7;
+        let currentPage = 1;
+        let users = [];
+
+        async function fetchUsers() {
+            try {
+                const response = await fetch("Assests/json/db.json"); // Fetch from JSON server
+                users = await response.json();
+                renderTable();
+            } catch (error) {
+                console.error('Error fetching users:', error);
+            }
+        }
+
+        function renderTable() {
+            const tableBody = document.getElementById('userTableBody');
+            tableBody.innerHTML = '';
+            const start = (currentPage - 1) * usersPerPage;
+            const end = start + usersPerPage;
+            const paginatedUsers = users.slice(start, end);
+
+            paginatedUsers.forEach((user, index) => {
+                const row = `
+                    <tr>
+                        <td>${start + index + 1}</td>
+                        <td>${user.name}</td>
+                        <td>${user.mobile}</td>
+                        <td>${new Date(user.expiryDate).toLocaleDateString('en-GB')}</td>
+                        <td class="text-center">
+                            <button class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasUser${start + index + 1}">View</button>
+                        </td>
+                    </tr>
+                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasUser${start + index + 1}">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title">User Details - ${user.name}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <p><strong>Name:</strong> ${user.name}</p>
+                            <p><strong>Mobile:</strong> ${user.mobile}</p>
+                            <p><strong>Active Plan:</strong> ${user.activePlan}</p>
+                            <p><strong>Previous Plan:</strong> ${user.previousPlan}</p>
+                            <p><strong>Pack Expiry Date:</strong> ${new Date(user.expiryDate).toLocaleDateString('en-GB')}</p>
+                            <p><strong>Subscription Status:</strong> ${user.status}</p>
+                        </div>
+                    </div>
+                `;
+                tableBody.innerHTML += row;
+            });
+            renderPagination();
+        }
+
+        function renderPagination() {
+            const pagination = document.getElementById('pagination');
+            pagination.innerHTML = '';
+            const totalPages = Math.ceil(users.length / usersPerPage);
+
+            for (let i = 1; i <= totalPages; i++) {
+                pagination.innerHTML += `<li class="page-item ${i === currentPage ? 'active' : ''}"><a class="page-link" href="#" onclick="changePage(${i})">${i}</a></li>`;
+            }
+        }
+
+        function changePage(page) {
+            currentPage = page;
+            renderTable();
+        }
+
+        fetchUsers();
+    </script>
+</body>
+
+</html>

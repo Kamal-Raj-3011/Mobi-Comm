@@ -1,0 +1,108 @@
+@font-face {
+    font-family: poppins;
+    src: url("../fonts/Poppins-Medium.ttf");
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: poppins;
+}
+
+.section1{
+    /* background-image: url(../img/S1-Bg.png); */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+/* RECHARGE BUTTON CSS */
+.recharge-btn {
+    background: purple;
+    color: white;
+    border: none;
+    transition: all 0.4s ease-in-out;
+}
+
+.recharge-btn:hover {
+    transform: translateY(-3px);
+}
+
+.recharge-content {
+    transition: transform 0.4s ease-in-out;
+}
+
+.icon-effect {
+    opacity: 0;
+    transform: translateX(10px);
+    margin-left: 8px;
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+}
+
+.recharge-btn:hover .icon-effect {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* POPULAR CARD */
+
+.card {
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.offer-badge {
+    background-color: #ffcc00;
+    color: black;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 5px 10px;
+    display: inline-block;
+}
+
+.offer-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+}
+
+/* RECHARGE PROCESS */
+
+
+.step-box {
+    width: 160px; /* Ensures equal step size */
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.step-circle {
+    width: 65px;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 20px;
+}
+
+.chevron-box {
+    width: 40px;
+    text-align: center;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 576px) {
+    .step-box {
+        width: 130px; /* Adjusts size for smaller screens */
+    }
+    .chevron-box {
+        width: 30px;
+    }
+}
+
+.journey-btn:hover{
+    background: #2eff38 !important;
+    color: #fff;
+}

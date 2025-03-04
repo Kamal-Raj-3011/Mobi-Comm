@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobi-Comm Prepaid Plans</title>
+    <link rel="stylesheet" href="prepaidplans.css">
+    <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+        #plan-content {
+            overflow-x: hidden; /* Prevents horizontal scrolling */
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<header class="sticky-top shadow-sm bg-white">
+    <div class="container py-3">
+        <div class="d-flex justify-content-between align-items-center">
+            <nav class="d-none d-md-flex gap-4">
+                <a href="../../index.html" class="text-dark nav-link">Home</a>
+                <a href="../../recharge.html" class="text-dark nav-link">Recharge</a>
+                <a href="../../prepaidplans.html" class="text-dark nav-link active fw-bold">Prepaid Plans</a>
+            </nav>
+            <div class="text-center">
+                <img src="../img/Logo.png" alt="Company Logo" class="img-fluid" style="max-height: 45px;">
+            </div>
+            <nav class="d-none d-md-flex gap-4">
+                <a href="../../about.html" class="text-dark nav-link">About Us</a>
+                <a href="../../contact.html" class="text-dark nav-link">Contact Us</a>
+                <a href="../../account.html" class="text-dark nav-link">Account</a>
+            </nav>
+            <a href="#" class="d-md-none text-dark">
+                <i class="fa-solid fa-user fs-4"></i>
+            </a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section class="container-fluid py-5" style="height: 85vh;">
+        <div class="container">
+            <div class="row">
+                <aside class="col-md-3">
+                    <input type="text" class="form-control mb-3" placeholder="Search By Amount">
+                    <nav id="plan-scrollspy" class="nav flex-column bg-light p-3 rounded mt-3"></nav>
+                </aside>
+                <div class="col-md-9">
+                    <div id="plan-content" class="row g-4"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Modal for More Details -->
+<div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content border-0 shadow-lg rounded-4">
+            <div class="modal-header bg-info text-white">
+                <h5 class="modal-title fw-bold">Plan Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4" id="modalPlanDetails">
+                <div class="card shadow-sm p-3 rounded-4">
+                    <div class="card-body">
+                        <h5 class="fw-bold text-dark" id="planTitle"></h5>
+                        <p class="text-muted" id="planValidity"></p>
+                        <p class="text-muted" id="planData"></p>
+                        <p class="text-muted" id="planCalls"></p>
+                        <p class="text-muted" id="planSMS"></p>
+                        <h6 class="fw-bold mt-3">Additional Benefits:</h6>
+                        <ul id="additionalBenefits" class="list-unstyled text-muted"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function validateNumber() {
+        const number = document.getElementById("mobileNumber").value;
+        if (number.length === 10 && !isNaN(number)) {
+            window.location.href = "recharge.html";
+        } else {
+            alert("Please enter a valid 10-digit mobile number.");
+        }
+    }
+</script>
+
+<script src="../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="prepaidplans.js"></script>
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobi-Comm</title>
+    <link rel="stylesheet" href="Assests/css/planmanagement.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+    <style>
+        @media (max-width: 991px) {
+            #sidebar {
+                display: none;
+            }
+
+            .container-fluid {
+                margin-left: 0 !important;
+                max-width: 100% !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="d-none d-lg-block bg-dark text-white p-4" id="sidebar"
+        style="width: 250px; min-height: 100vh; position: fixed;">
+        <h3 class="text-center py-3">Admin Panel</h3>
+        <div class="list-group">
+            <a href="admindashboard.html"
+                class="list-group-item list-group-item-action bg-dark text-white">Dashboard</a>
+            <a href="user.html" class="list-group-item list-group-item-action bg-dark text-white">All Users</a>
+            <a href="planmanagement.html" class="list-group-item active list-group-item-action bg-dark text-white">Plan
+                Management</a>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <div class="container-fluid" style="margin-left: 250px; max-width: calc(100% - 250px);">
+        <nav class="navbar navbar-dark bg-dark">
+            <div class="container-fluid">
+                <button class="btn btn-dark d-lg-none" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="home.html">Mobi-Comm</a>
+                <div class="dropdown">
+                    <button class="btn btn-dark dropdown-toggle" type="button" id="adminDropdown"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Admin Profile
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+                        <li><a class="dropdown-item" href="admin.html">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Sidebar as Offcanvas in Mobile -->
+        <div class="offcanvas offcanvas-start text-white bg-dark" tabindex="-1" id="offcanvasSidebar">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title">Admin Panel</h5>
+                <button type="button" class="btn-close text-white" data-bs-dismiss="offcanvas"
+                    aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <div class="list-group">
+                    <a href="admindashboard.html"
+                        class="list-group-item list-group-item-action bg-dark text-white">Dashboard</a>
+                    <a href="user.html" class="list-group-item list-group-item-action bg-dark text-white">All Users</a>
+                    <a href="planmanagement.html" class="list-group-item list-group-item-action bg-dark text-white">Plan
+                        Management</a>
+                </div>
+            </div>
+        </div>
+        <div class="container mt-4">
+
+            <!-- Title -->
+            <h2 class="mb-4 text-center">Plan Management</h2>
+
+            <!-- Add Plan Button -->
+            <div class="text-end mb-3">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPlanModal">
+                    Add Plan <i class="fas fa-plus"></i>
+                </button>
+            </div>
+
+            <!-- Plans Table -->
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>S.No</th>
+                            <th>Plan Category</th>
+                            <th>Price</th>
+                            <th>Data</th>
+                            <th>Calls</th>
+                            <th>Validity</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="plansTableBody">
+                        <!-- Dynamic Data - Recharge Plans -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Modal to Add a New Plan -->
+        <div class="modal fade" id="addPlanModal" tabindex="-1" aria-labelledby="addPlanModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addPlanModalLabel">Add New Recharge Plan</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="addPlanForm">
+                            <div class="mb-3">
+                                <label for="planId" class="form-label">Plan ID</label>
+                                <input type="text" class="form-control" id="planId" placeholder="Enter Plan ID"
+                                    required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="planCategory" class="form-label">Plan Category</label>
+                                <select class="form-select" id="planCategory" required>
+                                    <option value="">Select Plan Category</option>
+                                    <option value="Popular Plan">Popular Plan</option>
+                                    <option value="Data Addon">Data Addon</option>
+                                    <option value="Super Savers">Super Savers</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="price" class="form-label">Price</label>
+                                <input type="number" class="form-control" id="price" placeholder="Enter price" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="data" class="form-label">Data (GB)</label>
+                                <input type="number" class="form-control" id="data" placeholder="Enter data in GB"
+                                    required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="calls" class="form-label">Calls</label>
+                                <input type="text" class="form-control" id="calls" placeholder="Enter call limit"
+                                    required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="validity" class="form-label">Validity (Days)</label>
+                                <input type="number" class="form-control" id="validity"
+                                    placeholder="Enter validity in days" required>
+                            </div>
+                            <div class="mb-3">
+                                <button type="submit" class="btn btn-success">Add Plan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const plansTableBody = document.getElementById('plansTableBody');
+
+        // Fetch plans from JSON server
+        async function fetchPlans() {
+            try {
+                const response = await fetch("Assests/json/addplans.json");
+                const data = await response.json();
+                renderPlansTable(data);
+            } catch (error) {
+                console.error('Error fetching plans:', error);
+            }
+        }
+
+        // Render plans table
+        function renderPlansTable(plans) {
+            plansTableBody.innerHTML = '';
+            Object.entries(plans).forEach(([id, plan], index) => {
+                const row = `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${plan.category}</td>
+                        <td>&#8377;${plan.details.price}</td>
+                        <td>${plan.details.data}</td>
+                        <td>${plan.details.calls}</td>
+                        <td>${plan.validity}</td>
+                        <td class="text-center">
+                            <button class="btn btn-info" onclick="editPlan('${id}')">Edit</button>
+                            <button class="btn btn-danger" onclick="deletePlan('${id}')">Delete</button>
+                        </td>
+                    </tr>
+                `;
+                plansTableBody.innerHTML += row;
+            });
+        }
+
+        // Edit plan function
+        function editPlan(planId) {
+            alert(`Edit functionality for Plan ID: ${planId} coming soon!`);
+        }
+
+        // Delete plan function
+        async function deletePlan(planId) {
+            try {
+                await fetch(`http://localhost:4000/plans/${planId}`, {
+                    method: 'DELETE'
+                });
+                fetchPlans(); // Refresh table
+            } catch (error) {
+                console.error('Error deleting plan:', error);
+            }
+        }
+
+        // Add new plan
+        document.getElementById('addPlanForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const planId = document.getElementById('planId').value;
+            const newPlan = {
+                id: planId,
+                category: document.getElementById('planCategory').value,
+                details: {
+                    price: parseFloat(document.getElementById('price').value),
+                    data: `${parseFloat(document.getElementById('data').value)}GB`,
+                    calls: document.getElementById('calls').value
+                },
+                validity: `${parseInt(document.getElementById('validity').value)} Days`
+            };
+
+            try {
+                await fetch('http://localhost:4000/plans', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(newPlan)
+                });
+
+                fetchPlans(); // Refresh table
+                document.getElementById('addPlanForm').reset();
+                const addPlanModal = bootstrap.Modal.getInstance(document.getElementById('addPlanModal'));
+                addPlanModal.hide();
+            } catch (error) {
+                console.error('Error adding plan:', error);
+            }
+        });
+
+        // Load plans initially
+        fetchPlans();
+    </script>
+
+</body>
+
+</html>

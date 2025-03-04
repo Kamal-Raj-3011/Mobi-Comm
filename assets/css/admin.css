@@ -1,0 +1,48 @@
+@font-face {
+    font-family: poppins;
+    src: url("../fonts/Poppins-Medium.ttf");
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: poppins;
+}
+
+body{
+    /* background-color: rgb(73, 166, 216) !important; */
+    background-image: url(../img/Admin\ Login\ BG.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+/* .sample{
+    max-width: 100%;
+    width: auto; 
+} */
+
+/* Centered 2 */
+.brandlogo{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 130px;
+    text-align: center;
+    margin: auto;
+}
+
+.brandlogo>img{
+    max-width: 62px;
+    height: auto;
+}
+
+/* Centered 3 */
+
+/* @media(min-width:992px) {
+    .navbar-expand-lg .navbar-collapse{
+        width: 100%;
+    }
+} */

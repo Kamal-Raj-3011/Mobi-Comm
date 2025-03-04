@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobi-Comm</title>
+    <link rel="stylesheet" href="Assests/css/admin.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+
+    <!-- HEADER STARTS -->
+    <header>
+        <div class="container-fluid justify-content-center d-flex pt-4 pb-2">
+            <a href="home.html">
+                <img src="Assests/img/Logo.png" alt="" class="rounded-circle" height="55px" width="55px">
+            </a>
+        </div>
+        <div class="container-fluid justify-content-center d-flex">
+            <a href="home.html" class="text-decoration-none text-black"><h4>Mobi-Comm</h4></a>
+        </div>
+    </header>
+
+    <!-- MAIN SECTION STARTS -->
+    <main>
+        <section class="container mt-4 mb-5 rounded section1">
+            <div class="container p-4 justify-content-center d-flex flex-column rounded" style="background-color: #ffffff; box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;">
+                <div class="row w-100">
+                    <!-- Image Section -->
+                    <div class="col-12 col-md-6 text-center">
+                        <img src="Assests/img/Admin Login.png" alt="" class="img-fluid pe-4" height="400px" width="400px">
+                    </div>
+
+                    <!-- Form Section -->
+                    <div class="col-12 col-md-6 p-5">
+                        <h4 class="text-center pb-3 fst-italic">Admin Login</h4>
+                        <form class="form" id="adminLoginForm">
+                            <div class="mb-3">
+                                <label for="adminName" class="form-label">Admin Name</label>
+                                <input type="text" class="form-control" id="adminName" required>
+                                <span id="adminNameError" style="color: red; display: none;"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="adminPassword" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="adminPassword" required>
+                                <span id="adminPasswordError" style="color: red; display: none;"></span>
+                            </div>
+
+                            <div class="text-center pt-4">
+                                <button type="submit" class="btn btn-info">Login</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- MAIN SECTION ENDS -->
+
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        // Define the valid username and password
+        const validUsername = "admin";
+        const validPassword = "admin@321";
+
+        // Validation for the admin login form
+        document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();  // Prevent the form from submitting
+
+            // Get values from the input fields
+            const adminName = document.getElementById('adminName').value.trim();
+            const adminPassword = document.getElementById('adminPassword').value.trim();
+
+            // Clear any previous error messages
+            document.getElementById('adminNameError').style.display = 'none';
+            document.getElementById('adminPasswordError').style.display = 'none';
+
+            let isValid = true;
+
+            // Check if both fields are not empty
+            if (adminName === '' || adminPassword === '') {
+                if (adminName === '') {
+                    document.getElementById('adminNameError').innerText = 'Admin Name is required!';
+                    document.getElementById('adminNameError').style.display = 'block';
+                }
+                if (adminPassword === '') {
+                    document.getElementById('adminPasswordError').innerText = 'Password is required!';
+                    document.getElementById('adminPasswordError').style.display = 'block';
+                }
+                isValid = false;
+            }
+
+            // Basic password length check
+            if (adminPassword.length < 6) {
+                document.getElementById('adminPasswordError').innerText = 'Password must be at least 6 characters long.';
+                document.getElementById('adminPasswordError').style.display = 'block';
+                isValid = false;
+            }
+
+            // Check for valid username and password
+            if (adminName !== validUsername) {
+                document.getElementById('adminNameError').innerText = 'Invalid Admin Name.';
+                document.getElementById('adminNameError').style.display = 'block';
+                isValid = false;
+            }
+
+            if (adminPassword !== validPassword) {
+                document.getElementById('adminPasswordError').innerText = 'Invalid Password.';
+                document.getElementById('adminPasswordError').style.display = 'block';
+                isValid = false;
+            }
+
+            // If validation passes, simulate successful login
+            if (isValid) {
+                window.location.href = 'admindashboard.html';  // Redirect to admin dashboard
+            }
+        });
+    </script>
+
+</body>
+
+</html>

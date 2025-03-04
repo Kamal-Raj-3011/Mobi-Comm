@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobi-Comm Recharge</title>
+    <link rel="stylesheet" href="assets/css/recharge.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+</head>
+<body>
+
+<!-- HEADER STARTS -->
+
+<header class="sticky-top shadow-sm" style="background: #ffffff;">
+    <div class="container py-3">
+        <div class="d-flex justify-content-between align-items-center">
+
+            <!-- Left Section (Desktop) -->
+            <nav class="d-none d-md-flex gap-4">
+                <a href="index.html" class="text-dark text-decoration-none nav-link">Home</a>
+                <a href="recharge.html" class="text-dark text-decoration-none nav-link active fw-bold" aria-current="page">Recharge</a>
+                <a href="prepaidplans.html" class="text-dark text-decoration-none nav-link">Prepaid Plans</a>
+            </nav>
+
+            <!-- Mobile View: Hamburger Menu -->
+            <button class="btn d-md-none" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
+                <i class="fa-solid fa-bars fs-4 text-dark"></i>
+            </button>
+
+            <!-- Logo (Centered) -->
+            <div class="text-center">
+                <img src="assets/img/Logo.png" alt="Company Logo" class="img-fluid" style="max-height: 45px;">
+            </div>
+
+            <!-- Right Section (Desktop) -->
+            <nav class="d-none d-md-flex gap-4">
+                <a href="about.html" class="text-dark text-decoration-none nav-link">About Us</a>
+                <a href="contact.html" class="text-dark text-decoration-none nav-link">Contact Us</a>
+                <a href="account.html" class="text-dark text-decoration-none nav-link">Account</a>
+            </nav>
+
+            <!-- Mobile View: Account (Right) -->
+            <a href="#" class="d-md-none text-dark text-decoration-none">
+                <i class="fa-solid fa-user fs-4"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- MOBILE NAVBAR STARTS -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">Menu</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body d-flex flex-column gap-3">
+            <a href="#" class="text-dark nav-link active fw-bold" aria-current="page">Home</a>
+            <a href="#" class="text-dark text-decoration-none nav-link">Recharge</a>
+            <a href="#" class="text-dark text-decoration-none nav-link">Prepaid Plans</a>
+            <a href="#" class="text-dark text-decoration-none nav-link">About Us</a>
+            <a href="#" class="text-dark text-decoration-none nav-link">Contact Us</a>
+            <a href="#" class="text-dark text-decoration-none nav-link">Account</a>
+        </div>
+    </div>
+    <!-- MOBILE NAVBAR ENDS -->
+</header>
+
+<!-- HEADER ENDS -->
+
+<!-- MAIN SECTION STARTS -->
+<main>
+    <!-- SECTION 1: Mobile Recharge Form -->
+    <section class="container-fluid py-5" style="background: #ffffff;">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Left Side (Illustration) -->
+                <div class="col-lg-6 text-center">
+                    <video width="90%" height="auto" autoplay muted>
+                        <source src="assets/img/Mobile login.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+                <!-- Right Side (Recharge Form) -->
+                <div class="col-12 col-lg-6">
+                    <div class="card shadow-lg p-4 rounded-4 border-0 bg-white">
+                        <h3 class="text-center fw-bold text-dark">Fast & Secure Mobile Recharge</h3>
+                        <p class="text-center text-muted">Recharge instantly and stay connected</p>
+                        
+                        <div class="text-center mb-3">
+                            <span class="badge bg-warning text-dark fs-6 py-2 px-4 rounded-pill">Prepaid</span>
+                        </div>
+
+                        <form class="mt-3" onsubmit="return validateNumber(event)">
+                            <!-- Mobile Number Input -->
+                            <div class="input-group mb-3">
+                                <span class="input-group-text text-white bg-warning">
+                                    <i class="fa-solid fa-phone"></i>
+                                </span>
+                                <input type="text" id="mobileNumber" class="form-control form-control-lg" required
+                                    placeholder="Enter Mobile Number">
+                            </div>
+                            <p id="error-message" class="text-danger small text-center"></p>
+
+                            <!-- Recharge Button -->
+                            <button type="submit" class="btn btn-lg w-100 fw-bold py-2 rounded-5 text-dark"
+                                style="background: #ffc600; border: none;">
+                                <i class="fa-solid fa-bolt"></i> Recharge Now
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: View Plans -->
+    <section class="container-fluid py-5 bg-light">
+        <div class="container">
+            <h1 class="text-center fw-bold mb-4 text-dark">View Plans</h1>
+
+            <!-- Scrollable Tabs Navigation -->
+            <div class="position-relative">
+                <button class="btn btn-light position-absolute start-0 top-50 translate-middle-y shadow-sm" id="scrollLeft">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+
+                <div class="overflow-hidden">
+                    <ul class="nav nav-pills flex-nowrap gap-2 px-5 overflow-auto" id="plan-tabs" role="tablist" 
+                        style="white-space: nowrap; scrollbar-width: none;">
+                    </ul>
+                </div>
+
+                <button class="btn btn-light position-absolute end-0 top-50 translate-middle-y shadow-sm" id="scrollRight">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="tab-content p-4 bg-white rounded shadow-lg mt-3" id="plan-content">
+                <!-- Plans will be dynamically injected here -->
+            </div>
+        </div>
+
+        <!-- Toast Notification -->
+        <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1050">
+            <div id="validationToast" class="toast align-items-center text-white bg-secondary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body fw-bold">
+                        <i class="fa-solid text-warning fa-triangle-exclamation me-2"></i> Validate Your Number
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- MAIN SECTION ENDS -->
+
+<!-- GO TO TOP BUTTON STARTS -->
+    <div class="position-fixed bottom-0 end-0 p-4 plans">
+        <a href="#" class="btn btn-dark shadow"><i class="fa-solid fa-chevron-up"></i></a>
+    </div>
+<!-- GO TO TOP BUTTON ENDS-->
+
+<!-- FOOTER START -->
+<footer class="footer border-top shadow-lg py-5" style="background-color: #f8f9fa; color: #1e1e1e;">
+    <div class="container">
+        <div class="row text-center text-md-start align-items-start g-4">
+            <!-- Company Info -->
+            <div class="col-md-4">
+                <a class="navbar-brand d-block mb-3 mx-auto mx-md-0" href="#">
+                    <img src="assets/img/Logo.png" alt="Mobi-Comm Logo" style="height: 80px; width: 80px;">
+                </a>
+                <p class="mb-0" style="font-size: 1.1rem; line-height: 1.6; color: #1e1e1e;">
+                    Mobi-Comm delivers affordable, reliable mobile services, keeping you connected with cutting-edge solutions.
+                </p>
+                <hr class="mobile-divider d-md-none" style="border-top: 1px solid rgba(0, 0, 0, 0.1); margin: 1.5rem 0;">
+            </div>
+
+            <!-- Quick Links -->
+            <div class="col-md-3 ps-md-3 d-flex justify-content-center justify-content-md-start align-items-center align-items-md-start">
+                <div>
+                    <h5 class="fw-bold mb-3" style="color: #1e1e1e;">Quick Links</h5>
+                    <ul class="nav flex-column gap-2">
+                        <li class="nav-item">
+                            <a href="home.html" class="nav-link p-0 d-flex align-items-center" style="color: #1e1e1e; transition: color 0.3s ease;" onmouseover="this.style.color='#ffc600';" onmouseout="this.style.color='#1e1e1e';">
+                                <i class="fa-solid fa-house me-2" style="color: #1e1e1e;"></i> Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="recharge.html" class="nav-link p-0 d-flex align-items-center" style="color: #1e1e1e; transition: color 0.3s ease;" onmouseover="this.style.color='#ffc600';" onmouseout="this.style.color='#1e1e1e';">
+                                <i class="fa-solid fa-bolt me-2" style="color: #1e1e1e;"></i> Recharge
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="viewplans.html" class="nav-link p-0 d-flex align-items-center" style="color: #1e1e1e; transition: color 0.3s ease;" onmouseover="this.style.color='#ffc600';" onmouseout="this.style.color='#1e1e1e';">
+                                <i class="fa-solid fa-list me-2" style="color: #1e1e1e;"></i> View Plans
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="about.html" class="nav-link p-0 d-flex align-items-center" style="color: #1e1e1e; transition: color 0.3s ease;" onmouseover="this.style.color='#ffc600';" onmouseout="this.style.color='#1e1e1e';">
+                                <i class="fa-solid fa-info-circle me-2" style="color: #1e1e1e;"></i> About Us
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="contact.html" class="nav-link p-0 d-flex align-items-center" style="color: #1e1e1e; transition: color 0.3s ease;" onmouseover="this.style.color='#ffc600';" onmouseout="this.style.color='#1e1e1e';">
+                                <i class="fa-solid fa-envelope me-2" style="color: #1e1e1e;"></i> Contact Us
+                            </a>
+                        </li>
+                    </ul>
+                    <hr class="mobile-divider d-md-none" style="border-top: 1px solid rgba(0, 0, 0, 0.1); margin: 1.5rem 0;">
+                </div>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="col-md-3 ps-md-3">
+                <h5 class="fw-bold mb-3" style="color: #1e1e1e;">Get in Touch</h5>
+                <ul class="list-unstyled" style="color: #1e1e1e; font-size: 1rem;">
+                    <li class="mb-2">
+                        <i class="fa-solid fa-phone me-2" style="color: #1e1e1e;"></i>
+                        <a href="tel:+18005551234" style="color: #1e1e1e; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#ffc600';" onmouseout="this.style.color='#1e1e1e';">+1-800-555-1234</a>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-envelope me-2" style="color: #1e1e1e;"></i>
+                        <a href="mailto:support@mobi-comm.com" style="color: #1e1e1e; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#ffc600';" onmouseout="this.style.color='#1e1e1e';">support@mobi-comm.com</a>
+                    </li>
+                </ul>
+                <hr class="mobile-divider d-md-none" style="border-top: 1px solid rgba(0, 0, 0, 0.1); margin: 1.5rem 0;">
+            </div>
+
+            <!-- Social Media -->
+            <div class="col-md-2">
+                <h5 class="fw-bold mb-3" style="color: #1e1e1e;">Connect with Us</h5>
+                <p class="mb-3" style="color: #1e1e1e; font-size: 1rem;">Stay updated with exclusive offers and news!</p>
+                <div class="d-flex justify-content-center justify-content-md-start gap-2">
+                    <a href="#" class="btn rounded-circle shadow-sm" style="background-color: #fff7d1; color: #1e1e1e; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#ffc600';" onmouseout="this.style.backgroundColor='#fff7d1';">
+                        <i class="fa-brands fa-x-twitter"></i>
+                    </a>
+                    <a href="#" class="btn rounded-circle shadow-sm" style="background-color: #fff7d1; color: #1e1e1e; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#ffc600';" onmouseout="this.style.backgroundColor='#fff7d1';">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="#" class="btn rounded-circle shadow-sm" style="background-color: #fff7d1; color: #1e1e1e; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#ffc600';" onmouseout="this.style.backgroundColor='#fff7d1';">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+                </div>
+                <hr class="mobile-divider d-md-none" style="border-top: 1px solid rgba(0, 0, 0, 0.1); margin: 1.5rem 0;">
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="text-center border-top pt-3 mt-4" style="border-color: rgba(0, 0, 0, 0.1);">
+            <p class="mb-0" style="color: #1e1e1e; font-size: 0.9rem;">
+                © 2025 Mobi-Comm, Inc. All rights reserved. | 
+                <a href="/privacy" style="color: #1e1e1e; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#ffc600';" onmouseout="this.style.color='#1e1e1e';">Privacy Policy</a> | 
+                <a href="/terms" style="color: #1e1e1e; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#ffc600';" onmouseout="this.style.color='#1e1e1e';">Terms of Service</a>
+            </p>
+        </div>
+    </div>
+</footer>
+<!-- FOOTER END -->
+
+
+<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+<script src="assets/js/script.js"></script>
+<script src="assets/js/recharge.js"></script>
+
+</body>
+</html>

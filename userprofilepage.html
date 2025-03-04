@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobi-Comm | User Profile</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+    <style>
+        .bg-gradient-custom {
+            background: linear-gradient(135deg, #007bff, #00d4ff);
+        }
+        .card-premium {
+            border-radius: 15px;
+            border: none;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-premium:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        .form-control-disabled {
+            background-color: #f8f9fa;
+            border-color: #e9ecef;
+            cursor: not-allowed;
+        }
+        .toast-custom {
+            background-color: #28a745;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-light">
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand fw-bold text-white" href="#">Mobi-Comm</a>
+            <div class="dropdown">
+                <button class="btn btn-outline-light dropdown-toggle fw-medium" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user me-2"></i> Kavan
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                    <li><a class="dropdown-item" href="userviewprofile.html">View Profile</a></li>
+                    <li><a class="dropdown-item text-danger" href="home.html">Logout</a></li>
+                </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main>
+        <section class="container-fluid mt-3" style="max-width: 85vw; margin-left: auto; margin-right: auto;">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8 col-lg-6">
+                    <!-- Profile Card -->
+                    <div class="card card-premium p-4 bg-white">
+                        <div class="card-body">
+                            <h3 class="text-primary fw-bold text-center mb-4">User Profile</h3>
+
+                            <!-- Profile Image and Name -->
+                            <div class="text-center mb-4">
+                                <i class="fas fa-user-circle fa-4x text-muted mb-2"></i>
+                                <h5 class="fw-bold text-dark">Kavan</h5>
+                            </div>
+
+                            <!-- Profile Details -->
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold text-dark">Mobile Number</label>
+                                <input type="tel" class="form-control form-control-disabled" value="8148074706" disabled>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold text-dark">Service Type</label>
+                                <input type="text" class="form-control form-control-disabled" value="Prepaid" disabled>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold text-dark">Email Address</label>
+                                <div class="input-group">
+                                    <input type="email" class="form-control" id="emailField" value="kavan@example.com" disabled>
+                                    <button class="btn btn-primary" onclick="enableEmailEdit()">Edit</button>
+                                </div>
+                                <div class="text-danger mt-1" id="emailError" style="display:none;">Enter a valid email address</div>
+                            </div>
+
+                            <div class="text-center mt-4">
+                                <button class="btn btn-primary px-4 fw-bold" onclick="validateAndSave()">Save Changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Toast Notification -->
+    <div class="position-fixed top-0 end-0 p-3" style="z-index: 1050">
+        <div id="emailToast" class="toast toast-custom align-items-center text-white" role="alert">
+            <div class="d-flex">
+                <div class="toast-body">
+                    Email updated successfully!
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function enableEmailEdit() {
+            document.getElementById("emailField").disabled = false;
+            document.getElementById("emailField").focus();
+        }
+
+        function validateAndSave() {
+            let emailInput = document.getElementById("emailField");
+            let emailError = document.getElementById("emailError");
+            let emailValue = emailInput.value.trim();
+
+            let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+            if (!emailPattern.test(emailValue)) {
+                emailError.style.display = "block";
+            } else {
+                emailError.style.display = "none";
+                emailInput.disabled = true;
+
+                // Show success toast
+                let toast = new bootstrap.Toast(document.getElementById("emailToast"));
+                toast.show();
+            }
+        }
+    </script>
+
+    <script src="Assests/js/numberValidation.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

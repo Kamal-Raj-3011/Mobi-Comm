@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobi-Comm - Admin Dashboard</title>
+    <link rel="stylesheet" href="assets/css/admindashboard.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script src="node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+    <style>
+        @media (max-width: 991px) {
+            #sidebar {
+                display: none;
+            }
+            .container-fluid {
+                margin-left: 0 !important;
+                max-width: 100% !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="d-none d-lg-block bg-dark text-white p-4" id="sidebar" style="width: 250px; min-height: 100vh; position: fixed;">
+        <h3 class="text-center py-3">Admin Panel</h3>
+        <div class="list-group">
+            <a href="admindashboard.html" class="list-group-item active list-group-item-action bg-dark text-white">Dashboard</a>
+            <a href="user.html" class="list-group-item list-group-item-action bg-dark text-white">All Users</a>
+            <a href="planmanagement.html" class="list-group-item list-group-item-action bg-dark text-white">Plan Management</a>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <div class="container-fluid" style="margin-left: 250px; max-width: calc(100% - 250px);">
+        <nav class="navbar navbar-dark bg-dark">
+            <div class="container-fluid">
+                <button class="btn btn-dark d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="home.html">Mobi-Comm</a>
+                <div class="dropdown">
+                    <button class="btn btn-dark dropdown-toggle" type="button" id="adminDropdown" data-bs-toggle="dropdown">
+                        Admin Profile
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="admin.html">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Dashboard Summary -->
+        <div class="row mt-4">
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h5>Total No. of Users</h5>
+                    </div>
+                    <div class="card-body text-center">
+                        <h2>1,50,000</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-success text-white">
+                        <h5>No. of Active Users</h5>
+                    </div>
+                    <div class="card-body text-center">
+                        <h2>1,20,000</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Users Plan Expiring in 3 Days -->
+        <div class="container">
+            <h4 class="text-center py-3">Users Plan Expires In 3 Days</h4>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>S.No</th>
+                            <th>Name</th>
+                            <th>Mobile Number</th>
+                            <th>Expiry Date</th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userTableBody"></tbody>
+                </table>
+                <nav>
+                    <ul class="pagination justify-content-center" id="pagination"></ul>
+                </nav>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const usersPerPage = 4;
+        let currentPage = 1;
+
+        // Hardcoded Users Data
+        let users = [
+            { id: 1, name: "Kavan", mobile: "8148074706", expiryDate: "2025-03-01", activePlan: "₹199 - 2GB/Month", previousPlan: "₹249 - 1.5GB/Day", status: "Active" },
+            { id: 2, name: "Jane Smith", mobile: "9123456780", expiryDate: "2025-03-02", activePlan: "₹299 - 3GB/Day", previousPlan: "₹399 - 2GB/Day", status: "Active" },
+            { id: 3, name: "Michael Lee", mobile: "9345678901", expiryDate: "2025-03-02", activePlan: "₹349 - 2.5GB/Day", previousPlan: "₹499 - 3GB/Day", status: "Inactive" },
+            { id: 4, name: "Emily Clark", mobile: "9567890123", expiryDate: "2025-03-03", activePlan: "₹199 - 2GB/Month", previousPlan: "₹249 - 1.5GB/Day", status: "Active" },
+            
+            { id: 4, name: "Emily Clark", mobile: "9567890123", expiryDate: "2025-03-03", activePlan: "₹199 - 2GB/Month", previousPlan: "₹249 - 1.5GB/Day", status: "Active" },
+            { id: 4, name: "Emily Clark", mobile: "9567890123", expiryDate: "2025-03-03", activePlan: "₹199 - 2GB/Month", previousPlan: "₹249 - 1.5GB/Day", status: "Active" },
+            { id: 4, name: "Emily Clark", mobile: "9567890123", expiryDate: "2025-03-03", activePlan: "₹199 - 2GB/Month", previousPlan: "₹249 - 1.5GB/Day", status: "Active" },
+            { id: 4, name: "Emily Clark", mobile: "9567890123", expiryDate: "2025-03-03", activePlan: "₹199 - 2GB/Month", previousPlan: "₹249 - 1.5GB/Day", status: "Active" },
+            { id: 4, name: "Emily Clark", mobile: "9567890123", expiryDate: "2025-03-03", activePlan: "₹199 - 2GB/Month", previousPlan: "₹249 - 1.5GB/Day", status: "Active" }
+        ];
+
+        function renderTable() {
+            const tableBody = document.getElementById("userTableBody");
+            tableBody.innerHTML = "";
+            const start = (currentPage - 1) * usersPerPage;
+            const paginatedUsers = users.slice(start, start + usersPerPage);
+
+            paginatedUsers.forEach((user, index) => {
+                tableBody.innerHTML += `
+                    <tr>
+                        <td>${start + index + 1}</td>
+                        <td>${user.name}</td>
+                        <td>${user.mobile}</td>
+                        <td>${new Date(user.expiryDate).toLocaleDateString('en-GB')}</td>
+                        <td class="text-center">
+                            <button class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasUser${start + index + 1}">View</button>
+                        </td>
+                    </tr>
+                    <div class="offcanvas offcanvas-end" id="offcanvasUser${start + index + 1}">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title">User Details - ${user.name}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <p><strong>Name:</strong> ${user.name}</p>
+                            <p><strong>Mobile:</strong> ${user.mobile}</p>
+                            <p><strong>Active Plan:</strong> ${user.activePlan}</p>
+                            <p><strong>Previous Plan:</strong> ${user.previousPlan}</p>
+                            <p><strong>Pack Expiry Date:</strong> ${new Date(user.expiryDate).toLocaleDateString('en-GB')}</p>
+                            <p><strong>Subscription Status:</strong> ${user.status}</p>
+                        </div>
+                    </div>
+                `;
+            });
+            renderPagination();
+        }
+
+        function renderPagination() {
+            document.getElementById("pagination").innerHTML = "";
+            for (let i = 1; i <= Math.ceil(users.length / usersPerPage); i++) {
+                document.getElementById("pagination").innerHTML += `<li class="page-item ${i === currentPage ? "active" : ""}"><a class="page-link" href="#" onclick="changePage(${i})">${i}</a></li>`;
+            }
+        }
+
+        function changePage(page) {
+            currentPage = page;
+            renderTable();
+        }
+
+        renderTable();
+    </script>
+
+</body>
+</html>

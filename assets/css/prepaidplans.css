@@ -1,0 +1,23 @@
+@font-face {
+    font-family: poppins;
+    src: url("../fonts/Poppins-Medium.ttf");
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: poppins;
+}
+
+/* Plan Content - Enable Scrolling Inside */
+#plan-content {
+    max-height: calc(85vh - 12.2vh);
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+/* Make Left-Side Cards Scrollable */
+#plan-scrollspy::-webkit-scrollbar,
+#plan-content::-webkit-scrollbar {
+    width: 5px;
+}

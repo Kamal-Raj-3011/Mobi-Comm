@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobi-Comm - Plan Management</title>
+    <link rel="stylesheet" href="assets/css/planmanagement.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script src="node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+    <style>
+        @media (max-width: 991px) {
+            #sidebar {
+                display: none;
+            }
+            .container-fluid {
+                margin-left: 0 !important;
+                max-width: 100% !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="d-none d-lg-block bg-dark text-white p-4" id="sidebar" style="width: 250px; min-height: 100vh; position: fixed;">
+        <h3 class="text-center py-3">Admin Panel</h3>
+        <div class="list-group">
+            <a href="admindashboard.html" class="list-group-item list-group-item-action bg-dark text-white">Dashboard</a>
+            <a href="user.html" class="list-group-item list-group-item-action bg-dark text-white">All Users</a>
+            <a href="planmanagement.html" class="list-group-item active list-group-item-action bg-dark text-white">Plan Management</a>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <div class="container-fluid" style="margin-left: 250px; max-width: calc(100% - 250px);">
+        <nav class="navbar navbar-dark bg-dark">
+            <div class="container-fluid">
+                <button class="btn btn-dark d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="home.html">Mobi-Comm</a>
+                <div class="dropdown">
+                    <button class="btn btn-dark dropdown-toggle" type="button" id="adminDropdown" data-bs-toggle="dropdown">
+                        Admin Profile
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="admin.html">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Plans Management -->
+        <div class="container mt-4">
+            <h2 class="mb-4 text-center">Plan Management</h2>
+
+            <!-- Add Plan Button -->
+            <div class="text-end mb-3">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPlanModal">
+                    Add Plan <i class="fas fa-plus"></i>
+                </button>
+            </div>
+
+            <!-- Plans Table -->
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>S.No</th>
+                            <th>Plan Category</th>
+                            <th>Price</th>
+                            <th>Data</th>
+                            <th>Calls</th>
+                            <th>Validity</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="plansTableBody">
+                        <!-- Plans will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Modal to Add a New Plan -->
+        <div class="modal fade" id="addPlanModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add New Recharge Plan</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="addPlanForm">
+                            <div class="mb-3">
+                                <label class="form-label">Plan Category</label>
+                                <input type="text" class="form-control" id="planCategory" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Price</label>
+                                <input type="number" class="form-control" id="price" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Data</label>
+                                <input type="text" class="form-control" id="data" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Calls</label>
+                                <input type="text" class="form-control" id="calls" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Validity</label>
+                                <input type="text" class="form-control" id="validity" required>
+                            </div>
+                            <div class="mb-3">
+                                <button type="submit" class="btn btn-success">Add Plan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        let plans = [
+            { id: 1, category: "Popular Plan", price: "₹299", data: "1.5GB/Day", calls: "Unlimited", validity: "28 Days" },
+            { id: 2, category: "Super Savers", price: "₹499", data: "2GB/Day", calls: "Unlimited", validity: "56 Days" },
+            { id: 3, category: "Data Addon", price: "₹99", data: "5GB", calls: "NA", validity: "Existing Plan Validity" }
+        ];
+
+        function renderPlans() {
+            const tableBody = document.getElementById("plansTableBody");
+            tableBody.innerHTML = "";
+            plans.forEach((plan, index) => {
+                tableBody.innerHTML += `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${plan.category}</td>
+                        <td>${plan.price}</td>
+                        <td>${plan.data}</td>
+                        <td>${plan.calls}</td>
+                        <td>${plan.validity}</td>
+                        <td class="text-center">
+                            <button class="btn btn-info" onclick="editPlan(${index})">Edit</button>
+                            <button class="btn btn-danger" onclick="deletePlan(${index})">Delete</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function deletePlan(index) {
+            plans.splice(index, 1);
+            renderPlans();
+        }
+
+        document.getElementById("addPlanForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            let newPlan = {
+                id: plans.length + 1,
+                category: document.getElementById("planCategory").value,
+                price: `₹${document.getElementById("price").value}`,
+                data: document.getElementById("data").value,
+                calls: document.getElementById("calls").value,
+                validity: document.getElementById("validity").value
+            };
+            plans.push(newPlan);
+            renderPlans();
+            document.getElementById("addPlanForm").reset();
+            let modal = bootstrap.Modal.getInstance(document.getElementById("addPlanModal"));
+            modal.hide();
+        });
+
+        renderPlans();
+    </script>
+
+</body>
+</html>

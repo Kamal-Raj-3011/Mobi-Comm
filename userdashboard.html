@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobi-Comm | Dashboard</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+
+</head>
+<body class="bg-light">
+
+    <!-- Top Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand fw-bold text-white" href="#">Mobi-Comm</a>
+            <div class="dropdown">
+                <button class="btn btn-outline-light dropdown-toggle fw-medium" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user me-2"></i> Kavan
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                    <li><a class="dropdown-item" href="userprofilepage.html">View Profile</a></li>
+                    <li><a class="dropdown-item text-danger" href="home.html">Logout</a></li>
+                </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="p-5 mb-5">
+        <section class="container" style="max-height: 85vh; margin-left: auto; margin-right: auto;">
+            <div class="row g-4 justify-content-center">
+                <!-- Left Section (2 Divisions) -->
+                <div class="col-12 col-md-6">
+                    <!-- Welcome Card -->
+                    <div class="card card-custom bg-yellow-custom  mb-4">
+                        <div class="card-body text-center">
+                            <i class="fas fa-user fa-2x mb-3 text-dark"></i>
+                            <h4 class="fw-bold mb-3">Welcome, Kavan!</h4>
+                            <h5 class="fw-semibold">8148074706</h5>
+                            <span class="badge bg-light text-dark px-3 py-1 mt-2">Prepaid</span>
+                        </div>
+                    </div>
+
+                    <!-- Current Plan Card -->
+                    <div class="card card-custom bg-yellow-custom p-4">
+                        <div class="card-body">
+                            <i class="fas fa-mobile-alt fa-2x mb-3 text-dark"></i>
+                            <span class=" h4 fw-bold mb-3">Current Plan</span>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="fw-bold mb-0">₹199 Unlimited</h5>
+                                <span class="badge bg-success px-3 py-2">Active</span>
+                            </div>
+                            <p class="text-dark fw-semibold mb-2">Expiring on: <strong>24 Feb 2025</strong></p>
+
+                            <p class="text-dark fw-semibold">Plan Details:</p>
+                            <ul class="list-unstyled text-dark mb-3">
+                                <li><i class="fas fa-check me-2 text-success"></i>Data: 1.8 GB/Day</li>
+                                <li><i class="fas fa-check me-2 text-success"></i>Talktime: Unlimited</li>
+                                <li><i class="fas fa-check me-2 text-success"></i>SMS: 100/Day</li>
+                            </ul>
+                            <a href="./Assests/other html/viewplans.html" class="btn btn-primary mt-2 w-100">Recharge Same Pack</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Section (4 Divisions) -->
+                <div class="col-12 col-md-6">
+                    <div class="row g-4">
+                        <!-- Today's Remaining Data -->
+                        <div class="col-6">
+                            <div class="card card-custom bg-yellow-custom p-3 h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-signal fa-2x mb-3 text-dark"></i>
+                                    <h6 class="fw-bold">Today's Remaining Data</h6>
+                                    <p class="fs-5 fw-semibold text-dark">1.8 GB</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Calls -->
+                        <div class="col-6">
+                            <div class="card card-custom bg-yellow-custom p-3 h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-phone fa-2x mb-3 text-dark"></i>
+                                    <h6 class="fw-bold">Calls</h6>
+                                    <p class="fs-5 fw-semibold text-dark">Unlimited</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- SMS Left -->
+                        <div class="col-6">
+                            <div class="card card-custom bg-yellow-custom p-3 h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-comment fa-2x mb-3 text-dark"></i>
+                                    <h6 class="fw-bold">SMS Left</h6>
+                                    <p class="fs-5 fw-semibold text-dark">100</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Manage Plan -->
+                        <div class="col-6">
+                            <div class="card card-custom bg-yellow-custom p-3 h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-wallet fa-2x mb-3 text-dark"></i>
+                                    <h6 class="fw-bold">Manage Plan</h6>
+                                    <a href="./Assests/other html/viewplans.html" class="btn btn-dark mt-2 w-100">Recharge Now</a>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Recharge History -->
+                        <div class="col-6">
+                            <div class="card card-custom bg-yellow-custom p-1 h-100">
+                                <div class="card-body text-center">
+                                    <i class="fa-solid fa-clock-rotate-left fa-2x mb-3 text-dark"></i>
+                                    <h6 class="fw-bold">Recharge History</h6>
+                                    <button class="btn btn-dark mt-2 w-100" data-bs-toggle="modal" data-bs-target="#rechargeHistoryModal">
+                                        View
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Recharge History Modal -->
+                        <div class="modal fade" id="rechargeHistoryModal" tabindex="-1" aria-labelledby="rechargeHistoryLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content bg-dark text-light">
+                                    <div class="modal-header border-0">
+                                        <h5 class="modal-title fw-bold text-warning" id="rechargeHistoryLabel">
+                                            <i class="fa-solid fa-clock-rotate-left"></i> Recharge History
+                                        </h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table table-dark table-hover text-center">
+                                            <thead>
+                                                <tr class="text-warning">
+                                                    <th>Date</th>
+                                                    <th>Plan</th>
+                                                    <th>Amount</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Feb 15, 2025</td>
+                                                    <td>₹199 Unlimited</td>
+                                                    <td>₹199</td>
+                                                    <td><span class="badge bg-success">Success</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Jan 10, 2025</td>
+                                                    <td>₹399 Data Pack</td>
+                                                    <td>₹399</td>
+                                                    <td><span class="badge bg-success">Success</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Dec 25, 2024</td>
+                                                    <td>₹99 SMS Pack</td>
+                                                    <td>₹99</td>
+                                                    <td><span class="badge bg-danger">Failed</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Nov 05, 2024</td>
+                                                    <td>₹299 Talktime</td>
+                                                    <td>₹299</td>
+                                                    <td><span class="badge bg-success">Success</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Oct 20, 2024</td>
+                                                    <td>₹149 Data Boost</td>
+                                                    <td>₹149</td>
+                                                    <td><span class="badge bg-success">Success</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Sep 08, 2024</td>
+                                                    <td>₹249 Combo Pack</td>
+                                                    <td>₹249</td>
+                                                    <td><span class="badge bg-danger">Failed</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Support -->
+                        <div class="col-6">
+                            <div class="card card-custom bg-yellow-custom p-1 h-100">
+                                <div class="card-body text-center">
+                                    <i class="fa-solid fa-headset fa-2x mb-3 text-dark"></i>
+                                    <h6 class="fw-bold">Support</h6>
+                                    <a href="./Assests/other html/viewplans.html" class="btn btn-dark mt-2 w-100">Reach Us</a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="Assests/js/numberValidation.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

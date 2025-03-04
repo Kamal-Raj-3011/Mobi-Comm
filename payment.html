@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobi-Comm - Payment</title>
+    <link rel="stylesheet" href="Assests/css/payment.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <!-- HEADER STARTS -->
+    <header class="bg-light mb-4">
+        <div class="container-fluid d-flex justify-content-center align-items-center pt-4 pb-2">
+            <a href="#" class="d-flex align-items-center text-decoration-none">
+                <img src="assets/img/Logo.png" alt="Mobi-Comm Logo" height="60px" width="60px">
+                <h3 class="text-black ms-3 fw-bold">Mobi-Comm</h3>
+            </a>
+        </div>
+    </header>
+    <!-- HEADER ENDS -->
+
+
+    <!-- MAIN SECTION STARTS -->
+
+    <main>
+        <section class="container mt-4 mb-5 rounded section1 text-white">
+            <div class="row justify-content-center">
+                <!-- Plan Details (Left Section) -->
+                <div class="col-12 col-md-5 payment-box mb-3">
+                    <h4 class="text-center text-black pb-3">Plan Details</h4>
+                    <div class="table-responsive bg-light rounded-4 shadow p-3">
+                        <table class="table table-borderless text-center">
+                            <tbody>
+                                <tr class="bg-secondary bg-opacity-10">
+                                    <td class="fw-bold rounded-start">Pack:</td>
+                                    <td class="rounded-end">&#8377;29</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold bg-secondary bg-opacity-10 rounded-start">Data:</td>
+                                    <td class="rounded-end">1GB/Day</td>
+                                </tr>
+                                <tr class="bg-secondary bg-opacity-10">
+                                    <td class="fw-bold rounded-start">Validity:</td>
+                                    <td class="rounded-end">1 Day</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold bg-secondary bg-opacity-10 rounded-start">SMS:</td>
+                                    <td class="rounded-end">100/Day</td>
+                                </tr>
+                                <tr class="bg-secondary bg-opacity-10">
+                                    <td class="fw-bold rounded-start">Calls:</td>
+                                    <td class="rounded-end">Unlimited</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+
+                <!-- Payment Mode (Right Section) -->
+                <div class="col-12 col-md-5 payment-box">
+                    <div class="row justify-content-center">
+                        <!-- Payment Mode (Right Section) -->
+                        <div class="col-12 col-md-6 payment-box">
+                            <h4 class="text-center text-black pb-3">Select Payment Method</h4>
+
+                            <!-- Payment Options -->
+                            <div class="mb-3">
+                                <div class="form-check pb-3">
+                                    <input class="form-check-input payment-method" type="radio" name="payment"
+                                        id="upiOption" value="upi">
+                                    <label class="form-check-label text-black" for="upiOption"><i class="fas fa-university ps-2 pe-1"></i>
+                                        UPI Payment</label>
+                                </div>
+
+                                <div class="form-check pb-3">
+                                    <input class="form-check-input payment-method" type="radio" name="payment"
+                                        id="cardOption" value="card">
+                                    <label class="form-check-label  text-black" for="cardOption"><i class="fas fa-credit-card ps-2 pe-1"></i>
+                                        Credit/Debit Card</label>
+                                </div>
+
+                                <div class="form-check pb-3">
+                                    <input class="form-check-input payment-method" type="radio" name="payment"
+                                        id="bankOption" value="bank">
+                                    <label class="form-check-label  text-black" for="bankOption"><i class="fas fa-globe ps-2 pe-1"></i> Net
+                                        Banking</label>
+                                </div>
+
+                                <div class="form-check pb-3">
+                                    <input class="form-check-input payment-method" type="radio" name="payment"
+                                        id="walletOption" value="wallet">
+                                    <label class="form-check-label  text-black" for="walletOption"><i class="fas fa-wallet ps-2 pe-1"></i>
+                                        Wallets</label>
+                                </div>
+                            </div>
+
+                            <!-- Pay Button -->
+                            <div class="text-black">
+                                <button class="btn btn-success px-4" id="payButton" disabled>Proceed to Pay</button>
+                            </div>
+                        </div>
+                    </div>
+        </section>
+
+        <!-- Payment Modal -->
+        <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content p-4">
+                    <h5 class="modal-title text-center pb-3" id="modalTitle"></h5>
+                    <div id="modalBody"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="submitPayment">Submit Payment</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+        </section>
+    </main>
+
+    <!-- MAIN SECTION ENDS -->
+
+    <script src="Assests/js/numberValidation.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    let paymentMethods = document.querySelectorAll(".payment-method");
+    let payButton = document.getElementById("payButton");
+    let modalTitle = document.getElementById("modalTitle");
+    let modalBody = document.getElementById("modalBody");
+    
+    // Enable the "Proceed to Pay" button when a payment method is selected
+    paymentMethods.forEach(method => {
+        method.addEventListener("change", function () {
+            payButton.disabled = false;
+        });
+    });
+
+    // Open modal with the corresponding payment fields
+    payButton.addEventListener("click", function () {
+        let selectedMethod = document.querySelector(".payment-method:checked").value;
+
+        if (selectedMethod === "upi") {
+            modalTitle.innerText = "Enter UPI ID";
+            modalBody.innerHTML = `
+                <input type="text" class="form-control mb-2" placeholder="Enter UPI ID">
+            `;
+        } else if (selectedMethod === "card") {
+            modalTitle.innerText = "Enter Card Details";
+            modalBody.innerHTML = `
+                <input type="text" class="form-control mb-2" placeholder="Card Number">
+                <div class="row">
+                    <div class="col"><input type="text" class="form-control" placeholder="Expiry Date"></div>
+                    <div class="col"><input type="text" class="form-control" placeholder="CVV"></div>
+                </div>
+            `;
+        } else if (selectedMethod === "bank") {
+            modalTitle.innerText = "Select Your Bank";
+            modalBody.innerHTML = `
+                <select class="form-select">
+                    <option>Select Bank</option>
+                    <option>HDFC Bank</option>
+                    <option>SBI Bank</option>
+                    <option>ICICI Bank</option>
+                </select>
+            `;
+        } else if (selectedMethod === "wallet") {
+            modalTitle.innerText = "Select Wallet";
+            modalBody.innerHTML = `
+                <select class="form-select">
+                    <option>Select Wallet</option>
+                    <option>Paytm</option>
+                    <option>Google Pay</option>
+                    <option>PhonePe</option>
+                </select>
+            `;
+        }
+
+        // Show modal
+        let paymentModal = new bootstrap.Modal(document.getElementById("paymentModal"));
+        paymentModal.show();
+    });
+
+    // Handle Payment Submission (Just for Simulation)
+    document.getElementById("submitPayment").addEventListener("click", function () {
+        alert("Payment Successful!");
+        window.location.href = "userdashboard.html"; // Redirect to dashboard after payment
+    });
+});
+    </script>
+</body>
+
+</html>
