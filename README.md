@@ -10,8 +10,8 @@ Mobi-Comm is a prepaid mobile recharge platform. It provides a seamless experien
 
 ## 2. Json Server Code 
  🔹 Code To Run The Server Run This Code In The Terminal of VS Code
-    npm install -g json-server 
-    json-server --watch assets/json/plans.json --port 3000 
+ 🔹 npm install -g json-server 
+ 🔹 json-server --watch assets/json/plans.json --port 3000 
 
 ## 3. Number Validation 
  🔹 Acceptable Number Is : 8148074706 
