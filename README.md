@@ -21,7 +21,7 @@ Mobi-Comm is a prepaid mobile recharge platform. It provides a seamless experien
    🔹 Phone Number : 8148074706 
 
 ## 5. Admin Login Credential 
-   🔹 Email : admin 
+   🔹 Admin Name : admin 
    🔹 Password :admin@321 
 
 
