@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <script src="node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         @media (max-width: 991px) {
             #sidebar {
@@ -170,6 +171,51 @@
         }
 
         renderTable();
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    // Total Users Growth (Line Chart)
+    new Chart(document.getElementById("userGrowthChart"), {
+        type: "line",
+        data: {
+            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+            datasets: [{
+                label: "Total Users",
+                data: [5000, 8000, 12000, 18000, 25000, 32000],
+                borderColor: "#007bff",
+                backgroundColor: "rgba(0, 123, 255, 0.2)",
+                fill: true
+            }]
+        }
+    });
+
+    // Recharge Statistics (Pie Chart)
+    new Chart(document.getElementById("rechargeChart"), {
+        type: "pie",
+        data: {
+            labels: ["Daily Plans", "Monthly Plans", "Yearly Plans"],
+            datasets: [{
+                data: [40, 35, 25],
+                backgroundColor: ["#28a745", "#ffc107", "#17a2b8"]
+            }]
+        }
+    });
+
+    // Revenue Overview (Bar Chart)
+    new Chart(document.getElementById("revenueChart"), {
+        type: "bar",
+        data: {
+            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+            datasets: [{
+                label: "Revenue (in ₹)",
+                data: [20000, 35000, 50000, 70000, 85000, 100000],
+                backgroundColor: "#ff6b6b"
+            }]
+        }
+    });
+});
+
     </script>
 
 </body>

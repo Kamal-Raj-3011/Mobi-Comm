@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobi-Comm - Admin Dashboard</title>
+    <link rel="stylesheet" href="assets/css/admindashboard.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script src="node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @media (max-width: 991px) {
+            #sidebar {
+                display: none;
+            }
+            .container-fluid {
+                margin-left: 0 !important;
+                max-width: 100% !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="d-none d-lg-block bg-dark text-white p-4" id="sidebar" style="width: 250px; min-height: 100vh; position: fixed;">
+        <h3 class="text-center py-3">Admin Panel</h3>
+        <div class="list-group">
+            <a href="admindashboard.html" class="list-group-item active list-group-item-action bg-dark text-white">Dashboard</a>
+            <a href="user.html" class="list-group-item list-group-item-action bg-dark text-white">All Users</a>
+            <a href="planmanagement.html" class="list-group-item list-group-item-action bg-dark text-white">Plan Management</a>
+            <a href="planmanagement.html" class="list-group-item list-group-item-action bg-dark text-white">Report</a>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <div class="container-fluid" style="margin-left: 250px; max-width: calc(100% - 250px);">
+        <nav class="navbar navbar-dark bg-dark">
+            <div class="container-fluid">
+                <button class="btn btn-dark d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="home.html">Mobi-Comm</a>
+                <div class="dropdown">
+                    <button class="btn btn-dark dropdown-toggle" type="button" id="adminDropdown" data-bs-toggle="dropdown">
+                        Admin Profile
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="admin.html">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container-fluid py-4">
+            <h2 class="text-center mb-4">Admin Dashboard</h2>
+        
+            <div class="row">
+                <!-- Total Users Growth (Line Chart) -->
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">Total Users Growth</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="userGrowthChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Recharge Statistics (Pie Chart) -->
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">Recharge Statistics</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="rechargeChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Revenue Overview (Bar Chart) -->
+                <div class="col-12">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-header bg-warning text-dark">
+                            <h5 class="mb-0">Revenue Overview</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="revenueChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    // Total Users Growth (Line Chart)
+    new Chart(document.getElementById("userGrowthChart"), {
+        type: "line",
+        data: {
+            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+            datasets: [{
+                label: "Total Users",
+                data: [5000, 8000, 12000, 18000, 25000, 32000],
+                borderColor: "#007bff",
+                backgroundColor: "rgba(0, 123, 255, 0.2)",
+                fill: true
+            }]
+        }
+    });
+
+    // Recharge Statistics (Pie Chart)
+    new Chart(document.getElementById("rechargeChart"), {
+        type: "pie",
+        data: {
+            labels: ["Daily Plans", "Monthly Plans", "Yearly Plans"],
+            datasets: [{
+                data: [40, 35, 25],
+                backgroundColor: ["#28a745", "#ffc107", "#17a2b8"]
+            }]
+        }
+    });
+
+    // Revenue Overview (Bar Chart)
+    new Chart(document.getElementById("revenueChart"), {
+        type: "bar",
+        data: {
+            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+            datasets: [{
+                label: "Revenue (in ₹)",
+                data: [20000, 35000, 50000, 70000, 85000, 100000],
+                backgroundColor: "#ff6b6b"
+            }]
+        }
+    });
+});
+
+    </script>
+
+</body>
+</html>

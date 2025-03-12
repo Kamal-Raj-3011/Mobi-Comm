@@ -44,11 +44,13 @@
         <div class="container">
             <div class="row">
                 <aside class="col-md-3">
-                    <input type="text" class="form-control mb-3" placeholder="Search By Amount">
+                    <input type="text" class="form-control mb-3" id="search" placeholder="Search By Amount">
                     <nav id="plan-scrollspy" class="nav flex-column bg-light p-3 rounded mt-3"></nav>
                 </aside>
                 <div class="col-md-9">
-                    <div id="plan-content" class="row g-4"></div>
+                    <div id="plan-content" class="row g-4">
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -107,6 +109,17 @@
             alert("Please enter a valid 10-digit mobile number.");
         }
     }
+</script>
+<script>
+    document.getElementById("search").addEventListener("keyup", function () {
+        let value = this.value.toLowerCase();
+        let rows = document.querySelectorAll("#plan-card");
+
+        rows.forEach(row => {
+            let text = row.innerText.toLowerCase();
+            row.style.display = text.includes(value) ? "" : "none";
+        });
+    });
 </script>
 
 <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>

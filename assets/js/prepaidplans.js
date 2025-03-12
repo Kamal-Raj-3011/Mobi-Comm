@@ -39,9 +39,9 @@ function renderPlans(plans) {
             card.classList.add("col-md-6", "col-lg-4");
 
             card.innerHTML = `
-                <div class="card p-4 shadow-sm border rounded-4 bg-white">
+                <div class="card p-4 shadow-sm border rounded-4 bg-white" id="plan-card">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h2 class="fw-bold text-dark">${plan.title}</h2>
+                        <h2 class="fw-bold text-dark" id="title">${plan.title}</h2>
                         <span class="fs-4 text-warning"><i class="fa-solid fa-certificate"></i></span>
                     </div>
                     <hr class="border-secondary opacity-50">
