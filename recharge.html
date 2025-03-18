@@ -19,7 +19,7 @@
             <!-- Left Section (Desktop) -->
             <nav class="d-none d-md-flex gap-4">
                 <a href="index.html" class="text-dark text-decoration-none nav-link">Home</a>
-                <a href="recharge.html" class="text-dark text-decoration-none nav-link active fw-bold" aria-current="page">Recharge</a>
+                <a href="recharge.html" class="text-dark text-decoration-none nav-link active fw-bold" aria-current="page" style="background-color: transparent !important;">Recharge</a>
                 <a href="prepaidplans.html" class="text-dark text-decoration-none nav-link">Prepaid Plans</a>
             </nav>
 
@@ -114,46 +114,6 @@
         </div>
     </section>
 
-    <!-- SECTION 2: View Plans -->
-    <section class="container-fluid py-5 bg-light">
-        <div class="container">
-            <h1 class="text-center fw-bold mb-4 text-dark">View Plans</h1>
-
-            <!-- Scrollable Tabs Navigation -->
-            <div class="position-relative">
-                <button class="btn btn-light position-absolute start-0 top-50 translate-middle-y shadow-sm" id="scrollLeft">
-                    <i class="fa-solid fa-chevron-left"></i>
-                </button>
-
-                <div class="overflow-hidden">
-                    <ul class="nav nav-pills flex-nowrap gap-2 px-5 overflow-auto" id="plan-tabs" role="tablist" 
-                        style="white-space: nowrap; scrollbar-width: none;">
-                    </ul>
-                </div>
-
-                <button class="btn btn-light position-absolute end-0 top-50 translate-middle-y shadow-sm" id="scrollRight">
-                    <i class="fa-solid fa-chevron-right"></i>
-                </button>
-            </div>
-
-            <!-- Tab Content -->
-            <div class="tab-content p-4 bg-white rounded shadow-lg mt-3" id="plan-content">
-                <!-- Plans will be dynamically injected here -->
-            </div>
-        </div>
-
-        <!-- Toast Notification -->
-        <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1050">
-            <div id="validationToast" class="toast align-items-center text-white bg-secondary border-0" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="d-flex">
-                    <div class="toast-body fw-bold">
-                        <i class="fa-solid text-warning fa-triangle-exclamation me-2"></i> Validate Your Number
-                    </div>
-                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-            </div>
-        </div>
-    </section>
 </main>
 
 <!-- MAIN SECTION ENDS -->
@@ -162,6 +122,10 @@
     <div class="position-fixed bottom-0 end-0 p-4 plans">
         <a href="#" class="btn btn-dark shadow"><i class="fa-solid fa-chevron-up"></i></a>
     </div>
+    <p>Name: <span id="userName"></span></p>
+<p>Mobile: <span id="userMobile"></span></p>
+<p>Email: <span id="userEmail"></span></p>
+
 <!-- GO TO TOP BUTTON ENDS-->
 
 <!-- FOOTER START -->

@@ -20,22 +20,57 @@
                 max-width: 100% !important;
             }
         }
+
+        
     </style>
 </head>
 
 <body>
-    <!-- Sidebar -->
-    <div class="d-none d-lg-block bg-dark text-white p-4" id="sidebar" style="width: 250px; min-height: 100vh; position: fixed;">
-        <h3 class="text-center py-3">Admin Panel</h3>
+<!-- Sidebar (Offcanvas for Mobile) -->
+<div class="offcanvas offcanvas-start d-lg-none bg-dark text-white p-4 shadow-lg" id="offcanvasSidebar" style="width: 250px;">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title text-info"><i class="fas fa-user-shield me-2"></i> Admin Panel</h5>
+        <button type="button" class="btn-close text-white" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body">
         <div class="list-group">
-            <a href="admindashboard.html" class="list-group-item list-group-item-action bg-dark text-white">Dashboard</a>
-            <a href="user.html" class="list-group-item active list-group-item-action bg-dark text-white">All Users</a>
-            <a href="planmanagement.html" class="list-group-item list-group-item-action bg-dark text-white">Plan Management</a>
+            <a href="admindashboard.html" class="list-group-item list-group-item-action d-flex align-items-center gap-2">
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+            </a>
+            <a href="user.html" class="list-group-item active list-group-item-action d-flex align-items-center gap-2">
+                <i class="fas fa-users"></i> All Users
+            </a>
+            <a href="planmanagement.html" class="list-group-item  list-group-item-action d-flex align-items-center gap-2">
+                <i class="fas fa-list-alt"></i> Plan Management
+            </a>
+            <a href="adminreport.html" class="list-group-item  list-group-item-action d-flex align-items-center gap-2">
+                <i class="fas fa-list-alt"></i> Report
+            </a>
         </div>
     </div>
+</div>
+
+<!-- Sidebar (Fixed for Large Screens) -->
+<div class="d-none d-lg-block bg-dark text-white p-4 shadow-lg" id="sidebar" style="width: 250px; min-height: 100vh; position: fixed;">
+    <h3 class="text-center py-3 text-info"><i class="fas fa-user-shield me-2"></i> Admin Panel</h3>
+    <div class="list-group">
+        <a href="admindashboard.html" class="list-group-item list-group-item-action d-flex align-items-center gap-2">
+            <i class="fas fa-tachometer-alt"></i> Dashboard
+        </a>
+        <a href="user.html" class="list-group-item active list-group-item-action d-flex align-items-center gap-2">
+            <i class="fas fa-users"></i> All Users
+        </a>
+        <a href="planmanagement.html" class="list-group-item  list-group-item-action d-flex align-items-center gap-2">
+            <i class="fas fa-list-alt"></i> Plan Management
+        </a>
+        <a href="adminreport.html" class="list-group-item  list-group-item-action d-flex align-items-center gap-2">
+            <i class="fas fa-list-alt"></i> Report
+        </a>
+    </div>
+</div>
 
     <!-- Page Content -->
-    <div class="container-fluid" style="margin-left: 250px; max-width: calc(100% - 250px);">
+    <div class="container-fluid" style="margin-left: 238px; max-width: calc(100% - 240px);">
         <nav class="navbar navbar-dark bg-dark">
             <div class="container-fluid">
                 <button class="btn btn-dark d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar">
@@ -69,7 +104,7 @@
         </div>
 
         <div class="container">
-            <h4 class="text-center py-3">Users Plan Expires In 3 Days</h4>
+            <h4 class="text-center py-3">All User Details</h4>
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead class="table-dark">
@@ -77,7 +112,6 @@
                             <th>S.No</th>
                             <th>Name</th>
                             <th>Mobile Number</th>
-                            <th>Expiry Date</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
@@ -89,80 +123,194 @@
             </div>
         </div>
 
+<!-- Offcanvas for Viewing User Details -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="userDetailsOffcanvas" aria-labelledby="userDetailsOffcanvasLabel">
+    <div class="offcanvas-header p-4" style="background: linear-gradient(135deg, #0062E6, #33AEFF);">
+      <h5 class="offcanvas-title text-white" id="userDetailsOffcanvasLabel"><i class="fas fa-user-circle"></i> User Details</h5>
+      <button type="button" class="btn-close text-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body p-4">
+      <div id="userDetailsContent">
+        <!-- User details section with cards for each detail -->
+        <div class="row mb-4">
+          <div class="col-12 col-md-6">
+            <div class="card shadow-sm border-0 rounded-3">
+              <div class="card-body">
+                <h6 class="card-title text-muted">Name</h6>
+                <p id="userName" class="h6 font-weight-bold"></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="card shadow-sm border-0 rounded-3">
+              <div class="card-body">
+                <h6 class="card-title text-muted">Mobile Number</h6>
+                <p id="userMobileNo" class="h6 font-weight-bold"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="row mb-4">
+          <div class="col-12 col-md-6">
+            <div class="card shadow-sm border-0 rounded-3">
+              <div class="card-body">
+                <h6 class="card-title text-muted">Email</h6>
+                <p id="userEmail" class="h6 font-weight-bold"></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="card shadow-sm border-0 rounded-3">
+              <div class="card-body">
+                <h6 class="card-title text-muted">Address</h6>
+                <p id="userAddress" class="h6 font-weight-bold"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+  
+        <hr class="my-4">
+        
+        <!-- Previous plans section with animated list -->
+        <h6 class="text-primary mb-3"><strong>Previous Plans:</strong></h6>
+        <ul id="previousPlansList" class="list-group">
+          <!-- Previous plans will be populated here -->
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  
+
     </div>
 
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        const usersPerPage = 7;
-        let currentPage = 1;
+document.addEventListener("DOMContentLoaded", function () {
+    // Define the API URLs
+    const usersApiUrl = "http://127.0.0.1:9090/api/users/all"; // Adjust if necessary
+    const rechargesApiUrl = "http://127.0.0.1:9090/api/recharges/user/";
+    const transactionsApiUrl = "http://127.0.0.1:9090/api/transactions/user/";
 
-        // Hardcoded User Data
-        let users = [
-            { id: 1, name: "Kavan", mobile: "8148074706", expiryDate: "2025-03-01", activePlan: "₹199 - 2GB/Month", previousPlan: "₹249 - 1.5GB/Day", status: "Active" },
-            { id: 2, name: "Jane Smith", mobile: "9123456780", expiryDate: "2025-03-02", activePlan: "₹299 - 3GB/Day", previousPlan: "₹399 - 2GB/Day", status: "Active" },
-            { id: 3, name: "Michael Lee", mobile: "9345678901", expiryDate: "2025-03-02", activePlan: "₹349 - 2.5GB/Day", previousPlan: "₹499 - 3GB/Day", status: "Inactive" },
-            { id: 4, name: "Emily Clark", mobile: "9567890123", expiryDate: "2025-03-03", activePlan: "₹199 - 2GB/Month", previousPlan: "₹249 - 1.5GB/Day", status: "Active" },
-            { id: 5, name: "James Brown", mobile: "9789012345", expiryDate: "2025-03-03", activePlan: "₹249 - 1.5GB/Day", previousPlan: "₹399 - 2GB/Day", status: "Active" },
-            { id: 5, name: "James Brown", mobile: "9789012345", expiryDate: "2025-03-03", activePlan: "₹249 - 1.5GB/Day", previousPlan: "₹399 - 2GB/Day", status: "Active" },
-            { id: 5, name: "James Brown", mobile: "9789012345", expiryDate: "2025-03-03", activePlan: "₹249 - 1.5GB/Day", previousPlan: "₹399 - 2GB/Day", status: "Active" },
-            { id: 5, name: "James Brown", mobile: "9789012345", expiryDate: "2025-03-03", activePlan: "₹249 - 1.5GB/Day", previousPlan: "₹399 - 2GB/Day", status: "Active" },
-            { id: 5, name: "James Brown", mobile: "9789012345", expiryDate: "2025-03-03", activePlan: "₹249 - 1.5GB/Day", previousPlan: "₹399 - 2GB/Day", status: "Active" },
-            { id: 5, name: "James Brown", mobile: "9789012345", expiryDate: "2025-03-03", activePlan: "₹249 - 1.5GB/Day", previousPlan: "₹399 - 2GB/Day", status: "Active" },
-            { id: 5, name: "James Brown", mobile: "9789012345", expiryDate: "2025-03-03", activePlan: "₹249 - 1.5GB/Day", previousPlan: "₹399 - 2GB/Day", status: "Active" },
-            { id: 5, name: "James Brown", mobile: "9789012345", expiryDate: "2025-03-03", activePlan: "₹249 - 1.5GB/Day", previousPlan: "₹399 - 2GB/Day", status: "Active" }
-        ];
+    const userTableBody = document.getElementById("userTableBody");
+    const pagination = document.getElementById("pagination");
 
-        function renderTable() {
-            const tableBody = document.getElementById("userTableBody");
-            tableBody.innerHTML = "";
-            const start = (currentPage - 1) * usersPerPage;
-            const paginatedUsers = users.slice(start, start + usersPerPage);
+    // Fetch Users
+    function fetchUsers() {
+        fetch(usersApiUrl)
+            .then(response => response.json())
+            .then(users => {
+                if (users.length === 0) {
+                    userTableBody.innerHTML = "<tr><td colspan='5' class='text-center'>No users found</td></tr>";
+                } else {
+                    displayUserDetails(users);
+                    setupPagination(users);
+                }
+            })
+            .catch(error => console.log('Error fetching users:', error));
+    }
 
-            paginatedUsers.forEach((user, index) => {
-                tableBody.innerHTML += `
-                    <tr>
-                        <td>${start + index + 1}</td>
-                        <td>${user.name}</td>
-                        <td>${user.mobile}</td>
-                        <td>${new Date(user.expiryDate).toLocaleDateString('en-GB')}</td>
-                        <td class="text-center">
-                            <button class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasUser${start + index + 1}">View</button>
-                        </td>
-                    </tr>
-                    <div class="offcanvas offcanvas-end" id="offcanvasUser${start + index + 1}">
-                        <div class="offcanvas-header">
-                            <h5 class="offcanvas-title">User Details - ${user.name}</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-                        </div>
-                        <div class="offcanvas-body">
-                            <p><strong>Name:</strong> ${user.name}</p>
-                            <p><strong>Mobile:</strong> ${user.mobile}</p>
-                            <p><strong>Active Plan:</strong> ${user.activePlan}</p>
-                            <p><strong>Previous Plan:</strong> ${user.previousPlan}</p>
-                            <p><strong>Pack Expiry Date:</strong> ${new Date(user.expiryDate).toLocaleDateString('en-GB')}</p>
-                            <p><strong>Subscription Status:</strong> ${user.status}</p>
-                        </div>
-                    </div>
-                `;
+    // Display User Details in Table
+    function displayUserDetails(users) {
+        userTableBody.innerHTML = "";
+        users.forEach((user) => {
+            const row = document.createElement("tr");
+
+            
+            const userIdCell = document.createElement("td");
+            userIdCell.textContent = user.userId || "N/A";
+            row.appendChild(userIdCell);
+
+            const userNameCell = document.createElement("td");
+            userNameCell.textContent = user.name || "N/A";
+            row.appendChild(userNameCell);
+
+            const userMobileCell = document.createElement("td");
+            userMobileCell.textContent = user.mobileNo || "N/A";
+            row.appendChild(userMobileCell);
+
+            const actionCell = document.createElement("td");
+            actionCell.classList.add("text-center");
+            const actionButton = document.createElement("button");
+            actionButton.classList.add("btn", "btn-primary");
+            actionButton.textContent = "View Details";
+            actionButton.onclick = () => openUserDetailsOffcanvas(user);  // Open offcanvas on click
+            actionCell.appendChild(actionButton);
+            row.appendChild(actionCell);
+
+            userTableBody.appendChild(row);
+        });
+    }
+
+    // Open Offcanvas and Fetch User Details and Previous Plans
+    function openUserDetailsOffcanvas(user) {
+        // Set user details in offcanvas
+        document.getElementById("userName").textContent = user.name;
+        document.getElementById("userMobileNo").textContent = user.mobileNo;
+        document.getElementById("userEmail").textContent = user.emailId;
+        document.getElementById("userAddress").textContent = user.address;
+
+        // Fetch and display previous plans
+        fetchPreviousPlans(user.userId);
+        
+        // Show the offcanvas
+        let myOffcanvas = new bootstrap.Offcanvas(document.getElementById('userDetailsOffcanvas'));
+        myOffcanvas.show();
+    }
+
+    // Fetch Previous Plans for the User
+    function fetchPreviousPlans(userId) {
+        fetch(`${rechargesApiUrl}${userId}`)
+            .then(response => response.json())
+            .then(recharges => {
+                // Display previous plans in the offcanvas
+                displayPreviousPlans(recharges);
+            })
+            .catch(error => console.log('Error fetching recharges:', error));
+    }
+
+    // Display Previous Plans in the Offcanvas
+    function displayPreviousPlans(recharges) {
+        const previousPlansList = document.getElementById("previousPlansList");
+        previousPlansList.innerHTML = "";  // Clear the previous plans list
+
+        if (recharges.length === 0) {
+            previousPlansList.innerHTML = "<li class='list-group-item text-center'>No previous plans found.</li>";
+        } else {
+            recharges.forEach((recharge) => {
+                const plan = recharge.plan; // Access the plan object within the recharge
+
+                // Check if plan exists and then access its details
+                if (plan) {
+                    const listItem = document.createElement("li");
+                    listItem.classList.add("list-group-item", "my-3", "border-0", "p-3", "rounded-3", "shadow-sm");
+                    listItem.innerHTML = `
+                        <strong>Plan ID:</strong> ${plan.planId} <br>
+                        <strong>Plan Name:</strong> ${plan.category.categoryName} <br>
+                        <strong>Price:</strong> ₹${plan.price} <br>
+                        <strong>Validity:</strong> ${plan.validity} days <br>
+                        <strong>Expiry Date:</strong> ${new Date(recharge.expiryDate).toLocaleDateString()} <br>
+                    `;
+                    previousPlansList.appendChild(listItem);
+                } else {
+                    const listItem = document.createElement("li");
+                    listItem.classList.add("list-group-item", "border-0", "p-3", "rounded-3", "shadow-sm");
+                    listItem.textContent = "No plan data available for this recharge.";
+                    previousPlansList.appendChild(listItem);
+                }
             });
-            renderPagination();
         }
+    }
 
-        function renderPagination() {
-            document.getElementById("pagination").innerHTML = "";
-            for (let i = 1; i <= Math.ceil(users.length / usersPerPage); i++) {
-                document.getElementById("pagination").innerHTML += `<li class="page-item ${i === currentPage ? "active" : ""}"><a class="page-link" href="#" onclick="changePage(${i})">${i}</a></li>`;
-            }
-        }
+    // Fetch users on page load
+    fetchUsers();
+});
 
-        function changePage(page) {
-            currentPage = page;
-            renderTable();
-        }
-
-        renderTable();
     </script>
-
-</body>
+</body> 
 </html>

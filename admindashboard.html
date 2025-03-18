@@ -25,18 +25,51 @@
 </head>
 
 <body>
-    <!-- Sidebar -->
-    <div class="d-none d-lg-block bg-dark text-white p-4" id="sidebar" style="width: 250px; min-height: 100vh; position: fixed;">
-        <h3 class="text-center py-3">Admin Panel</h3>
+<!-- Sidebar (Offcanvas for Mobile) -->
+<div class="offcanvas offcanvas-start d-lg-none bg-dark text-white p-4 shadow-lg" id="offcanvasSidebar" style="width: 250px;">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title text-info"><i class="fas fa-user-shield me-2"></i> Admin Panel</h5>
+        <button type="button" class="btn-close text-white" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body">
         <div class="list-group">
-            <a href="admindashboard.html" class="list-group-item active list-group-item-action bg-dark text-white">Dashboard</a>
-            <a href="user.html" class="list-group-item list-group-item-action bg-dark text-white">All Users</a>
-            <a href="planmanagement.html" class="list-group-item list-group-item-action bg-dark text-white">Plan Management</a>
+            <a href="admindashboard.html" class="list-group-item active list-group-item-action d-flex align-items-center gap-2">
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+            </a>
+            <a href="user.html" class="list-group-item list-group-item-action d-flex align-items-center gap-2">
+                <i class="fas fa-users"></i> All Users
+            </a>
+            <a href="planmanagement.html" class="list-group-item  list-group-item-action d-flex align-items-center gap-2">
+                <i class="fas fa-list-alt"></i> Plan Management
+            </a>
+            <a href="adminreport.html" class="list-group-item list-group-item-action d-flex align-items-center gap-2">
+                <i class="fas fa-list-alt"></i> Report
+            </a>
         </div>
     </div>
+</div>
+
+<!-- Sidebar (Fixed for Large Screens) -->
+<div class="d-none d-lg-block bg-dark text-white p-4 shadow-lg" id="sidebar" style="width: 250px; min-height: 100vh; position: fixed;">
+    <h3 class="text-center py-3 text-info"><i class="fas fa-user-shield me-2"></i> Admin Panel</h3>
+    <div class="list-group">
+        <a href="admindashboard.html" class="list-group-item active list-group-item-action d-flex align-items-center gap-2">
+            <i class="fas fa-tachometer-alt"></i> Dashboard
+        </a>
+        <a href="user.html" class="list-group-item list-group-item-action d-flex align-items-center gap-2">
+            <i class="fas fa-users"></i> All Users
+        </a>
+        <a href="planmanagement.html" class="list-group-item list-group-item-action d-flex align-items-center gap-2">
+            <i class="fas fa-list-alt"></i> Plan Management
+        </a>
+        <a href="adminreport.html" class="list-group-item list-group-item-action d-flex align-items-center gap-2">
+            <i class="fas fa-list-alt"></i> Report
+        </a>
+    </div>
+</div>
 
     <!-- Page Content -->
-    <div class="container-fluid" style="margin-left: 250px; max-width: calc(100% - 250px);">
+    <div class="container-fluid" style="margin-left: 238px; max-width: calc(100% - 240px);">
         <nav class="navbar navbar-dark bg-dark">
             <div class="container-fluid">
                 <button class="btn btn-dark d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar">
@@ -54,29 +87,7 @@
             </div>
         </nav>
 
-        <!-- Dashboard Summary -->
-        <div class="row mt-4">
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card shadow-sm">
-                    <div class="card-header bg-primary text-white">
-                        <h5>Total No. of Users</h5>
-                    </div>
-                    <div class="card-body text-center">
-                        <h2>1,50,000</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card shadow-sm">
-                    <div class="card-header bg-success text-white">
-                        <h5>No. of Active Users</h5>
-                    </div>
-                    <div class="card-body text-center">
-                        <h2>1,20,000</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
+
 
         <!-- Users Plan Expiring in 3 Days -->
         <div class="container">
@@ -100,120 +111,150 @@
             </div>
         </div>
 
+                <!-- Dashboard Summary -->
+                <div class="row mt-4">
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-primary text-white">
+                                <h5>Total No. of Users</h5>
+                            </div>
+                            <div class="card-body text-center">
+                                <h2>1,50,000</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-success text-white">
+                                <h5>No. of Active Users</h5>
+                            </div>
+                            <div class="card-body text-center">
+                                <h2>1,20,000</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="toastContainer" class="position-fixed bottom-0 end-0 p-3"></div>
+
     </div>
 
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        const usersPerPage = 4;
-        let currentPage = 1;
+document.addEventListener("DOMContentLoaded", function () {
+    const API_URL = "http://localhost:9090/api/recharges/";
+    const tableBody = document.getElementById("userTableBody");
+    const pagination = document.getElementById("pagination");
+    const toastContainer = document.getElementById("toastContainer"); // Toast container
+    const usersPerPage = 7;
+    let currentPage = 1;
+    let users = [];
 
-        // Hardcoded Users Data
-        let users = [
-            { id: 1, name: "Kavan", mobile: "8148074706", expiryDate: "2025-03-01", activePlan: "₹199 - 2GB/Month", previousPlan: "₹249 - 1.5GB/Day", status: "Active" },
-            { id: 2, name: "Jane Smith", mobile: "9123456780", expiryDate: "2025-03-02", activePlan: "₹299 - 3GB/Day", previousPlan: "₹399 - 2GB/Day", status: "Active" },
-            { id: 3, name: "Michael Lee", mobile: "9345678901", expiryDate: "2025-03-02", activePlan: "₹349 - 2.5GB/Day", previousPlan: "₹499 - 3GB/Day", status: "Inactive" },
-            { id: 4, name: "Emily Clark", mobile: "9567890123", expiryDate: "2025-03-03", activePlan: "₹199 - 2GB/Month", previousPlan: "₹249 - 1.5GB/Day", status: "Active" },
-            
-            { id: 4, name: "Emily Clark", mobile: "9567890123", expiryDate: "2025-03-03", activePlan: "₹199 - 2GB/Month", previousPlan: "₹249 - 1.5GB/Day", status: "Active" },
-            { id: 4, name: "Emily Clark", mobile: "9567890123", expiryDate: "2025-03-03", activePlan: "₹199 - 2GB/Month", previousPlan: "₹249 - 1.5GB/Day", status: "Active" },
-            { id: 4, name: "Emily Clark", mobile: "9567890123", expiryDate: "2025-03-03", activePlan: "₹199 - 2GB/Month", previousPlan: "₹249 - 1.5GB/Day", status: "Active" },
-            { id: 4, name: "Emily Clark", mobile: "9567890123", expiryDate: "2025-03-03", activePlan: "₹199 - 2GB/Month", previousPlan: "₹249 - 1.5GB/Day", status: "Active" },
-            { id: 4, name: "Emily Clark", mobile: "9567890123", expiryDate: "2025-03-03", activePlan: "₹199 - 2GB/Month", previousPlan: "₹249 - 1.5GB/Day", status: "Active" }
-        ];
-
-        function renderTable() {
-            const tableBody = document.getElementById("userTableBody");
-            tableBody.innerHTML = "";
-            const start = (currentPage - 1) * usersPerPage;
-            const paginatedUsers = users.slice(start, start + usersPerPage);
-
-            paginatedUsers.forEach((user, index) => {
-                tableBody.innerHTML += `
-                    <tr>
-                        <td>${start + index + 1}</td>
-                        <td>${user.name}</td>
-                        <td>${user.mobile}</td>
-                        <td>${new Date(user.expiryDate).toLocaleDateString('en-GB')}</td>
-                        <td class="text-center">
-                            <button class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasUser${start + index + 1}">View</button>
-                        </td>
-                    </tr>
-                    <div class="offcanvas offcanvas-end" id="offcanvasUser${start + index + 1}">
-                        <div class="offcanvas-header">
-                            <h5 class="offcanvas-title">User Details - ${user.name}</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-                        </div>
-                        <div class="offcanvas-body">
-                            <p><strong>Name:</strong> ${user.name}</p>
-                            <p><strong>Mobile:</strong> ${user.mobile}</p>
-                            <p><strong>Active Plan:</strong> ${user.activePlan}</p>
-                            <p><strong>Previous Plan:</strong> ${user.previousPlan}</p>
-                            <p><strong>Pack Expiry Date:</strong> ${new Date(user.expiryDate).toLocaleDateString('en-GB')}</p>
-                            <p><strong>Subscription Status:</strong> ${user.status}</p>
-                        </div>
-                    </div>
-                `;
-            });
-            renderPagination();
-        }
-
-        function renderPagination() {
-            document.getElementById("pagination").innerHTML = "";
-            for (let i = 1; i <= Math.ceil(users.length / usersPerPage); i++) {
-                document.getElementById("pagination").innerHTML += `<li class="page-item ${i === currentPage ? "active" : ""}"><a class="page-link" href="#" onclick="changePage(${i})">${i}</a></li>`;
+    async function fetchExpiringPlans() {
+        try {
+            const response = await fetch(API_URL);
+            if (!response.ok) {
+                throw new Error("Failed to fetch data");
             }
-        }
+            const allUsers = await response.json();
+            console.log("Fetched Data from Backend:", allUsers);
 
-        function changePage(page) {
-            currentPage = page;
+            users = filterExpiringPlans(allUsers);
             renderTable();
+        } catch (error) {
+            console.error("Error fetching expiring plans:", error);
+            tableBody.innerHTML = `<tr><td colspan='6' class='text-center text-danger'>Failed to load data</td></tr>`;
+        }
+    }
+
+    function filterExpiringPlans(allUsers) {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        const expiryDateLimit = new Date(today);
+        expiryDateLimit.setDate(expiryDateLimit.getDate() + 3);
+
+        const expiryDateLimitString = expiryDateLimit.toISOString().split('T')[0];
+
+        console.log("Expected Expiry Date:", expiryDateLimitString);
+
+        return allUsers.filter(user => {
+            const expiryDate = new Date(user.expiryDate);
+            const expiryDateString = expiryDate.toISOString().split('T')[0];
+
+            console.log(`Checking User: ${user.user.name}, Expiry Date: ${expiryDateString}`);
+
+            return expiryDateString === expiryDateLimitString;
+        });
+    }
+
+    function renderTable() {
+        tableBody.innerHTML = "";
+        const start = (currentPage - 1) * usersPerPage;
+        const paginatedUsers = users.slice(start, start + usersPerPage);
+
+        if (paginatedUsers.length === 0) {
+            tableBody.innerHTML = `<tr><td colspan='6' class='text-center'>No expiring plans found</td></tr>`;
+            return;
         }
 
+        paginatedUsers.forEach((user, index) => {
+            const row = `
+                <tr>
+                    <td>${start + index + 1}</td>
+                    <td>${user.user.name}</td>
+                    <td>${user.user.mobileNo}</td>
+                    <td class="text-danger fw-bold">${new Date(user.expiryDate).toLocaleDateString('en-GB')}</td>
+                    <td class="text-center">
+                        <button class="btn btn-warning btn-sm" onclick="sendReminder('${user.user.mobileNo}', '${user.user.name}')">Send Reminder</button>
+                    </td>
+                </tr>
+            `;
+            tableBody.innerHTML += row;
+        });
+        renderPagination();
+    }
+
+    function renderPagination() {
+        pagination.innerHTML = "";
+        for (let i = 1; i <= Math.ceil(users.length / usersPerPage); i++) {
+            pagination.innerHTML += `<li class="page-item ${i === currentPage ? "active" : ""}"><a class="page-link" href="#" onclick="changePage(${i})">${i}</a></li>`;
+        }
+    }
+
+    function changePage(page) {
+        currentPage = page;
         renderTable();
-    </script>
+    }
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-    // Total Users Growth (Line Chart)
-    new Chart(document.getElementById("userGrowthChart"), {
-        type: "line",
-        data: {
-            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-            datasets: [{
-                label: "Total Users",
-                data: [5000, 8000, 12000, 18000, 25000, 32000],
-                borderColor: "#007bff",
-                backgroundColor: "rgba(0, 123, 255, 0.2)",
-                fill: true
-            }]
-        }
-    });
+    window.sendReminder = function (mobileNo, name) {
+        showToast(`Reminder sent to ${name} (${mobileNo})`);
+    };
 
-    // Recharge Statistics (Pie Chart)
-    new Chart(document.getElementById("rechargeChart"), {
-        type: "pie",
-        data: {
-            labels: ["Daily Plans", "Monthly Plans", "Yearly Plans"],
-            datasets: [{
-                data: [40, 35, 25],
-                backgroundColor: ["#28a745", "#ffc107", "#17a2b8"]
-            }]
-        }
-    });
+    function showToast(message) {
+        const toast = document.createElement("div");
+        toast.classList.add("toast", "align-items-center", "text-bg-success", "border-0", "show");
+        toast.style.position = "fixed";
+        toast.style.bottom = "20px";
+        toast.style.right = "20px";
+        toast.style.zIndex = "1050";
+        toast.innerHTML = `
+            <div class="d-flex">
+                <div class="toast-body">
+                    ${message}
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+            </div>
+        `;
+        
+        toastContainer.appendChild(toast);
 
-    // Revenue Overview (Bar Chart)
-    new Chart(document.getElementById("revenueChart"), {
-        type: "bar",
-        data: {
-            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-            datasets: [{
-                label: "Revenue (in ₹)",
-                data: [20000, 35000, 50000, 70000, 85000, 100000],
-                backgroundColor: "#ff6b6b"
-            }]
-        }
-    });
+        setTimeout(() => {
+            toast.remove();
+        }, 3000);
+    }
+
+    fetchExpiringPlans();
 });
 
     </script>

@@ -1,148 +1,156 @@
+// Your original code starts here (without changes)
+
+// document.addEventListener("DOMContentLoaded", function () {
+//     const tabContainer = document.getElementById("plan-tabs");
+//     const scrollLeftBtn = document.getElementById("scrollLeft");
+//     const scrollRightBtn = document.getElementById("scrollRight");
+
+//     // Function to scroll left
+//     scrollLeftBtn.addEventListener("click", () => {
+//         tabContainer.scrollBy({ left: -200, behavior: "smooth" });
+//     });
+
+//     // Function to scroll right
+//     scrollRightBtn.addEventListener("click", () => {
+//         tabContainer.scrollBy({ left: 200, behavior: "smooth" });
+//     });
+// });
+
+
+
 document.addEventListener("DOMContentLoaded", function () {
-    const tabContainer = document.getElementById("plan-tabs");
-    const scrollLeftBtn = document.getElementById("scrollLeft");
-    const scrollRightBtn = document.getElementById("scrollRight");
+    // Your existing code for fetching categories and plans
+    const API_URL_CATEGORIES = "http://127.0.0.1:9090/api/categories/";
+    const API_URL_PLANS = "http://127.0.0.1:9090/api/plans/category/";
+    const planTabs = document.getElementById("plan-tabs");
+    const planContent = document.getElementById("plan-content");
 
-    // Function to scroll left
-    scrollLeftBtn.addEventListener("click", () => {
-        tabContainer.scrollBy({ left: -200, behavior: "smooth" });
-    });
+    function fetchCategories() {
+        fetch(API_URL_CATEGORIES)
+            .then(response => response.json())
+            .then(categories => {
+                planTabs.innerHTML = ""; 
+                planContent.innerHTML = "";
 
-    // Function to scroll right
-    scrollRightBtn.addEventListener("click", () => {
-        tabContainer.scrollBy({ left: 200, behavior: "smooth" });
-    });
-});
+                categories.forEach((category, index) => {
+                    // Create category tab
+                    const tab = document.createElement("li");
+                    tab.classList.add("nav-item");
 
+                    tab.innerHTML = `
+                        <a class="nav-link ${index === 0 ? 'active' : ''}" id="category-tab-${category.categoryId}" 
+                            data-bs-toggle="pill" href="#category-content-${category.categoryId}" 
+                            role="tab" aria-controls="category-content-${category.categoryId}" 
+                            aria-selected="${index === 0}">
+                            ${category.categoryName}
+                        </a>
+                    `;
+                    planTabs.appendChild(tab);
 
+                    // Create content section for category
+                    const contentSection = document.createElement("div");
+                    contentSection.classList.add("tab-pane", "fade");
 
+                    if (index === 0) {
+                        contentSection.classList.add("show", "active");
+                    }
 
+                    contentSection.id = `category-content-${category.categoryId}`;
+                    contentSection.setAttribute("role", "tabpanel");
+                    planContent.appendChild(contentSection);
 
-document.addEventListener("DOMContentLoaded", () => {
-    fetch("http://localhost:3000/plans") // Replace with your JSON server URL
-        .then(response => response.json())
-        .then(data => renderPlans(data))
-        .catch(error => console.error("Error fetching plans:", error));
-});
+                    // Fetch and display plans for the first category by default
+                    if (index === 0) {
+                        setTimeout(() => fetchPlansForCategory(category.categoryId, contentSection), 100);
+                    }
 
-function renderPlans(plans) {
-    const tabsContainer = document.getElementById("plan-tabs");
-    const contentContainer = document.getElementById("plan-content");
-    tabsContainer.innerHTML = "";
-    contentContainer.innerHTML = "";
+                    // Fetch plans when tab is clicked
+                    tab.querySelector("a").addEventListener("click", function () {
+                        setTimeout(() => fetchPlansForCategory(category.categoryId, contentSection), 100);
+                    });
+                });
+            })
+            .catch(error => console.error('Error fetching categories:', error));
+    }
 
-    let firstCategory = true;
+        function fetchPlansForCategory(categoryId, contentSection) {
+            fetch(`${API_URL_PLANS}${categoryId}`)
+                .then(response => response.json())
+                .then(plans => {
+                    contentSection.innerHTML = ""; 
 
-    // Loop through each category
-    Object.entries(plans).forEach(([category, plans]) => {
-        const categoryId = category.replace(/\s+/g, "-").toLowerCase(); // Unique ID for each tab
+                    const planRow = document.createElement("div");
+                    planRow.classList.add("row", "g-4"); 
 
-        // Create Tabs
-        const tab = document.createElement("li");
-        tab.classList.add("nav-item");
-        tab.innerHTML = `
-            <button class="nav-link text-black fw-medium  ${firstCategory ? "active" : ""}" id="${categoryId}-tab" data-bs-toggle="tab" data-bs-target="#${categoryId}" type="button" role="tab">
-                 ${category}
-            </button>
-        `;
-        tabsContainer.appendChild(tab);
+                    plans.forEach(plan => {
+                        const planCard = document.createElement("div");
+                        planCard.classList.add("col-md-4", "mb-4");
 
-        // Create Content Sections
-        const section = document.createElement("div");
-        section.classList.add("tab-pane", "fade");
-        if (firstCategory) {
-            section.classList.add("show", "active");
-        }
-        section.id = categoryId;
-        section.setAttribute("role", "tabpanel");
-
-        section.innerHTML = `
-            <h4 class="fw-bold text-black"><i class="fa-solid fa-signal me-2"></i>${category}</h4>
-            <div class="row g-4" id="${categoryId}-container">
-            </div>
-        `;
-        contentContainer.appendChild(section);
-
-        const categoryContainer = document.getElementById(`${categoryId}-container`);
-
-        // Loop through plans inside category
-        Object.entries(plans).forEach(([planId, plan]) => {
-            const card = document.createElement("div");
-            card.classList.add("col-md-4");
-
-            card.innerHTML = `
-                <div class="card p-4 shadow-sm border rounded-4 bg-white">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <h2 class="fw-bold text-dark">${plan.title}</h2>
-                        <span class="fs-4 text-warning"><i class="fa-solid fa-certificate"></i></span>
-                    </div>
-
-                    <hr class="border-secondary opacity-50">
-
-                    <div class="mb-3">
-                        <p class="mb-2 text-muted"><i class="fa-solid fa-calendar-alt me-2 text-primary"></i> ${plan.validity}</p>
-                        <p class="mb-2 text-muted"><i class="fa-solid fa-wifi me-2 text-success"></i> ${plan.data}</p>
-                        <p class="mb-2 text-muted"><i class="fa-solid fa-phone me-2 text-danger"></i> ${plan.calls}</p>
-                        <p class="mb-2 text-muted"><i class="fa-solid fa-comment-dots me-2 text-info"></i> ${plan.sms}</p>
-                    </div>
-
-                    <!-- Buy Now Button (Triggers Toast) -->
-                    <a href="#" class="btn text-white w-100 py-2 fw-bold rounded-5 mb-2" 
-                        style="background: linear-gradient(135deg, #17a2b8, #007bff); border: none;" onclick="showToast()">
-                        <i class="fa-solid fa-bolt"></i> Buy Now
-                    </a>
-
-                    <!-- More Details (Opens Modal) -->
-                    <a href="#" class="text-center text-primary fw-bold d-block" data-bs-toggle="modal" data-bs-target="#planModal-${planId}">
-                        More Details
-                    </a>
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="planModal-${planId}" tabindex="-1" aria-labelledby="planModalLabel-${planId}" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content border-0 shadow-lg rounded-4">
-                                <div class="modal-header bg-warning text-dark">
-                                    <h5 class="modal-title fw-bold"><i class="fa-solid fa-file-invoice-dollar me-2"></i> Plan Details</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        planCard.innerHTML = `
+                            <div class="card p-4 shadow-sm border rounded-4 bg-white">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h2 class="fw-bold text-dark">₹${plan.price}</h2>
+                                    <span class="fs-4 text-warning"><i class="fa-solid fa-certificate"></i></span>
                                 </div>
-                                <div class="modal-body p-4">
-                                    <!-- Plan Card -->
-                                    <div class="card border-0 shadow-sm rounded-4 p-3">
-                                        <div class="card-body">
-                                            <h4 class="fw-bold text-dark">${plan.title} - ${plan.validity}</h4>
-                                            <hr>
-                                            <p class="mb-2 text-muted"><i class="fa-solid fa-wifi me-2 text-success"></i> ${plan.data}</p>
-                                            <p class="mb-2 text-muted"><i class="fa-solid fa-phone me-2 text-danger"></i> ${plan.calls}</p>
-                                            <p class="mb-2 text-muted"><i class="fa-solid fa-comment-dots me-2 text-info"></i> ${plan.sms}</p>
-                                        </div>
-                                    </div>
 
-                                    <!-- Additional Benefits Section -->
-                                    <div class="mt-3">
-                                        <h6 class="fw-bold text-dark">Additional Benefits</h6>
-                                        <ul class="list-group">
-                                            ${plan.additional_benefits.map(benefit => `
-                                                <li class="list-group-item"><i class="fa-solid fa-check-circle text-success me-2"></i> ${benefit}</li>
-                                            `).join("")}
-                                        </ul>
+                                <hr class="border-secondary opacity-50">
+
+                                <div class="mb-3">
+                                    <p class="mb-2 text-muted"><i class="fa-solid fa-calendar-alt me-2 text-black"></i> ${plan.validity} Days</p>
+                                    <p class="mb-2 text-muted"><i class="fa-solid fa-wifi me-2 text-black"></i> ${plan.data}</p>
+                                    <p class="mb-2 text-muted"><i class="fa-solid fa-phone me-2 text-black"></i> ${plan.calls} Calls</p>
+                                    <p class="mb-2 text-muted"><i class="fa-solid fa-comment-dots me-2 text-black"></i> ${plan.message} Messages</p>
+                                </div>
+
+                                <!-- Buy Now Button -->
+                               <!-- Buy Now Button (Direct Redirect) -->
+        <a href="recharge.html" class="btn text-white w-100 py-2 fw-bold rounded-5 mb-2 btn-buy-now" 
+            style="background: linear-gradient(135deg, #17a2b8, #007bff);">
+            <i class="fa-solid fa-bolt"></i> Buy Now
+        </a>
+
+                                <a href="#" class="text-center text-primary fw-bold d-block" data-bs-toggle="modal" data-bs-target="#planModal-${plan.planId}">
+                                    More Details
+                                </a>
+
+                                <!-- Plan Modal -->
+                                <div class="modal fade" id="planModal-${plan.planId}" tabindex="-1" aria-labelledby="planModalLabel-${plan.planId}" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content border-0 shadow-lg rounded-4">
+                                            <div class="modal-header bg-warning text-dark">
+                                                <h5 class="modal-title fw-bold"><i class="fa-solid fa-file-invoice-dollar me-2"></i> Plan Details</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body p-4">
+                                                <div class="card border-0 shadow-sm rounded-4 p-3">
+                                                    <div class="card-body">
+                                                        <h4 class="fw-bold text-dark">${plan.tag} - ${plan.validity} Days</h4>
+                                                        <hr>
+                                                        <p class="mb-2 text-muted"><i class="fa-solid fa-wifi me-2 text-black"></i> ${plan.data}</p>
+                                                        <p class="mb-2 text-muted"><i class="fa-solid fa-phone me-2 text-black"></i> ${plan.calls}</p>
+                                                        <p class="mb-2 text-muted"><i class="fa-solid fa-comment-dots me-2 text-black"></i> ${plan.message}</p>
+                                                    </div>
+                                                    <div class="mt-3">
+                                                    <h6 class="fw-bold text-dark">Additional Benefits</h6>
+                                                    <ul class="list-group">
+                                                        ${plan.additionalFeature ? plan.additionalFeature.split(',').map(benefit => `
+                                                            <li class="list-group-item"><i class="fa-solid fa-check-circle text-success me-2"></i> ${benefit.trim()}</li>
+                                                        `).join("") : '<li class="list-group-item text-muted">No Additional Benefits</li>'}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            `;
+                        `;
+                        planRow.appendChild(planCard);
+                    });
+                    contentSection.appendChild(planRow);
+                })
+                .catch(error => console.error('Error fetching plans:', error));
+        }
 
-            categoryContainer.appendChild(card);
-        });
-
-        firstCategory = false;
-    });
-}
-
-// Toast Notification Function
-function showToast() {
-    const toastElement = document.getElementById("validationToast");
-    const toast = new bootstrap.Toast(toastElement);
-    toast.show();
-}
+    fetchCategories();
+    setupBuyNowButtons();  // Setup the "Buy Now" buttons after page load
+});

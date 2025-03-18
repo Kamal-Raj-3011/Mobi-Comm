@@ -61,69 +61,76 @@
                 </div>
             </div>
         </section>
+
+        <!-- Toast Container -->
+        <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1050">
+            <div id="toastMessage" class="toast align-items-center text-white bg-info border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body" id="toastBody">
+                        <!-- Message will be inserted here -->
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+
+
     </main>
     <!-- MAIN SECTION ENDS -->
 
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 
     <script>
-        // Define the valid username and password
-        const validUsername = "admin";
-        const validPassword = "admin@321";
-
-        // Validation for the admin login form
-        document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
-            e.preventDefault();  // Prevent the form from submitting
-
-            // Get values from the input fields
-            const adminName = document.getElementById('adminName').value.trim();
-            const adminPassword = document.getElementById('adminPassword').value.trim();
-
-            // Clear any previous error messages
+        document.getElementById('adminLoginForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+    
+            const email = document.getElementById('adminName').value.trim();
+            const password = document.getElementById('adminPassword').value.trim();
+    
+            // Clear previous error messages
             document.getElementById('adminNameError').style.display = 'none';
             document.getElementById('adminPasswordError').style.display = 'none';
-
-            let isValid = true;
-
-            // Check if both fields are not empty
-            if (adminName === '' || adminPassword === '') {
-                if (adminName === '') {
-                    document.getElementById('adminNameError').innerText = 'Admin Name is required!';
-                    document.getElementById('adminNameError').style.display = 'block';
+    
+            try {
+                const response = await fetch('http://localhost:9090/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+    
+                const data = await response.json();
+    
+                if (!response.ok) {
+                    throw new Error(data.error || 'Invalid login credentials');
                 }
-                if (adminPassword === '') {
-                    document.getElementById('adminPasswordError').innerText = 'Password is required!';
-                    document.getElementById('adminPasswordError').style.display = 'block';
-                }
-                isValid = false;
-            }
-
-            // Basic password length check
-            if (adminPassword.length < 6) {
-                document.getElementById('adminPasswordError').innerText = 'Password must be at least 6 characters long.';
-                document.getElementById('adminPasswordError').style.display = 'block';
-                isValid = false;
-            }
-
-            // Check for valid username and password
-            if (adminName !== validUsername) {
-                document.getElementById('adminNameError').innerText = 'Invalid Admin Name.';
-                document.getElementById('adminNameError').style.display = 'block';
-                isValid = false;
-            }
-
-            if (adminPassword !== validPassword) {
-                document.getElementById('adminPasswordError').innerText = 'Invalid Password.';
-                document.getElementById('adminPasswordError').style.display = 'block';
-                isValid = false;
-            }
-
-            // If validation passes, simulate successful login
-            if (isValid) {
-                window.location.href = 'admindashboard.html';  // Redirect to admin dashboard
+    
+                // Store JWT token in localStorage
+                localStorage.setItem('accessToken', data.accessToken);
+    
+                // Show success toast
+                showToast("Login successful! Redirecting...", "bg-success");
+    
+                setTimeout(() => {
+                    window.location.href = 'admindashboard.html';
+                }, 2000);
+    
+            } catch (error) {
+                showToast(error.message, "bg-danger");
             }
         });
+    
+        // Toast Function
+        function showToast(message, bgColor) {
+            const toastElement = document.getElementById('toastMessage');
+            document.getElementById('toastBody').innerText = message;
+            toastElement.classList.remove("bg-info", "bg-success", "bg-danger");
+            toastElement.classList.add(bgColor);
+            const toast = new bootstrap.Toast(toastElement);
+            toast.show();
+        }
     </script>
+    
+    
 
 </body>
 

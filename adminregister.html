@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Register - Mobi-Comm</title>
+    <link rel="stylesheet" href="assets/css/admin.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <main>
+        <section class="container mt-4 mb-5">
+            <div class="container p-4 bg-white shadow-lg rounded">
+                <h4 class="text-center">Admin Registration</h4>
+                <form id="adminRegisterForm">
+                    <div class="mb-3">
+                        <label for="adminEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="adminEmail" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="adminPassword" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="adminPassword" required>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-info">Register</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Toast Container -->
+        <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1050">
+            <div id="toastMessage" class="toast align-items-center text-white bg-info border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body" id="toastBody">
+                        <!-- Message will be inserted here -->
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        document.getElementById('adminRegisterForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const email = document.getElementById('adminEmail').value.trim();
+            const password = document.getElementById('adminPassword').value.trim();
+    
+            try {
+                const response = await fetch('http://localhost:9090/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+    
+                const data = await response.text();
+                if (!response.ok) throw new Error(data);
+    
+                showToast("Registration successful! Redirecting to login...", "bg-success");
+    
+                setTimeout(() => {
+                    window.location.href = 'adminlogin.html';
+                }, 2000);
+    
+            } catch (error) {
+                showToast(error.message, "bg-danger");
+            }
+        });
+    
+        // Toast Function
+        function showToast(message, bgColor) {
+            const toastElement = document.getElementById('toastMessage');
+            document.getElementById('toastBody').innerText = message;
+            toastElement.classList.remove("bg-info", "bg-success", "bg-danger");
+            toastElement.classList.add(bgColor);
+            const toast = new bootstrap.Toast(toastElement);
+            toast.show();
+        }
+    </script>
+    
+</body>
+</html>
