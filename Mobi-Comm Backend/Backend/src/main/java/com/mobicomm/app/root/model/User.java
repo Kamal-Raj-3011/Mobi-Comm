@@ -1,5 +1,7 @@
 package com.mobicomm.app.root.model;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -43,5 +45,9 @@ public class User {
 
     @Column(nullable = false)
     private String mobileNo;
+    
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PaymentHistory> paymentHistories;
+
 
 }

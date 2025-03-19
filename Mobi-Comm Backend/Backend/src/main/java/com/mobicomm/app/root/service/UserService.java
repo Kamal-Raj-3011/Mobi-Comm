@@ -1,9 +1,10 @@
 package com.mobicomm.app.root.service;
 
+import com.mobicomm.app.root.exception.DuplicateResourceException;
+import com.mobicomm.app.root.exception.ResourceNotFoundException;
 import com.mobicomm.app.root.model.User;
 import com.mobicomm.app.root.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,8 +41,15 @@ public class UserService {
 
     // Register a new user with password hashing (optional)
     public User registerUser(User user) {
-        user.setUserId(generateUserId()); // Generate userId
-        return userRepository.save(user); // Save the user to the database
+        if (userRepository.findByEmailId(user.getEmailId()).isPresent()) {
+            throw new DuplicateResourceException("User with email '" + user.getEmailId() + "' already exists.");
+        }
+        if (userRepository.findByMobileNo(user.getMobileNo()).isPresent()) {
+            throw new DuplicateResourceException("User with mobile number '" + user.getMobileNo() + "' already exists.");
+        }
+
+        user.setUserId(generateUserId()); 
+        return userRepository.save(user);
     }
     
 
@@ -54,6 +62,13 @@ public class UserService {
         }
         return false;
     }
+    
+    public User getUserDetailsByMobile(String mobileNo) {
+        System.out.println("🔍 Checking User: " + mobileNo);  // Debugging log
+        return userRepository.findUserByMobileNo(mobileNo)
+            .orElseThrow(() -> new ResourceNotFoundException("User not found with mobile number: " + mobileNo));
+    }
+
 
 
 
@@ -71,15 +86,18 @@ public class UserService {
 
     // Update user details
     public User updateUser(String userId, User userDetails) {
-        if (userRepository.existsById(userId)) {
-            userDetails.setUserId(userId); // Ensure the user ID is set to the existing one
-            return userRepository.save(userDetails);
-        }
-        return null; // Return null if user doesn't exist
+        User existingUser = userRepository.findById(userId)
+            .orElseThrow(() -> new ResourceNotFoundException("User not found with ID: " + userId));
+
+        userDetails.setUserId(userId);
+        return userRepository.save(userDetails);
     }
 
     // Delete a user by ID
     public void deleteUser(String userId) {
+        if (!userRepository.existsById(userId)) {
+            throw new ResourceNotFoundException("User not found with ID: " + userId);
+        }
         userRepository.deleteById(userId);
     }
     

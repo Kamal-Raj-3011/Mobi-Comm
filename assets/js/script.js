@@ -1,12 +1,13 @@
 
 // Number Validation
+// Validate & Store Mobile Number
 function validateNumber(event) {
-    event.preventDefault();  // Prevent form submission
+    event.preventDefault();  
 
     const mobileNumber = document.getElementById("mobileNumber").value;
     const errorMessage = document.getElementById("error-message");
 
-    // Regular expression to match 10-digit mobile number
+    // Regular expression for a valid mobile number
     const mobilePattern = /^[6-9]\d{9}$/;
 
     if (!mobilePattern.test(mobileNumber)) {
@@ -14,27 +15,41 @@ function validateNumber(event) {
         return false;
     }
 
-    // If the mobile number format is valid, make an API call to check if it exists in the backend
-    fetch(`http://localhost:9090/api/users/validateMobile/${mobileNumber}`, {
-        method: "GET",
-    })
-    .then(response => response.json())  // Parse JSON response
+    // API Call to Validate Mobile Number
+    fetch(`http://localhost:9090/api/users/validateMobile/${mobileNumber}`)
+    .then(response => response.json())
     .then(data => {
         if (data.exists) {
-            // If the number exists in the database, redirect to Prepaid Plans page
-            window.location.href = "assets/loggedusershtmlpage/recharge.html";  // Adjust the URL based on your routing
+            // ✅ Store mobile number in localStorage
+            localStorage.setItem("mobileNumber", mobileNumber);
+
+            // ✅ Fetch User ID and User Name
+            return fetch(`http://localhost:9090/api/users/details/${mobileNumber}`);
         } else {
-            // If the number does not exist, display an error message
-            errorMessage.textContent = "Enter A Valid Mobi-Comm Number";
+            throw new Error("Invalid Mobi-Comm Number");
         }
     })
-    .catch(error => {
-        console.error("Error during mobile validation:", error);
-        errorMessage.textContent = "An error occurred. Please try again later.";
-    });
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Failed to fetch user details");
+        }
+        return response.json();
+    })
+    .then(userData => {
+        // ✅ Store User ID and Name in localStorage
+        localStorage.setItem("userID", userData.userId);
+        localStorage.setItem("userName", userData.name);
 
-    return false;  // Prevent the form from submitting
+        // ✅ Redirect to Payment Gateway page
+        window.location.href = "assets/paymentgateway/paymentgateway.html";
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        errorMessage.textContent = "Enter Valid Mobi-Comm Number.";
+    });
 }
+
+
 
 
 

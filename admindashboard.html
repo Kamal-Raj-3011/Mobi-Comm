@@ -111,29 +111,6 @@
             </div>
         </div>
 
-                <!-- Dashboard Summary -->
-                <div class="row mt-4">
-                    <div class="col-md-6 col-lg-4 mb-4">
-                        <div class="card shadow-sm">
-                            <div class="card-header bg-primary text-white">
-                                <h5>Total No. of Users</h5>
-                            </div>
-                            <div class="card-body text-center">
-                                <h2>1,50,000</h2>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 mb-4">
-                        <div class="card shadow-sm">
-                            <div class="card-header bg-success text-white">
-                                <h5>No. of Active Users</h5>
-                            </div>
-                            <div class="card-body text-center">
-                                <h2>1,20,000</h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div id="toastContainer" class="position-fixed bottom-0 end-0 p-3"></div>
 
     </div>
@@ -146,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const tableBody = document.getElementById("userTableBody");
     const pagination = document.getElementById("pagination");
     const toastContainer = document.getElementById("toastContainer"); // Toast container
-    const usersPerPage = 7;
+    const usersPerPage = 10;
     let currentPage = 1;
     let users = [];
 
@@ -184,7 +161,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             console.log(`Checking User: ${user.user.name}, Expiry Date: ${expiryDateString}`);
 
-            return expiryDateString === expiryDateLimitString;
+            return expiryDate >= today && expiryDate <= expiryDateLimit;
         });
     }
 

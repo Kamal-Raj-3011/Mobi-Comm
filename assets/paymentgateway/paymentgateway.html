@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mobi-Comm Recharge</title>
-    <link rel="stylesheet" href="assets/css/recharge.css">
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="paymentgateway.css">
+    <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 </head>
 <body>
@@ -19,7 +19,7 @@
             <!-- Left Section (Desktop) -->
             <nav class="d-none d-md-flex gap-4">
                 <a href="index.html" class="text-dark text-decoration-none nav-link">Home</a>
-                <a href="recharge.html" class="text-dark text-decoration-none nav-link active fw-bold" aria-current="page" style="background-color: transparent !important;">Recharge</a>
+                <a href="recharge.html" class="text-dark text-decoration-none nav-link active fw-bold" aria-current="page" style="background-color: white !important;">Recharge</a>
                 <a href="prepaidplans.html" class="text-dark text-decoration-none nav-link">Prepaid Plans</a>
             </nav>
 
@@ -30,7 +30,7 @@
 
             <!-- Logo (Centered) -->
             <div class="text-center">
-                <img src="assets/img/Logo.png" alt="Company Logo" class="img-fluid" style="max-height: 45px;">
+                <img src="../img/Logo.png" alt="Company Logo" class="img-fluid" style="max-height: 45px;">
             </div>
 
             <!-- Right Section (Desktop) -->
@@ -69,60 +69,42 @@
 
 <!-- MAIN SECTION STARTS -->
 <main>
-    <!-- SECTION 1: Mobile Recharge Form -->
-    <section class="container-fluid py-5" style="background: #ffffff;">
+    <!-- SECTION 2: View Plans -->
+    <section class="container-fluid pb-5 pt-3 bg-light">
         <div class="container">
-            <div class="row align-items-center">
-                <!-- Left Side (Illustration) -->
-                <div class="col-lg-6 text-center">
-                    <video width="90%" height="auto" autoplay muted>
-                        <source src="assets/img/Mobile login.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
+            <h2 class="text-center fw-bold mb-4 text-dark">View Plans</h2>
+
+            <!-- Scrollable Tabs Navigation -->
+            <div class="position-relative">
+                <button class="btn btn-light position-absolute start-0 top-50 translate-middle-y shadow-sm" id="scrollLeft">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+
+                <div class="overflow-hidden">
+                    <ul class="nav nav-pills flex-nowrap gap-2 px-5 overflow-auto" id="plan-tabs" role="tablist" 
+                        style="white-space: nowrap; scrollbar-width: none;">
+                    </ul>
                 </div>
-    
-                <!-- Right Side (Recharge Form) -->
-                <div class="col-12 col-lg-6">
-                    <div class="card shadow-lg p-4 rounded-4 border-0 bg-white">
-                        <h3 class="text-center fw-bold text-dark">Fast & Secure Mobile Recharge</h3>
-                        <p class="text-center text-muted">Recharge instantly and stay connected</p>
-    
-                        <div class="text-center mb-3">
-                            <span class="badge bg-warning text-dark fs-6 py-2 px-4 rounded-pill">Prepaid</span>
-                        </div>
-    
-                        <form class="mt-3" onsubmit="return validateNumber(event)">
-                            <!-- Mobile Number Input -->
-                            <div class="input-group mb-3">
-                                <span class="input-group-text text-white bg-warning">
-                                    <i class="fa-solid fa-phone"></i>
-                                </span>
-                                <input type="text" id="mobileNumber" class="form-control form-control-lg" required
-                                    placeholder="Enter Mobile Number">
-                            </div>
-                            <p id="error-message" class="text-danger small text-center"></p>
-    
-                            <!-- Recharge Button -->
-                            <button type="submit" class="btn btn-lg w-100 fw-bold py-2 rounded-5 text-dark"
-                                style="background: #ffc600; border: none;">
-                                <i class="fa-solid fa-bolt"></i> Recharge Now
-                            </button>
-                        </form>
-                    </div>
-                </div>
+
+                <button class="btn btn-light position-absolute end-0 top-50 translate-middle-y shadow-sm" id="scrollRight">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="tab-content p-4 bg-white rounded shadow-lg mt-3" id="plan-content">
+                <!-- Plans will be dynamically injected here -->
             </div>
         </div>
+
     </section>
-
 </main>
-
 <!-- MAIN SECTION ENDS -->
 
 <!-- GO TO TOP BUTTON STARTS -->
     <div class="position-fixed bottom-0 end-0 p-4 plans">
         <a href="#" class="btn btn-dark shadow"><i class="fa-solid fa-chevron-up"></i></a>
     </div>
-
 <!-- GO TO TOP BUTTON ENDS-->
 
 <!-- FOOTER START -->
@@ -132,7 +114,7 @@
             <!-- Company Info -->
             <div class="col-md-4">
                 <a class="navbar-brand d-block mb-3 mx-auto mx-md-0" href="#">
-                    <img src="assets/img/Logo.png" alt="Mobi-Comm Logo" style="height: 80px; width: 80px;">
+                    <img src="../img/Logo.png" alt="Mobi-Comm Logo" style="height: 80px; width: 80px;">
                 </a>
                 <p class="mb-0" style="font-size: 1.1rem; line-height: 1.6; color: #1e1e1e;">
                     Mobi-Comm delivers affordable, reliable mobile services, keeping you connected with cutting-edge solutions.
@@ -223,9 +205,11 @@
 <!-- FOOTER END -->
 
 
-<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
-<script src="assets/js/script.js"></script>
+<script src="../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../../node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+<script src="paymentgateway.js"></script>
+<!-- Add Razorpay Checkout SDK -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 
 </body>

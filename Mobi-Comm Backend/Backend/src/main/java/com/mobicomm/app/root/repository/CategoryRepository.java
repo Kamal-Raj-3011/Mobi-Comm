@@ -11,4 +11,6 @@ import com.mobicomm.app.root.model.Category;
 public interface CategoryRepository extends JpaRepository<Category, String> {
 	Optional<Category> findTopByCategoryIdNotNullOrderByCategoryIdDesc();
 
+    Optional<Category> findByCategoryName(String categoryName);
+
 }  

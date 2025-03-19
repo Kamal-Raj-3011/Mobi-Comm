@@ -1,5 +1,7 @@
 package com.mobicomm.app.root.model;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.*;
@@ -31,5 +33,9 @@ public class Plan {
     private String tag;
     @Enumerated(EnumType.STRING)
     private Status status;
+    
+    @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PaymentHistory> paymentHistories;
+
 }
 

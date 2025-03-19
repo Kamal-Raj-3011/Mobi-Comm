@@ -2,6 +2,10 @@ package com.mobicomm.app.root.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.mobicomm.app.root.exception.DuplicateResourceException;
+import com.mobicomm.app.root.exception.InvalidRequestException;
+import com.mobicomm.app.root.exception.ResourceNotFoundException;
 import com.mobicomm.app.root.model.Category;
 import com.mobicomm.app.root.model.Status;
 import com.mobicomm.app.root.repository.CategoryRepository;
@@ -35,12 +39,17 @@ public class CategoryService {
 
 
     public String saveCategory(Category category) {
-    	category.setCategoryId(generateCategoryId());
-    	if (category.getStatus() == null) {
-    		category.setStatus(Status.ACTIVE);
-    	}
-    	categoryRepository.save(category);
-    	return "Category Added Successfully!";
+        Optional<Category> existingCategory = categoryRepository.findByCategoryName(category.getCategoryName());
+        if (existingCategory.isPresent()) {
+            throw new DuplicateResourceException("Category with name '" + category.getCategoryName() + "' already exists.");
+        }
+
+        category.setCategoryId(generateCategoryId());
+        if (category.getStatus() == null) {
+            category.setStatus(Status.ACTIVE);
+        }
+        categoryRepository.save(category);
+        return "Category Added Successfully!";
     }
 
     public List<Category> getAllCategories() {
@@ -49,7 +58,7 @@ public class CategoryService {
 
     public Category getCategoryById(String id) {
         return categoryRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Category not found"));
+            .orElseThrow(() -> new ResourceNotFoundException("Category not found with ID: " + id));
     }
 
     public Category updateCategory(String id, Category category) {
@@ -63,31 +72,26 @@ public class CategoryService {
     }
     
     public void activateCategory(String id) {
-        Optional<Category> optionalCategory = categoryRepository.findById(id);
-        if (optionalCategory.isPresent()) {
-            Category category = optionalCategory.get();
-            category.setStatus(Status.ACTIVE);
-            category.getPlans().forEach(plan -> plan.setStatus(Status.ACTIVE));
-            categoryRepository.save(category);
-            
-         // Activate all associated plans
-        } else {
-            throw new RuntimeException("Category not found with ID: " + id);
+        Category category = getCategoryById(id);  // Throws exception if not found
+        if (category.getStatus() == Status.ACTIVE) {
+            throw new InvalidRequestException("Category " + id + " is already active.");
         }
+
+        category.setStatus(Status.ACTIVE);
+        category.getPlans().forEach(plan -> plan.setStatus(Status.ACTIVE));
+        categoryRepository.save(category);
     }
+
     
     public void deactivateCategory(String id) {
-        Optional<Category> optionalCategory= categoryRepository.findById(id);
-        if (optionalCategory.isPresent()) {
-            Category category= optionalCategory.get();
-            category.setStatus(Status.INACTIVE);
-            categoryRepository.save(category);
-            
-         // Activate all associated plans
-            category.getPlans().forEach(plan -> plan.setStatus(Status.INACTIVE));
-        } else {
-            throw new RuntimeException("Category not found with ID: " + id);
+        Category category = getCategoryById(id); // Throws exception if not found
+        if (category.getStatus() == Status.INACTIVE) {
+            throw new InvalidRequestException("Category " + id + " is already inactive.");
         }
+
+        category.setStatus(Status.INACTIVE);
+        category.getPlans().forEach(plan -> plan.setStatus(Status.INACTIVE));
+        categoryRepository.save(category);
     }
     
     

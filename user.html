@@ -192,13 +192,11 @@
 
     <script>
 document.addEventListener("DOMContentLoaded", function () {
-    // Define the API URLs
-    const usersApiUrl = "http://127.0.0.1:9090/api/users/all"; // Adjust if necessary
-    const rechargesApiUrl = "http://127.0.0.1:9090/api/recharges/user/";
-    const transactionsApiUrl = "http://127.0.0.1:9090/api/transactions/user/";
+    // API URLs
+    const usersApiUrl = "http://127.0.0.1:9090/api/users/all";
+    const paymentHistoryApiUrl = "http://127.0.0.1:9090/api/payment-history/";
 
     const userTableBody = document.getElementById("userTableBody");
-    const pagination = document.getElementById("pagination");
 
     // Fetch Users
     function fetchUsers() {
@@ -209,10 +207,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     userTableBody.innerHTML = "<tr><td colspan='5' class='text-center'>No users found</td></tr>";
                 } else {
                     displayUserDetails(users);
-                    setupPagination(users);
                 }
             })
-            .catch(error => console.log('Error fetching users:', error));
+            .catch(error => console.log("Error fetching users:", error));
     }
 
     // Display User Details in Table
@@ -221,91 +218,77 @@ document.addEventListener("DOMContentLoaded", function () {
         users.forEach((user) => {
             const row = document.createElement("tr");
 
-            
-            const userIdCell = document.createElement("td");
-            userIdCell.textContent = user.userId || "N/A";
-            row.appendChild(userIdCell);
-
-            const userNameCell = document.createElement("td");
-            userNameCell.textContent = user.name || "N/A";
-            row.appendChild(userNameCell);
-
-            const userMobileCell = document.createElement("td");
-            userMobileCell.textContent = user.mobileNo || "N/A";
-            row.appendChild(userMobileCell);
-
-            const actionCell = document.createElement("td");
-            actionCell.classList.add("text-center");
-            const actionButton = document.createElement("button");
-            actionButton.classList.add("btn", "btn-primary");
-            actionButton.textContent = "View Details";
-            actionButton.onclick = () => openUserDetailsOffcanvas(user);  // Open offcanvas on click
-            actionCell.appendChild(actionButton);
-            row.appendChild(actionCell);
-
+            row.innerHTML = `
+                <td>${user.userId || "N/A"}</td>
+                <td>${user.name || "N/A"}</td>
+                <td>${user.mobileNo || "N/A"}</td>
+                <td class="text-center">
+                    <button class="btn btn-primary" onclick="openUserDetailsOffcanvas('${user.userId}', '${user.name}', '${user.mobileNo}', '${user.emailId}', '${user.address}')">
+                        View Details
+                    </button>
+                </td>
+            `;
             userTableBody.appendChild(row);
         });
     }
 
-    // Open Offcanvas and Fetch User Details and Previous Plans
-    function openUserDetailsOffcanvas(user) {
-        // Set user details in offcanvas
-        document.getElementById("userName").textContent = user.name;
-        document.getElementById("userMobileNo").textContent = user.mobileNo;
-        document.getElementById("userEmail").textContent = user.emailId;
-        document.getElementById("userAddress").textContent = user.address;
+    // Open Offcanvas and Fetch User Details + Previous Plans
+    window.openUserDetailsOffcanvas = function (userId, name, mobileNo, email, address) {
+        document.getElementById("userName").textContent = name;
+        document.getElementById("userMobileNo").textContent = mobileNo;
+        document.getElementById("userEmail").textContent = email;
+        document.getElementById("userAddress").textContent = address;
 
-        // Fetch and display previous plans
-        fetchPreviousPlans(user.userId);
-        
+        // Fetch and display previous plans from payment history
+        fetchPreviousPlans(userId);
+
         // Show the offcanvas
-        let myOffcanvas = new bootstrap.Offcanvas(document.getElementById('userDetailsOffcanvas'));
+        let myOffcanvas = new bootstrap.Offcanvas(document.getElementById("userDetailsOffcanvas"));
         myOffcanvas.show();
-    }
+    };
 
     // Fetch Previous Plans for the User
     function fetchPreviousPlans(userId) {
-        fetch(`${rechargesApiUrl}${userId}`)
-            .then(response => response.json())
-            .then(recharges => {
-                // Display previous plans in the offcanvas
-                displayPreviousPlans(recharges);
-            })
-            .catch(error => console.log('Error fetching recharges:', error));
-    }
+    fetch(`${paymentHistoryApiUrl}${userId}`)
+        .then(response => response.json())
+        .then(payments => {
+            console.log("Fetched Payment History:", payments); // ✅ Debugging Log
+            displayPreviousPlans(payments);
+        })
+        .catch(error => console.log("Error fetching payment history:", error));
+}
+
 
     // Display Previous Plans in the Offcanvas
-    function displayPreviousPlans(recharges) {
-        const previousPlansList = document.getElementById("previousPlansList");
-        previousPlansList.innerHTML = "";  // Clear the previous plans list
+    function displayPreviousPlans(payments) {
+    const previousPlansList = document.getElementById("previousPlansList");
+    previousPlansList.innerHTML = ""; // Clear list
 
-        if (recharges.length === 0) {
-            previousPlansList.innerHTML = "<li class='list-group-item text-center'>No previous plans found.</li>";
-        } else {
-            recharges.forEach((recharge) => {
-                const plan = recharge.plan; // Access the plan object within the recharge
-
-                // Check if plan exists and then access its details
-                if (plan) {
-                    const listItem = document.createElement("li");
-                    listItem.classList.add("list-group-item", "my-3", "border-0", "p-3", "rounded-3", "shadow-sm");
-                    listItem.innerHTML = `
-                        <strong>Plan ID:</strong> ${plan.planId} <br>
-                        <strong>Plan Name:</strong> ${plan.category.categoryName} <br>
-                        <strong>Price:</strong> ₹${plan.price} <br>
-                        <strong>Validity:</strong> ${plan.validity} days <br>
-                        <strong>Expiry Date:</strong> ${new Date(recharge.expiryDate).toLocaleDateString()} <br>
-                    `;
-                    previousPlansList.appendChild(listItem);
-                } else {
-                    const listItem = document.createElement("li");
-                    listItem.classList.add("list-group-item", "border-0", "p-3", "rounded-3", "shadow-sm");
-                    listItem.textContent = "No plan data available for this recharge.";
-                    previousPlansList.appendChild(listItem);
-                }
-            });
-        }
+    if (!payments || payments.length === 0) {
+        previousPlansList.innerHTML = "<li class='list-group-item text-center'>No previous plans found.</li>";
+        return;
     }
+
+    payments.forEach((payment) => {
+        const plan = payment.plan; // Check if plan exists
+
+        const listItem = document.createElement("li");
+        listItem.classList.add("list-group-item", "my-3", "border-0", "p-3", "rounded-3", "shadow-sm");
+
+        if (plan) {
+            listItem.innerHTML = `
+                <strong>Plan ID:</strong> ${plan.planId} <br>
+                <strong>Plan Name:</strong> ${plan.category ? plan.category.categoryName : "N/A"} <br>
+                <strong>Price:</strong> ₹${plan.price} <br>
+                <strong>Validity:</strong> ${plan.validity} days <br>
+                <strong>Expiry Date:</strong> ${new Date(payment.expiryDate).toLocaleDateString()} <br>
+            `;
+        } else {
+            listItem.textContent = "Plan details not available.";
+        }
+        previousPlansList.appendChild(listItem);
+    });
+}
 
     // Fetch users on page load
     fetchUsers();

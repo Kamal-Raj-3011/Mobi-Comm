@@ -1,7 +1,7 @@
 package com.mobicomm.app.root.controller;
 
-import com.mobicomm.app.root.model.Transaction;
 import com.mobicomm.app.root.model.User;
+import com.mobicomm.app.root.repository.UserRepository;
 import com.mobicomm.app.root.service.UserService;
 
 import java.util.HashMap;
@@ -21,6 +21,7 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    private UserRepository userRepository;
 
  // Get All Users
     @GetMapping("/all")
@@ -116,6 +117,13 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);  // Mobile number not found
         }
     }
+    
+    @GetMapping("/details/{mobileNumber}")
+    public ResponseEntity<User> getUserDetailsByMobile(@PathVariable String mobileNumber) {
+        User user = userService.getUserDetailsByMobile(mobileNumber);
+        return ResponseEntity.ok(user);
+    }
+
     
     
 }

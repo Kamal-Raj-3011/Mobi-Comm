@@ -98,8 +98,8 @@ document.addEventListener("DOMContentLoaded", function () {
                                 <div class="mb-3">
                                     <p class="mb-2 text-muted"><i class="fa-solid fa-calendar-alt me-2 text-black"></i> ${plan.validity} Days</p>
                                     <p class="mb-2 text-muted"><i class="fa-solid fa-wifi me-2 text-black"></i> ${plan.data}</p>
-                                    <p class="mb-2 text-muted"><i class="fa-solid fa-phone me-2 text-black"></i> ${plan.calls} Calls</p>
-                                    <p class="mb-2 text-muted"><i class="fa-solid fa-comment-dots me-2 text-black"></i> ${plan.message} Messages</p>
+                                    <p class="mb-2 text-muted"><i class="fa-solid fa-phone me-2 text-black"></i> ${plan.calls}</p>
+                                    <p class="mb-2 text-muted"><i class="fa-solid fa-comment-dots me-2 text-black"></i> ${plan.message}</p>
                                 </div>
 
                                 <!-- Buy Now Button -->

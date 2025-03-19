@@ -2,12 +2,17 @@ package com.mobicomm.app.root.service;
 
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.mobicomm.app.root.exception.InvalidRequestException;
+import com.mobicomm.app.root.exception.ResourceNotFoundException;
 import com.mobicomm.app.root.model.Plan;
 import com.mobicomm.app.root.model.Status;
 import com.mobicomm.app.root.repository.PlanRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -52,7 +57,8 @@ public class PlanService {
     }
 
     public Plan getPlanById(String id) {
-        return planRepository.findById(id).orElseThrow(() -> new RuntimeException("Plan not found"));
+        return planRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Plan not found with ID: " + id));
     }
 
     public Plan updatePlan(String id, Plan plan) {
@@ -72,31 +78,29 @@ public class PlanService {
     }
     
     public void activatePlan(String id) {
-        Optional<Plan> optionalPlan = planRepository.findById(id);
-        if (optionalPlan.isPresent()) {
-            Plan plan = optionalPlan.get();
-            plan.setStatus(Status.ACTIVE);
-            planRepository.save(plan);
-        } else {
-            throw new RuntimeException("Plan not found with ID: " + id);
+        Plan plan = getPlanById(id); // Throws exception if not found
+        if (plan.getStatus() == Status.ACTIVE) {
+            throw new InvalidRequestException("Plan " + id + " is already active.");
         }
+        plan.setStatus(Status.ACTIVE);
+        planRepository.save(plan);
     }
     
     public void deactivatePlan(String id) {
-        Optional<Plan> optionalPlan = planRepository.findById(id);
-        if (optionalPlan.isPresent()) {
-            Plan plan = optionalPlan.get();
-            plan.setStatus(Status.INACTIVE);
-            planRepository.save(plan);
-        } else {
-            throw new RuntimeException("Plan not found with ID: " + id);
+        Plan plan = getPlanById(id); // Throws exception if not found
+        if (plan.getStatus() == Status.INACTIVE) {
+            throw new InvalidRequestException("Plan " + id + " is already inactive.");
         }
+        plan.setStatus(Status.INACTIVE);
+        planRepository.save(plan);
     }
     
     // Method to fetch plans by category ID
     public List<Plan> getPlansByCategory(String categoryId) {
         return planRepository.findByCategoryCategoryId(categoryId);  // Query by category ID
     }
+    
+   
     
 }
 
