@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
     crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="node_modules/aos/dist/aos.css">
 
 </head>
 <body>
@@ -44,7 +45,7 @@
                 </nav>
 
                 <!-- Mobile View: Account (Right) -->
-                <a href="#" class="d-md-none text-dark text-decoration-none">
+                <a href="account.html   " class="d-md-none text-dark text-decoration-none">
                     <i class="fa-solid fa-user fs-4"></i>
                 </a>
             </div>
@@ -57,12 +58,11 @@
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
             </div>
             <div class="offcanvas-body d-flex flex-column gap-3">
-                <a href="#" class="text-dark nav-link active fw-bold" aria-current="page">Home</a>
-                <a href="#" class="text-dark text-decoration-none nav-link">Recharge</a>
-                <a href="#" class="text-dark text-decoration-none nav-link">Prepaid Plans</a>
-                <a href="#" class="text-dark text-decoration-none nav-link">About Us</a>
-                <a href="#" class="text-dark text-decoration-none nav-link">Contact Us</a>
-                <a href="#" class="text-dark text-decoration-none nav-link">Account</a>
+                <a href="index.html" class="text-dark nav-link active fw-bold" aria-current="page">Home</a>
+                <a href="recharge.html" class="text-dark text-decoration-none nav-link">Recharge</a>
+                <a href="prepaidplans.html" class="text-dark text-decoration-none nav-link">Prepaid Plans</a>
+                <a href="about.html" class="text-dark text-decoration-none nav-link">About Us</a>
+                <a href="contact.html" class="text-dark text-decoration-none nav-link">Contact Us</a>
             </div>
         </div>
         <!-- MOBILE NAVBAR ENDS -->
@@ -80,20 +80,20 @@
                 <div class="row align-items-center">
                     <!-- Left Content -->
                     <div class="col-12 col-md-6 text-center text-md-start pt-5">
-                        <h1 class="fw-bold" style="color: #1e1e1e;">Welcome To Mobi-Comm</h1>
-                        <p class="fw-semibold h5 mt-2" style="color: #17a2b8; font-style: italic;">
+                        <h1 class="fw-bold" style="color: #1e1e1e;" data-aos="fade-right" data-aos-delay="200">Welcome To Mobi-Comm</h1>
+                        <p class="fw-semibold h5 mt-2" style="color: #17a2b8; font-style: italic;"data-aos="fade-right" data-aos-delay="300">
                             "Recharge Your World, One Tap at a Time!"
                         </p>
-                        <p class="mt-3" style="color: #343a40; font-size: 1.1rem;">
+                        <p class="mt-3" style="color: #343a40; font-size: 1.1rem;" data-aos="fade-right" data-aos-delay="400">
                             Experience seamless mobile recharges with affordable plans, lightning-fast payments, and a hassle-free process.
                         </p>
-                        <p class="mt-3" style="color: #343a40; font-size: 1.1rem;">
+                        <p class="mt-3" style="color: #343a40; font-size: 1.1rem;" data-aos="fade-right" data-aos-delay="500">
                             Stay connected effortlessly with cutting-edge convenience designed just for you.
                         </p>
 
                         
                        
-                        <a href="newsim.html" class="btn mt-4 px-4 py-2 journey-btn" style="background-color: #ffc600; color: #1e1e1e; font-weight: bold; border-radius: 8px; transition: all 0.3s ease; display: inline-flex; align-items: center;">
+                        <a href="newsim.html" class="btn mt-4 px-4 py-2 journey-btn" style="background-color: #ffc600; color: #1e1e1e; font-weight: bold; border-radius: 8px; transition: all 0.3s ease; display: inline-flex; align-items: center;" data-aos="fade-up" data-aos-delay="600">
                             Start Your Journey With Us 
                             <i class="fa-solid fa-rocket mx-2" style="font-size: 1.2rem;"></i>
                         </a>
@@ -120,7 +120,7 @@
                     Recharge in a Blink – Stay Connected! 
                     
                 </h3>
-                <div class="row justify-content-center">
+                <div class="row justify-content-center" data-aos="zoom-in">
                     <div class="col-12 col-md-8 col-lg-5">
                         <div class="card shadow-sm border-0 rounded-3 p-4" style="background-color: #fff7d1;">
                             <div class="text-center">
@@ -147,7 +147,7 @@
         </section>
         <!-- SECTION 2 ENDS -->
 
-        <div class="row justify-content-center d-lg-none p-4" style="background-color: #f8f9fa;">
+        <div class="row justify-content-center d-lg-none p-4" style="background-color: #f8f9fa;" data-aos="zoom-in">
             <div class="col-12 col-sm-8 col-md-6 d-flex justify-content-center">
                 <div class="card shadow-sm border-0 rounded-3 overflow-hidden" style="max-width: 25rem; background-color: #fff7d1;">
                     <img src="assets/img/Recharge.jpg" class="card-img-top" alt="Mobile Recharge Plans" style="object-fit: cover; height: 12rem;">
@@ -156,7 +156,7 @@
                         <p class="card-text mt-2" style="color: #343a40; font-size: 1rem;">
                             Explore tailored mobile plans and pick the perfect pack to stay connected effortlessly.
                         </p>
-                        <a href="viewplans.html" class="btn w-75 py-2 mt-3 rounded-pill" style="background-color: #ffc600; color: #1e1e1e; font-weight: bold; transition: background-color 0.3s ease, color 0.3s ease;" onmouseover="this.style.backgroundColor='#007bff'; this.style.color='#fff';" onmouseout="this.style.backgroundColor='#ffc600'; this.style.color='#1e1e1e';">
+                        <a href="prepaidplans.html" class="btn w-75 py-2 mt-3 rounded-pill" style="background-color: #ffc600; color: #1e1e1e; font-weight: bold; transition: background-color 0.3s ease, color 0.3s ease;" onmouseover="this.style.backgroundColor='#007bff'; this.style.color='#fff';" onmouseout="this.style.backgroundColor='#ffc600'; this.style.color='#1e1e1e';">
                             View Plans <i class="fa-solid fa-arrow-right ms-2"></i>
                         </a>
                     </div>
@@ -169,7 +169,7 @@
             <div class="container">
                 <div class="row g-4 align-items-stretch">
                     <!-- Animated Users Section -->
-                    <div class="col-12 col-lg-6 d-flex flex-column align-items-center text-center rounded-4  pt-4" style="background-color: #dfebfb;">
+                    <div class="col-12 col-lg-6 d-flex flex-column align-items-center text-center rounded-4  pt-4" style="background-color: #dfebfb;" data-aos="fade-up" data-aos-delay="500">
                         <h3 class="fw-bold mb-3 text-black" style="color: #ffc600;">Join the Mobi-Comm Revolution</h3>
                         <p class="mb-4 text-black" style="color: #f8f9fa; font-size: 1.1rem;">
                             Become part of a thriving community enjoying lightning-fast recharges, secure services, and exclusive perks.
@@ -181,18 +181,15 @@
                         <div class="row justify-content-center mt-4 g-3">
                             <div class="col-4 text-center">
                                 <img src="assets/img/Trust.png" class="rounded img-fluid" alt="Trust" style="max-width: 100px;">
-                                <h5 class="mt-2 text-black" style="color: #17a2b8;">Unmatched Trust</h5>
-                                <p class="small text-black" style="color: #f8f9fa;">Reliable services you can count.</p>
+                                <h5 class="mt-2 text-black" style="color: #17a2b8;"> Trust</h5>
                             </div>
                             <div class="col-4 text-center">
                                 <img src="assets/img/Secure.png" class="rounded img-fluid" alt="Secure" style="max-width: 100px;">
-                                <h5 class="mt-2 text-black" style="color: #17a2b8;">Top-Tier Security</h5>
-                                <p class="small text-black" style="color: #f8f9fa;">Your data, fully protected.</p>
+                                <h5 class="mt-2 text-black" style="color: #17a2b8;"> Security</h5>
                             </div>
                             <div class="col-4 text-center">
                                 <img src="assets/img/Faster Process.png" class="rounded img-fluid" alt="Quicker" style="max-width: 100px;">
-                                <h5 class="mt-2 text-black" style="color: #17a2b8;">Blazing Fast</h5>
-                                <p class="small text-black" style="color: #f8f9fa;">Recharge in seconds.</p>
+                                <h5 class="mt-2 text-black" style="color: #17a2b8;">Speed</h5>
                             </div>
                         </div>
         
@@ -202,13 +199,13 @@
                     <!-- Service Options -->
                     <div class="col-12 col-lg-6 d-flex flex-column gap-3">
                         <!-- Buy SIM Section -->
-                        <div class="rounded-4  p-4 text-center shadow-lg" style="background-color: #fff7d1;">
+                        <div class="rounded-4  p-4 text-center shadow-lg" style="background-color: #fff7d1;" data-aos="fade-up" data-aos-delay="700">
                             <div class="d-flex align-items-center gap-2 justify-content-center">
                                 <img src="assets/img/Sim.png" style="width: 33px;" alt="SIM Icon">
                                 <h4 class="fw-bold" style="color: #1e1e1e;">Get Your Mobi-Comm SIM</h4>
                             </div>
                             <p class="text-center small" style="color: #343a40;">Unlock high-speed data and unlimited calls with a new SIM.</p>
-                            <a href="newsim.html" class="btn rounded-pill mt-3 py-2 shadow" style="background-color: #007bff; color: #fff; transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='#17a2b8';" onmouseout="this.style.backgroundColor='#007bff';">
+                            <a href="newsim.html" class="btn rounded-pill mt-3 py-2 shadow" style="background-color: #0d72de; color: #fff; transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='#0000FF'"onmouseout="this.style.backgroundColor='#007bff';">
                                 Get Yours Now
                             </a>
                         </div>
@@ -216,24 +213,24 @@
                         <!-- Change Service & Rewards Section -->
                         <div class="row g-4">
                             <!-- Change Mobile Service -->
-                            <div class="col-12 col-md-6 px-3">
+                            <div class="col-12 col-md-6 px-3" data-aos="fade-up" data-aos-delay="800">
                                 <div class="text-center rounded-4  p-4 shadow-lg" style="background-color: #f9e8d0;">
                                     <img src="assets/img/Sim2.png" alt="Service Icon" style="width: 51px;">
                                     <h4 class="fw-bold mt-3" style="color: #1e1e1e;">Switch to <br> Mobi-Comm</h4>
                                     <p class="text-center small" style="color: #343a40;">Enjoy premium benefits by changing your service.</p>
-                                    <a href="switchsim.html" class="btn rounded-pill mt-3 px-4 py-2 " style="background-color: #f8f9fa; color: #343a40; transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='#17a2b8'; this.style.color='#fff';" onmouseout="this.style.backgroundColor='#f8f9fa'; this.style.color='#343a40';">
+                                    <a href="switchsim.html" class="btn shadow rounded-pill mt-3 px-4 py-2 " style="background-color: #f8f9fa; color: #343a40; transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='#ffc600'; this.style.color='#1e1e1e';" onmouseout="this.style.backgroundColor='#f8f9fa'; this.style.color='#343a40';">
                                         Switch Now
                                     </a>
                                 </div>
                             </div>
         
                             <!-- Rewards Section -->
-                            <div class="col-12 col-md-6 px-3">
+                            <div class="col-12 col-md-6 px-3" data-aos="fade-up" data-aos-delay="900">
                                 <div class="text-center rounded-4 p-4 shadow-lg" style="background-color: #f9e8d0;">
                                     <img src="assets/img/Reward.png" alt="Reward Icon" style="width: 40px;">
                                     <h4 class="fw-bold mt-3" style="color: #1e1e1e;">Refer And <br> Earn Rewards</h4>
                                     <p class="text-center small" style="color: #343a40;">Refer friends and score cashbacks!</p>
-                                    <a href="refer.html" class="btn rounded-pill mt-3 px-4 py-2 shadow" style="background-color: #f8f9fa; color: #343a40; transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='#17a2b8'; this.style.color='#fff';" onmouseout="this.style.backgroundColor='#f8f9fa'; this.style.color='#343a40';">
+                                    <a href="refer.html" class="btn rounded-pill mt-3 px-4 py-2 shadow" style="background-color: #f8f9fa; color: #343a40; transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='#ffc600'; this.style.color='#1e1e1e';" onmouseout="this.style.backgroundColor='#f8f9fa'; this.style.color='#343a40';">
                                         Start Earning
                                     </a>
                                 </div>
@@ -255,8 +252,8 @@
                 <!-- Plan details will be dynamically injected here -->
             </div>
             <!-- View All Plans Button -->
-            <div class="text-center mt-4">
-                <a href="recharge.html" class="btn btn-outline-info px-4 py-2 rounded-pill fw-bold" style="color: #007bff; border-color: #007bff; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#007bff'; this.style.color='#fff';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#007bff';">
+            <div class="text-center my-4">
+                <a href="prepaidplans.html" class="btn btn-outline-info px-4 py-2 rounded-pill fw-bold" style="color: #007bff; border-color: #007bff; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#007bff'; this.style.color='#fff';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#007bff';">
                     View All Plans <i class="fa-solid fa-arrow-right ms-2"></i>
                 </a>
             </div>
@@ -387,7 +384,7 @@
                     <ul class="list-unstyled" style="color: #1e1e1e; font-size: 1rem;">
                         <li class="mb-2">
                             <i class="fa-solid fa-phone me-2" style="color: #1e1e1e;"></i>
-                            <a href="tel:+18005551234" style="color: #1e1e1e; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#ffc600';" onmouseout="this.style.color='#1e1e1e';">+1-800-555-1234</a>
+                            <a href="tel:+18005551234" style="color: #1e1e1e; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#ffc600';" onmouseout="this.style.color='#1e1e1e';">+91 88552 47719</a>
                         </li>
                         <li>
                             <i class="fa-solid fa-envelope me-2" style="color: #1e1e1e;"></i>
@@ -431,6 +428,10 @@
 <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
 <script src="assets/js/script.js"></script>
+<script src="./node_modules/aos/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
 
 
 

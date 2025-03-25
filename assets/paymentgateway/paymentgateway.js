@@ -122,7 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     tab.classList.add("nav-item");
 
                     tab.innerHTML = `
-                        <a class="nav-link ${index === 0 ? 'active' : ''}" id="category-tab-${category.categoryId}" 
+                        <a class="nav-link text-black ${index === 0 ? 'active' : ''}" id="category-tab-${category.categoryId}" 
                             data-bs-toggle="pill" href="#category-content-${category.categoryId}" 
                             role="tab" aria-controls="category-content-${category.categoryId}" 
                             aria-selected="${index === 0}">

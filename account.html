@@ -44,7 +44,7 @@
             </nav>
 
             <!-- Mobile View: Account (Right) -->
-            <a href="#" class="d-md-none text-dark text-decoration-none">
+            <a href="account.html" class="d-md-none text-dark text-decoration-none">
                 <i class="fa-solid fa-user fs-4"></i>
             </a>
         </div>
@@ -57,12 +57,11 @@
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
         </div>
         <div class="offcanvas-body d-flex flex-column gap-3">
-            <a href="#" class="text-dark nav-link active fw-bold" aria-current="page">Home</a>
-            <a href="#" class="text-dark text-decoration-none nav-link">Recharge</a>
-            <a href="#" class="text-dark text-decoration-none nav-link">Prepaid Plans</a>
-            <a href="#" class="text-dark text-decoration-none nav-link">About Us</a>
-            <a href="#" class="text-dark text-decoration-none nav-link">Contact Us</a>
-            <a href="#" class="text-dark text-decoration-none nav-link">Account</a>
+            <a href="index.html" class="text-dark text-decoration-none nav-link" aria-current="page">Home</a>
+            <a href="recharge.html" class="text-dark text-decoration-none nav-link">Recharge</a>
+            <a href="prepaidplans.html" class="text-dark text-decoration-none nav-link">Prepaid Plans</a>
+            <a href="about.html" class="text-dark text-decoration-none nav-link">About Us</a>
+            <a href="contact.html" class="text-dark text-decoration-none nav-link">Contact Us</a>
         </div>
     </div>
     <!-- MOBILE NAVBAR ENDS -->
@@ -96,68 +95,22 @@
                                     <div class="text-danger d-none" id="emailError">Invalid email or not subscribed</div>
                                 </div>
         
-                                <!-- Phone Number -->
+                                <!-- Password -->
                                 <div class="mb-3">
-                                    <label class="form-label">Phone Number</label>
-                                    <input type="tel" id="phone" class="form-control" placeholder="Enter your phone number">
-                                    <div class="text-danger d-none" id="phoneError">Invalid phone number or not subscribed</div>
+                                    <label class="form-label">Password</label>
+                                    <input type="password" id="password" class="form-control" placeholder="Enter your password">
+                                    <div class="text-danger d-none" id="passwordError">Invalid password</div>
                                 </div>
         
-                                <!-- Radio Buttons -->
-                                <div class="mb-3">
-                                    <label class="form-label">Send OTP To:</label><br>
-                                    <input type="radio" name="otpMethod" value="phone" id="otpPhone" checked>
-                                    <label for="otpPhone">Phone</label>
-                                    <input type="radio" name="otpMethod" value="email" id="otpEmail">
-                                    <label for="otpEmail">Email</label>
-                                </div>
-        
-                                <!-- Send OTP Button -->
-                                <button type="button" class="btn btn-primary w-100" id="sendOtpBtn">Send OTP</button>
+                                <!-- Login Button -->
+                                <button type="submit" class="btn btn-primary w-100" id="loginBtn">Login</button>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-            </div>
-            
-            <!-- OTP Modal -->
-            <div class="modal fade" id="otpModal" tabindex="-1">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">OTP Sent</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                        </div>
-                        <div class="modal-body text-center">
-                            <p id="otpMessage"></p>
-                            <div class="otp-inputs d-flex justify-content-center gap-2">
-                                <input type="text" class="form-control otp-field" maxlength="1">
-                                <input type="text" class="form-control otp-field" maxlength="1">
-                                <input type="text" class="form-control otp-field" maxlength="1">
-                                <input type="text" class="form-control otp-field" maxlength="1">
-                            </div>
-                            <div class="text-danger d-none mt-2" id="otpError">Invalid OTP</div>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-success" id="verifyOtp">Verify OTP</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-<!-- Toast Notification -->
-<div class="position-fixed bottom-0 end-0 p-3">
-    <div id="otpToast" class="toast bg-dark text-white" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header bg-warning text-dark">
-            <strong class="me-auto">OTP Notification</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
-        </div>
-        <div class="toast-body fw-bold text-center"></div>
-    </div>
-</div>
-
         </section>
+        
         <!-- SECTION 1 ENDS -->
 
     </main>
@@ -222,7 +175,7 @@
                 <ul class="list-unstyled" style="color: #1e1e1e; font-size: 1rem;">
                     <li class="mb-2">
                         <i class="fa-solid fa-phone me-2" style="color: #1e1e1e;"></i>
-                        <a href="tel:+18005551234" style="color: #1e1e1e; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#ffc600';" onmouseout="this.style.color='#1e1e1e';">+1-800-555-1234</a>
+                        <a href="tel:+18005551234" style="color: #1e1e1e; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#ffc600';" onmouseout="this.style.color='#1e1e1e';">+91 88552 47719</a>
                     </li>
                     <li>
                         <i class="fa-solid fa-envelope me-2" style="color: #1e1e1e;"></i>
@@ -265,8 +218,72 @@
 
 <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
-<script src="assets/js/script.js"></script>
 <script src="assets/js/account.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const loginForm = document.getElementById("loginForm");
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const emailError = document.getElementById("emailError");
+    const passwordError = document.getElementById("passwordError");
+
+    loginForm.addEventListener("submit", async function (event) {
+        event.preventDefault(); // Prevent form submission
+
+        const email = emailInput.value.trim();
+        const password = passwordInput.value.trim();
+
+        // Reset previous error messages
+        emailError.classList.add("d-none");
+        passwordError.classList.add("d-none");
+
+        // Basic validation
+        if (!email || !password) {
+            emailError.classList.remove("d-none");
+            emailError.textContent = "Email and password are required.";
+            return;
+        }
+
+        try {
+            const response = await fetch("http://127.0.0.1:9090/api/users/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ emailId: email, password: password })
+            });
+
+            const result = await response.text(); // API returns plain text
+
+            if (response.ok) {
+                // ✅ Store user session (optional)
+                localStorage.setItem("userEmail", email);
+
+                // ✅ Redirect to User Dashboard
+                window.location.href = "UserDashboard.html";
+            } else {
+                // ❌ Handle different failure cases
+                if (response.status === 401) {
+                    passwordError.classList.remove("d-none");
+                    passwordError.textContent = "Incorrect email or password. Please try again.";
+                } else if (response.status === 404) {
+                    emailError.classList.remove("d-none");
+                    emailError.textContent = "No account found with this email.";
+                } else {
+                    emailError.classList.remove("d-none");
+                    emailError.textContent = "Server error. Please try again later.";
+                }
+            }
+        } catch (error) {
+            console.error("Login Error:", error);
+            emailError.classList.remove("d-none");
+            emailError.textContent = "Something went wrong. Please check your connection.";
+        }
+    });
+});
+
+</script>
 
 
 </body>

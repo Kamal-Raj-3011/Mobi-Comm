@@ -25,7 +25,7 @@ public class PaymentHistory {
     private LocalDateTime expiryDate;
     private String transactionId;
 
-    @JsonIgnore // ✅ Prevent infinite loops
+    @JsonIgnoreProperties("paymentHistories")
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;

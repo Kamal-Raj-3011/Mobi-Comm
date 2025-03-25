@@ -1,6 +1,5 @@
 
 // Number Validation
-// Validate & Store Mobile Number
 function validateNumber(event) {
     event.preventDefault();  
 
@@ -106,19 +105,19 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div class="row g-4 justify-content-center">
                             <!-- Dynamically create a card for each plan -->
                             ${plans.map(plan => `
-                                <div class="col-12 col-md-4">
+                                <div class="col-12 col-md-4" data-aos="flip-left" data-aos-delay="500">
                                     <div class="card p-4 shadow-lg rounded-4 border-0 text-white h-100" style="background: linear-gradient(135deg, #1e1e1e, #343a40);">
                                         <div class="d-flex justify-content-between align-items-center mb-3">
                                             <h6 class="text-uppercase fw-bold" style="color: #ffc600;">⭐ Best Seller</h6>
                                             <span class="fs-4" style="color: #fff7d1;">✨</span>
                                         </div>
-                                        <h2 class="fw-bold mb-3" style="color: #f8f9fa;">${plan.price}</h2>
+                                        <h2 class="fw-bold mb-3" style="color: #f8f9fa;">₹${plan.price}</h2>
                                         <hr style="border-top: 2px solid rgba(255, 255, 255, 0.2); margin: 1rem 0;">
                                         <div class="mb-4">
-                                            <p class="mb-2"><i class="fa-solid fa-calendar-alt me-2"></i> ${plan.validity}</p>
+                                            <p class="mb-2"><i class="fa-solid fa-calendar-alt me-2"></i> ${plan.validity} Days</p>
                                             <p class="mb-2"><i class="fa-solid fa-wifi me-2"></i> ${plan.data}</p>
                                             <p class="mb-2"><i class="fa-solid fa-phone me-2"></i> ${plan.calls}</p>
-                                            <p class="mb-2"><i class="fa-solid fa-comment-dots me-2"></i> ${plan.sms}</p>
+                                            <p class="mb-2"><i class="fa-solid fa-comment-dots me-2"></i> ${plan.message}</p>
                                         </div>
                                         <a href="prepaidplans.html" class="btn text-white w-100 py-2 fw-bold rounded-pill" style="background: linear-gradient(135deg, #ff6b6b, #ffc600); box-shadow: 0 4px 10px rgba(255, 198, 0, 0.5); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)';" onmouseout="this.style.transform='scale(1)';">
                                             Get This Plan <i class="fa-solid fa-rocket ms-2"></i>

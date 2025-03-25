@@ -81,7 +81,7 @@
                         Admin Profile
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="admin.html">Logout</a></li>
+                        <li><a class="dropdown-item" href="adminlogin.html">Logout</a></li>
                     </ul>
                 </div>
             </div>
@@ -119,7 +119,7 @@
 
     <script>
 document.addEventListener("DOMContentLoaded", function () {
-    const API_URL = "http://localhost:9090/api/recharges/";
+    const API_URL = "http://localhost:9090/api/payment-history"; // ✅ Correct API Endpoint
     const tableBody = document.getElementById("userTableBody");
     const pagination = document.getElementById("pagination");
     const toastContainer = document.getElementById("toastContainer"); // Toast container
@@ -149,17 +149,21 @@ document.addEventListener("DOMContentLoaded", function () {
         today.setHours(0, 0, 0, 0);
 
         const expiryDateLimit = new Date(today);
-        expiryDateLimit.setDate(expiryDateLimit.getDate() + 3);
+        expiryDateLimit.setDate(expiryDateLimit.getDate() + 3); // ✅ Set to 3 days later
 
-        const expiryDateLimitString = expiryDateLimit.toISOString().split('T')[0];
-
-        console.log("Expected Expiry Date:", expiryDateLimitString);
+        console.log("Filtering for expiry between:", today.toISOString().split('T')[0], "and", expiryDateLimit.toISOString().split('T')[0]);
 
         return allUsers.filter(user => {
-            const expiryDate = new Date(user.expiryDate);
-            const expiryDateString = expiryDate.toISOString().split('T')[0];
+            // ✅ Ensure user object exists
+            if (!user.user || !user.expiryDate) {
+                console.warn("Skipping invalid entry:", user);
+                return false;
+            }
 
-            console.log(`Checking User: ${user.user.name}, Expiry Date: ${expiryDateString}`);
+            const expiryDate = new Date(user.expiryDate);
+            expiryDate.setHours(0, 0, 0, 0);
+
+            console.log(`Checking User: ${user.user.name}, Expiry Date: ${expiryDate.toISOString().split('T')[0]}`);
 
             return expiryDate >= today && expiryDate <= expiryDateLimit;
         });
@@ -205,29 +209,27 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     window.sendReminder = function (mobileNo, name) {
-        showToast(`Reminder sent to ${name} (${mobileNo})`);
+        showToast(`📩 Reminder sent to ${name} (${mobileNo})`);
     };
 
     function showToast(message) {
         const toast = document.createElement("div");
-        toast.classList.add("toast", "align-items-center", "text-bg-success", "border-0", "show");
+        toast.classList.add("toast", "align-items-center", "text-bg-success", "border-0", "fade", "show");
         toast.style.position = "fixed";
         toast.style.bottom = "20px";
         toast.style.right = "20px";
         toast.style.zIndex = "1050";
         toast.innerHTML = `
             <div class="d-flex">
-                <div class="toast-body">
-                    ${message}
-                </div>
+                <div class="toast-body">${message}</div>
                 <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
             </div>
         `;
-        
-        toastContainer.appendChild(toast);
 
+        toastContainer.appendChild(toast);
         setTimeout(() => {
-            toast.remove();
+            toast.classList.remove("show");
+            setTimeout(() => toast.remove(), 500);
         }, 3000);
     }
 

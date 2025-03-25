@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobi-Comm Home</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+</head>
+<body>
+
+<style>
+    .futuristic-btn {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    background-color: #5f48aa; /* Electric Blue */
+    color: #fff;
+    border: 2px solid transparent;
+    box-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+}
+
+/* Hover Effects */
+.futuristic-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px rgba(0, 191, 255, 0.9), 0 0 50px rgba(0, 191, 255, 0.5);
+}
+
+/* Pulse Effect */
+.futuristic-btn::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(0, 191, 255, 0.2);
+    transition: all 0.4s ease-in-out;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+}
+
+/* Expanding Pulse Effect */
+.futuristic-btn:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+}
+
+</style>
+    
+<!-- HEADER STARTS -->
+
+<header class="sticky-top shadow-sm" style="background: #ffffff;">
+    <div class="container py-2 ">
+            <!-- Logo (Centered) -->
+            <div class="text-center">
+                <img src="assets/img/Logo.png" alt="Company Logo" class="img-fluid" style="max-height: 45px;">
+            </div>
+    </div>
+
+</header>
+
+<!-- HEADER ENDS -->
+
+<!-- SECTION 1 STARTS -->
+
+<section class="section1">
+    <div class="container-fluid text-center">
+        <img src="assets/img/Under Maintenance.png" alt="Under Maintanance" class="img-fluid rounded-5 mt-4" style="width: 35%;">
+    </div>
+    <div class="button text-center mt-4">
+        <a href="index.html" class="btn btn-sm fw-bold shadow-sm rounded-pill px-4 futuristic-btn">
+            <i class="fas fa-arrow-left me-2"></i> Back To Home
+        </a>
+    </div>
+    
+    
+    
+
+<!-- Bootstrap Icons (if needed) -->
+<script src="https://kit.fontawesome.com/YOUR_KIT_CODE.js" crossorigin="anonymous"></script>
+
+    
+</section>
+
+<!-- SECTION 1 ENDS -->
+
+<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+
+</body>
+</html>

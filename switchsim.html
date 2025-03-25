@@ -6,23 +6,79 @@
     <title>Mobi-Comm Home</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+    <style>
+        /* Professional Design Styles */
+        .form-section {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
 
+        .form-section h5 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .personal-details-section {
+            background-color: #ffffff;
+        }
+
+        .delivery-details-section {
+            background-color: #fff8e1;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #444;
+        }
+
+        .section-divider {
+            border-bottom: 2px solid #ffc600;
+            margin: 20px 0;
+        }
+
+        .btn-next {
+            background-color: #ffc600;
+            color: #fff;
+            font-weight: 600;
+            padding: 12px 20px;
+            border-radius: 5px;
+        }
+
+        .btn-next:hover {
+            background-color: #e6b800;
+        }
+
+
+    li {
+        font-size: 1rem;
+        color: #333;
+    }
+
+    li:hover {
+        color: #007bff; /* Change text color on hover */
+        cursor: pointer; /* Make cursor a pointer on hover */
+    }
+
+    </style>
 </head>
 <body>
-    
-<!-- HEADER STARTS -->
 
+<!-- HEADER STARTS -->
 <header class="sticky-top shadow-sm" style="background: #ffffff;">
     <div class="container py-3">
         <div class="d-flex justify-content-between align-items-center">
 
             <!-- Left Section (Desktop) -->
             <nav class="d-none d-md-flex gap-4">
-                <a href="index.html" class="text-dark text-decoration-none nav-link" aria-current="page">Home</a>
-                <a href="recharge.html" class="text-dark text-decoration-none nav-link">Recharge</a>
+                <a href="index.html" class="text-dark text-decoration-none nav-link">Home</a>
+                <a href="recharge.html" class="text-dark text-decoration-none nav-link active fw-bold" aria-current="page" style="background-color: transparent !important;">Recharge</a>
                 <a href="prepaidplans.html" class="text-dark text-decoration-none nav-link">Prepaid Plans</a>
             </nav>
 
@@ -44,7 +100,7 @@
             </nav>
 
             <!-- Mobile View: Account (Right) -->
-            <a href="#" class="d-md-none text-dark text-decoration-none">
+            <a href="account.html" class="d-md-none text-dark text-decoration-none">
                 <i class="fa-solid fa-user fs-4"></i>
             </a>
         </div>
@@ -57,202 +113,317 @@
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
         </div>
         <div class="offcanvas-body d-flex flex-column gap-3">
-            <a href="#" class="text-dark nav-link active fw-bold" aria-current="page">Home</a>
-            <a href="#" class="text-dark text-decoration-none nav-link">Recharge</a>
-            <a href="#" class="text-dark text-decoration-none nav-link">Prepaid Plans</a>
-            <a href="#" class="text-dark text-decoration-none nav-link">About Us</a>
-            <a href="#" class="text-dark text-decoration-none nav-link">Contact Us</a>
-            <a href="#" class="text-dark text-decoration-none nav-link">Account</a>
+            <a href="index.html" class="text-dark text-decoration-none nav-link" aria-current="page">Home</a>
+            <a href="recharge.html" class="text-dark text-decoration-none nav-link">Recharge</a>
+            <a href="prepaidplans.html" class="text-dark text-decoration-none nav-link">Prepaid Plans</a>
+            <a href="about.html" class="text-dark text-decoration-none nav-link">About Us</a>
+            <a href="contact.html" class="text-dark text-decoration-none nav-link">Contact Us</a>
         </div>
     </div>
     <!-- MOBILE NAVBAR ENDS -->
 </header>
-
 <!-- HEADER ENDS -->
-    
-    <!-- Progress Indicator -->
-    
-    <!-- Multi-step Form -->
-    <section class="container my-4 p-4 shadow-lg rounded-4 bg-light text-dark">
-        <div class="row align-items-center">
-            
-            <!-- Form Section -->
-            <div class="col-md-6">
-                <div id="step1">
-                    <h4 class="fw-bold text-center">1️⃣ Details</h4>
-                    <p class="text-center text-muted">Mobi-Comm only provides Prepaid Service. Other services will be available soon.</p>
-                    <form> 
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">Mobile Number</label>
-                            <input type="text" class="form-control" id="fullName" placeholder="Enter your mobile number" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">Email ID</label>
-                            <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">Upload ID Proof (Aadhar)</label>
-                            <input type="file" class="form-control" id="idProof" required>
-                        </div>
-                        <button type="button" class="btn btn-warning w-100 fw-bold" onclick="showStep(2)">Next: Delivery Details</button>
-                    </form>
-                </div>
-                
-                <div id="step2" class="d-none">
-                    <h4 class="fw-bold text-center">2️⃣ Delivery Details</h4>
-                    <form>
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">Address</label>
-                            <textarea class="form-control" id="address" rows="3" placeholder="Enter your address" required></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">Pincode</label>
-                            <input type="text" class="form-control" id="pincode" placeholder="Enter your pincode" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">State</label>
-                            <input type="text" class="form-control" id="state" placeholder="Enter your state" required>
-                        </div>
-                        <div class="d-flex justify-content-center gap-3">
-                            <button type="button" class="btn btn-secondary fw-bold w-50" onclick="showStep(1)">Back</button>
-                            <button type="button" class="btn btn-warning fw-bold w-50" onclick="showStep(3)">Next: Payment</button>
-                        </div>
-                    </form>
-                </div>
-                
-                <div id="step3" class="d-none">
-                    <h4 class="fw-bold text-center">3️⃣ Payment</h4>
-                    <p class="text-center">Select your preferred payment method.</p>
-                    <form>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="paymentMethod" id="creditCard" required>
-                            <label class="form-check-label" for="creditCard">Credit Card</label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="paymentMethod" id="debitCard" required>
-                            <label class="form-check-label" for="debitCard">Debit Card</label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="paymentMethod" id="upi" required>
-                            <label class="form-check-label" for="upi">UPI</label>
-                        </div>
-                        <div class="form-check mb-4">
-                            <input class="form-check-input" type="radio" name="paymentMethod" id="netBanking" required>
-                            <label class="form-check-label" for="netBanking">Net Banking</label>
-                        </div>
-                        <div class="d-flex justify-content-center gap-3">
-                            <button type="button" class="btn btn-secondary fw-bold w-50" onclick="showStep(2)">Back</button>
 
-                            <button type="button" class="btn btn-warning fw-bold w-50" onclick="processPayment()">Proceed to Payment</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
 
-            <!-- Image Section -->
-            <div class="col-md-6 d-none d-md-block text-center">
-                <img src="assets/img/Port Number.jpg" alt="SIM Card" class="img-fluid rounded">
-            </div>
-        </div>
-    </section>
-    
+<!-- Combined Form with Differentiation Between Personal & Delivery Details -->
+<section class="container my-4 p-4 shadow-lg rounded-4 bg-light text-dark">
+    <h4 class="fw-bold text-center">Registration & Plan Selection</h4>
 
-<!-- FOOTER START -->
-    <footer class="footer border-top shadow-lg py-5" style="background-color: #f8f9fa; color: #1e1e1e;">
-        <div class="container">
-            <div class="row text-center text-md-start align-items-start g-4">
-                <!-- Company Info -->
-                <div class="col-md-4">
-                    <a class="navbar-brand d-block mb-3 mx-auto mx-md-0" href="#">
-                        <img src="assets/img/Logo.png" alt="Mobi-Comm Logo" style="height: 80px; width: 80px;">
-                    </a>
-                    <p class="mb-0" style="font-size: 1.1rem; line-height: 1.6; color: #1e1e1e;">
-                        Mobi-Comm delivers affordable, reliable mobile services, keeping you connected with cutting-edge solutions.
-                    </p>
-                    <hr class="mobile-divider d-md-none" style="border-top: 1px solid rgba(0, 0, 0, 0.1); margin: 1.5rem 0;">
-                </div>
+    <form>
+        <!-- Personal Details Section -->
+        <div class="form-section personal-details-section">
+            <h5 class="section-title">Personal Details</h5>
 
-                <!-- Quick Links -->
-                <div class="col-md-3 ps-md-3 d-flex justify-content-center justify-content-md-start align-items-center align-items-md-start">
-                    <div>
-                        <h5 class="fw-bold mb-3" style="color: #1e1e1e;">Quick Links</h5>
-                        <ul class="nav flex-column gap-2">
-                            <li class="nav-item">
-                                <a href="index.html" class="nav-link p-0 d-flex align-items-center" style="color: #1e1e1e; transition: color 0.3s ease;" onmouseover="this.style.color='#ffc600';" onmouseout="this.style.color='#1e1e1e';">
-                                    <i class="fa-solid fa-house me-2" style="color: #1e1e1e;"></i> Home
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="recharge.html" class="nav-link p-0 d-flex align-items-center" style="color: #1e1e1e; transition: color 0.3s ease;" onmouseover="this.style.color='#ffc600';" onmouseout="this.style.color='#1e1e1e';">
-                                    <i class="fa-solid fa-bolt me-2" style="color: #1e1e1e;"></i> Recharge
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="viewplans.html" class="nav-link p-0 d-flex align-items-center" style="color: #1e1e1e; transition: color 0.3s ease;" onmouseover="this.style.color='#ffc600';" onmouseout="this.style.color='#1e1e1e';">
-                                    <i class="fa-solid fa-list me-2" style="color: #1e1e1e;"></i> View Plans
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="about.html" class="nav-link p-0 d-flex align-items-center" style="color: #1e1e1e; transition: color 0.3s ease;" onmouseover="this.style.color='#ffc600';" onmouseout="this.style.color='#1e1e1e';">
-                                    <i class="fa-solid fa-info-circle me-2" style="color: #1e1e1e;"></i> About Us
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="contact.html" class="nav-link p-0 d-flex align-items-center" style="color: #1e1e1e; transition: color 0.3s ease;" onmouseover="this.style.color='#ffc600';" onmouseout="this.style.color='#1e1e1e';">
-                                    <i class="fa-solid fa-envelope me-2" style="color: #1e1e1e;"></i> Contact Us
-                                </a>
-                            </li>
-                        </ul>
-                        <hr class="mobile-divider d-md-none" style="border-top: 1px solid rgba(0, 0, 0, 0.1); margin: 1.5rem 0;">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="fullName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Date of Birth</label>
+                        <input type="text" class="form-control" id="dob" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Aadhar Number</label>
+                        <input type="text" class="form-control" id="idProof" required>
                     </div>
                 </div>
 
-                <!-- Contact Info -->
-                <div class="col-md-3 ps-md-3">
-                    <h5 class="fw-bold mb-3" style="color: #1e1e1e;">Get in Touch</h5>
-                    <ul class="list-unstyled" style="color: #1e1e1e; font-size: 1rem;">
-                        <li class="mb-2">
-                            <i class="fa-solid fa-phone me-2" style="color: #1e1e1e;"></i>
-                            <a href="tel:+18005551234" style="color: #1e1e1e; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#ffc600';" onmouseout="this.style.color='#1e1e1e';">+1-800-555-1234</a>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Email ID</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" required>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- Delivery Details Section -->
+        <div class="form-section delivery-details-section">
+            <h5 class="section-title">Delivery Details</h5>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Address</label>
+                        <textarea class="form-control" id="address" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Pincode</label>
+                        <input type="text" class="form-control" id="pincode" required>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">City</label>
+                        <input type="text" class="form-control" id="city" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">State</label>
+                        <input type="text" class="form-control" id="state" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="form-section">
+            <h5 class="fw-bold text-center">Enter Your Mobile Number for Porting</h5>
+            <div class="mb-3">
+                <label class="form-label">Mobile Number</label>
+                <input type="text" class="form-control" id="mobileNumber" placeholder="Enter your current number" required>
+            </div>
+        </div>
+        
+    
+
+        <div class="section-divider"></div>
+
+        <!-- Payment Info -->
+
+        <h5 class="fw-bold mt-4 text-center">Payment</h5>
+
+        <div class="d-flex justify-content-center">
+            <ol class="list-unstyled" style="width: 80%;"> <!-- Centering the ordered list -->
+                <li class="d-flex align-items-center mb-3">
+                    <span class="number-icon me-3">1</span>
+                    After completing the registration, you will be redirected to the Mobi-Comm Plan page.
+                </li>
+                <li class="d-flex align-items-center mb-3">
+                    <span class="number-icon me-3">2</span>
+                    On the Mobi-Comm Plan page, you can browse and select the plan that best suits your needs.
+                </li>
+                <li class="d-flex align-items-center mb-3">
+                    <span class="number-icon me-3">3</span>
+                    Proceed to make the payment for the selected plan.
+                </li>
+                <li class="d-flex align-items-center mb-3">
+                    <span class="number-icon me-3">4</span>
+                    You will receive a confirmation with further instructions on your number porting request.
+                </li>
+                <li class="d-flex align-items-center mb-3">
+                    <span class="number-icon me-3">5</span>
+                    Follow the provided steps to complete the porting process and activate your SIM.
+                </li>
+            </ol>
+        </div>
+
+        
+        <button type="submit" class="btn btn-success text-black w-100 btn-next" id="payButton" onclick="handlePayment()">Register & Buy New Plan</button>
+
+        <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1050;">
+            <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <strong class="me-auto">Success</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    Registered successfully!
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+
+<!-- FOOTER START -->
+<footer class="footer border-top shadow-lg py-5" style="background-color: #f8f9fa; color: #1e1e1e;">
+    <div class="container">
+        <div class="row text-center text-md-start align-items-start g-4">
+            <!-- Company Info -->
+            <div class="col-md-4">
+                <a class="navbar-brand d-block mb-3 mx-auto mx-md-0" href="#">
+                    <img src="assets/img/Logo.png" alt="Mobi-Comm Logo" style="height: 80px; width: 80px;">
+                </a>
+                <p class="mb-0" style="font-size: 1.1rem; line-height: 1.6; color: #1e1e1e;">
+                    Mobi-Comm delivers affordable, reliable mobile services, keeping you connected with cutting-edge solutions.
+                </p>
+                <hr class="mobile-divider d-md-none" style="border-top: 1px solid rgba(0, 0, 0, 0.1); margin: 1.5rem 0;">
+            </div>
+
+            <!-- Quick Links -->
+            <div class="col-md-3 ps-md-3 d-flex justify-content-center justify-content-md-start align-items-center align-items-md-start">
+                <div>
+                    <h5 class="fw-bold mb-3" style="color: #1e1e1e;">Quick Links</h5>
+                    <ul class="nav flex-column gap-2">
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link p-0 d-flex align-items-center" style="color: #1e1e1e; transition: color 0.3s ease;" onmouseover="this.style.color='#ffc600';" onmouseout="this.style.color='#1e1e1e';">
+                                <i class="fa-solid fa-house me-2" style="color: #1e1e1e;"></i> Home
+                            </a>
                         </li>
-                        <li>
-                            <i class="fa-solid fa-envelope me-2" style="color: #1e1e1e;"></i>
-                            <a href="mailto:support@mobi-comm.com" style="color: #1e1e1e; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#ffc600';" onmouseout="this.style.color='#1e1e1e';">support@mobi-comm.com</a>
+                        <li class="nav-item">
+                            <a href="recharge.html" class="nav-link p-0 d-flex align-items-center" style="color: #1e1e1e; transition: color 0.3s ease;" onmouseover="this.style.color='#ffc600';" onmouseout="this.style.color='#1e1e1e';">
+                                <i class="fa-solid fa-bolt me-2" style="color: #1e1e1e;"></i> Recharge
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="viewplans.html" class="nav-link p-0 d-flex align-items-center" style="color: #1e1e1e; transition: color 0.3s ease;" onmouseover="this.style.color='#ffc600';" onmouseout="this.style.color='#1e1e1e';">
+                                <i class="fa-solid fa-list me-2" style="color: #1e1e1e;"></i> View Plans
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="about.html" class="nav-link p-0 d-flex align-items-center" style="color: #1e1e1e; transition: color 0.3s ease;" onmouseover="this.style.color='#ffc600';" onmouseout="this.style.color='#1e1e1e';">
+                                <i class="fa-solid fa-info-circle me-2" style="color: #1e1e1e;"></i> About Us
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="contact.html" class="nav-link p-0 d-flex align-items-center" style="color: #1e1e1e; transition: color 0.3s ease;" onmouseover="this.style.color='#ffc600';" onmouseout="this.style.color='#1e1e1e';">
+                                <i class="fa-solid fa-envelope me-2" style="color: #1e1e1e;"></i> Contact Us
+                            </a>
                         </li>
                     </ul>
                     <hr class="mobile-divider d-md-none" style="border-top: 1px solid rgba(0, 0, 0, 0.1); margin: 1.5rem 0;">
                 </div>
-
-                <!-- Social Media -->
-                <div class="col-md-2">
-                    <h5 class="fw-bold mb-3" style="color: #1e1e1e;">Connect with Us</h5>
-                    <p class="mb-3" style="color: #1e1e1e; font-size: 1rem;">Stay updated with exclusive offers and news!</p>
-                    <div class="d-flex justify-content-center justify-content-md-start gap-2">
-                        <a href="#" class="btn rounded-circle shadow-sm" style="background-color: #fff7d1; color: #1e1e1e; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#ffc600';" onmouseout="this.style.backgroundColor='#fff7d1';">
-                            <i class="fa-brands fa-x-twitter"></i>
-                        </a>
-                        <a href="#" class="btn rounded-circle shadow-sm" style="background-color: #fff7d1; color: #1e1e1e; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#ffc600';" onmouseout="this.style.backgroundColor='#fff7d1';">
-                            <i class="fa-brands fa-instagram"></i>
-                        </a>
-                        <a href="#" class="btn rounded-circle shadow-sm" style="background-color: #fff7d1; color: #1e1e1e; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#ffc600';" onmouseout="this.style.backgroundColor='#fff7d1';">
-                            <i class="fa-brands fa-facebook"></i>
-                        </a>
-                    </div>
-                    <hr class="mobile-divider d-md-none" style="border-top: 1px solid rgba(0, 0, 0, 0.1); margin: 1.5rem 0;">
-                </div>
             </div>
 
-            <!-- Copyright -->
-            <div class="text-center border-top pt-3 mt-4" style="border-color: rgba(0, 0, 0, 0.1);">
-                <p class="mb-0" style="color: #1e1e1e; font-size: 0.9rem;">
-                    © 2025 Mobi-Comm, Inc. All rights reserved. | 
-                    <a href="/privacy" style="color: #1e1e1e; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#ffc600';" onmouseout="this.style.color='#1e1e1e';">Privacy Policy</a> | 
-                    <a href="/terms" style="color: #1e1e1e; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#ffc600';" onmouseout="this.style.color='#1e1e1e';">Terms of Service</a>
-                </p>
+            <!-- Contact Info -->
+            <div class="col-md-3 ps-md-3">
+                <h5 class="fw-bold mb-3" style="color: #1e1e1e;">Get in Touch</h5>
+                <ul class="list-unstyled" style="color: #1e1e1e; font-size: 1rem;">
+                    <li class="mb-2">
+                        <i class="fa-solid fa-phone me-2" style="color: #1e1e1e;"></i>
+                        <a href="tel:+18005551234" style="color: #1e1e1e; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#ffc600';" onmouseout="this.style.color='#1e1e1e';">+91 88552 47719</a>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-envelope me-2" style="color: #1e1e1e;"></i>
+                        <a href="mailto:support@mobi-comm.com" style="color: #1e1e1e; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#ffc600';" onmouseout="this.style.color='#1e1e1e';">support@mobi-comm.com</a>
+                    </li>
+                </ul>
+                <hr class="mobile-divider d-md-none" style="border-top: 1px solid rgba(0, 0, 0, 0.1); margin: 1.5rem 0;">
+            </div>
+
+            <!-- Social Media -->
+            <div class="col-md-2">
+                <h5 class="fw-bold mb-3" style="color: #1e1e1e;">Connect with Us</h5>
+                <p class="mb-3" style="color: #1e1e1e; font-size: 1rem;">Stay updated with exclusive offers and news!</p>
+                <div class="d-flex justify-content-center justify-content-md-start gap-2">
+                    <a href="#" class="btn rounded-circle shadow-sm" style="background-color: #fff7d1; color: #1e1e1e; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#ffc600';" onmouseout="this.style.backgroundColor='#fff7d1';">
+                        <i class="fa-brands fa-x-twitter"></i>
+                    </a>
+                    <a href="#" class="btn rounded-circle shadow-sm" style="background-color: #fff7d1; color: #1e1e1e; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#ffc600';" onmouseout="this.style.backgroundColor='#fff7d1';">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="#" class="btn rounded-circle shadow-sm" style="background-color: #fff7d1; color: #1e1e1e; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#ffc600';" onmouseout="this.style.backgroundColor='#fff7d1';">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+                </div>
+                <hr class="mobile-divider d-md-none" style="border-top: 1px solid rgba(0, 0, 0, 0.1); margin: 1.5rem 0;">
             </div>
         </div>
-    </footer>
+
+        <!-- Copyright -->
+        <div class="text-center border-top pt-3 mt-4" style="border-color: rgba(0, 0, 0, 0.1);">
+            <p class="mb-0" style="color: #1e1e1e; font-size: 0.9rem;">
+                © 2025 Mobi-Comm, Inc. All rights reserved. | 
+                <a href="/privacy" style="color: #1e1e1e; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#ffc600';" onmouseout="this.style.color='#1e1e1e';">Privacy Policy</a> | 
+                <a href="/terms" style="color: #1e1e1e; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#ffc600';" onmouseout="this.style.color='#1e1e1e';">Terms of Service</a>
+            </p>
+        </div>
+    </div>
+</footer>
 <!-- FOOTER END -->
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let selectedMobileNumber = "";
+    
+        // Handle the form submission
+        const form = document.querySelector("form");
+    
+        form.addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent form from submitting the default way
+    
+            // Collect form values
+            const fullName = document.getElementById("fullName").value;
+            const dob = document.getElementById("dob").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const idProof = document.getElementById("idProof").value;
+            const address = document.getElementById("address").value;
+            const pincode = document.getElementById("pincode").value;
+            const city = document.getElementById("city").value;
+            const state = document.getElementById("state").value;
+            const mobileNumberInput = document.getElementById("mobileNumber").value.trim();
+    
+            // Validate mobile number format (10-digit Indian number)
+            const mobilePattern = /^[6-9]\d{9}$/;
+            if (!mobilePattern.test(mobileNumberInput)) {
+                alert("Please enter a valid 10-digit mobile number.");
+                return;
+            }
+    
+            selectedMobileNumber = mobileNumberInput;
+    
+            // Create the user object to send to the backend
+            const user = {
+                name: fullName,
+                dob: dob,
+                emailId: email,
+                password: password,
+                aadhar: idProof,
+                address: address,
+                pincode: pincode,
+                city: city,
+                state: state,
+                mobileNo: selectedMobileNumber // User-entered mobile number
+            };
+    
+            // Send data to the backend using Fetch API
+            fetch("http://localhost:9090/api/users/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(user)
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Redirect to the plans page after success
+                    window.location.href = "prepaidplans.html";
+                } else {
+                    alert("Error registering user");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("An error occurred while registering.");
+            });
+        });
+    });
+    </script>
+    
+
+<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
 
 </body>
 </html>

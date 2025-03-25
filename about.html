@@ -13,36 +13,34 @@
 </head>
 <body>
 
-    <style>
-        .feature-circle {
-    width: 80px;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    font-size: 24px;
-}
+<style>
+    .feature-circle {
+        width: 80px;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        font-size: 24px;
+    }
 
-.feature-line {
-    width: 100%;
-    height: 4px;
-    background-color: #f8d210;
-    margin-top: -30px;
-}
+    .feature-line {
+        width: 100%;
+        height: 4px;
+        background-color: #f8d210;
+        margin-top: -30px;
+    }
 
-.feature-icon {
-    width: 60px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    font-size: 24px;
-}
-
-
-    </style>
+    .feature-icon {
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        font-size: 24px;
+    }
+</style>
 
 <!-- HEADER STARTS -->
 
@@ -75,7 +73,7 @@
             </nav>
 
             <!-- Mobile View: Account (Right) -->
-            <a href="#" class="d-md-none text-dark text-decoration-none">
+            <a href="account.html" class="d-md-none text-dark text-decoration-none">
                 <i class="fa-solid fa-user fs-4"></i>
             </a>
         </div>
@@ -88,12 +86,11 @@
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
         </div>
         <div class="offcanvas-body d-flex flex-column gap-3">
-            <a href="#" class="text-dark nav-link active fw-bold" aria-current="page">Home</a>
-            <a href="#" class="text-dark text-decoration-none nav-link">Recharge</a>
-            <a href="#" class="text-dark text-decoration-none nav-link">Prepaid Plans</a>
-            <a href="#" class="text-dark text-decoration-none nav-link">About Us</a>
-            <a href="#" class="text-dark text-decoration-none nav-link">Contact Us</a>
-            <a href="#" class="text-dark text-decoration-none nav-link">Account</a>
+            <a href="index.html" class="text-dark text-decoration-none nav-link" aria-current="page">Home</a>
+            <a href="recharge.html" class="text-dark text-decoration-none nav-link">Recharge</a>
+            <a href="prepaidplans.html" class="text-dark text-decoration-none nav-link">Prepaid Plans</a>
+            <a href="about.html" class="text-dark nav-link active fw-bold">About Us</a>
+            <a href="contact.html" class="text-dark text-decoration-none nav-link">Contact Us</a>
         </div>
     </div>
     <!-- MOBILE NAVBAR ENDS -->
@@ -106,35 +103,36 @@
 
     <main>
         <!-- SECTION 1 STARTS -->
-            <section class="container-fluid section1 bg-light">
-                <div class="container-fluid py-5">
-                    <div class="container-fluid">
-                        <div class="row ms-4">
-                            <!-- Left Column: Text Content -->
-                            <div class="col-md-6 text-center text-md-start">
-                                <h1 class="display-6 fw-bold">Mobi-Comm: Built for You</h1> <hr>
-                                <h1 class="text-warning fw-bold mb-3 ">Connecting People, Empowering Communication</h1>
-                                <p class=" mb-4">
-                                    At <strong>Mobi-Comm</strong>, we revolutionize mobile prepaid recharges with 
-                                    seamless, secure, and instant transactions. Our platform ensures 
-                                    hassle-free top-ups, exclusive offers, and trusted payment solutions.
-                                </p>
-                                <p class=" mb-4">Whether you're topping up for yourself or a loved one, Mobi-Comm guarantees reliability, security, and the best value for your money. Join thousands of satisfied users who trust us to keep them connected.</p>
-
-                                <div class="mt-3">
-                                    <button class="btn btn-primary me-2">Be A Part of Our Family</button>
-                                    <button class="btn btn-outline-primary">Contact Us</button>
-                                </div>
-                            </div>
-
-                            <!-- Right Column: Image Content -->
-                            <div class="col-md-6 text-center">
-                                <img src="assets/img/Who We Are1.jpg" alt="Mobi-Comm About Us" class="img-fluid rounded shadow-lg" width="450px">
-                            </div>
+        <section class="container-fluid section1 bg-light">
+            <div class="container py-4">
+                <div class="row align-items-center">
+                    <!-- Right Column: Image Content (First on Mobile, Last on Desktop) -->
+                    <div class="col-12 col-md-6 text-center order-1 order-md-2 my-4 mt-md-0">
+                        <img src="assets/img/Who We Are1.jpg" alt="Mobi-Comm About Us" class="img-fluid rounded shadow-lg" style="max-width: 90%; height: auto;">
+                    </div>
+        
+                    <!-- Left Column: Text Content (Last on Mobile, First on Desktop) -->
+                    <div class="col-12 col-md-6 text-center text-md-start order-2 order-md-1">
+                        <h1 class="display-6 fw-bold">Mobi-Comm: Built for You</h1>
+                        <hr>
+                        <h1 class="text-warning fw-bold mb-3">Connecting People, Empowering Communication</h1>
+                        <p class="mb-4">
+                            At <strong>Mobi-Comm</strong>, we revolutionize mobile prepaid recharges with 
+                            seamless, secure, and instant transactions. Our platform ensures 
+                            hassle-free top-ups, exclusive offers, and trusted payment solutions.
+                        </p>
+                        <p class="mb-4">Whether you're topping up for yourself or a loved one, Mobi-Comm guarantees reliability, security, and the best value for your money.</p>
+        
+                        <div class="mt-3">
+                            <a href="newsim.html" class="btn btn-primary me-2 mb-3">Be A Part of Our Family</a>
+                            <a href="contact.html" class="btn btn-outline-primary mb-3">Contact Us</a>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
+        
+        
         <!-- SECTION 1 ENDS -->
 
         <!-- SECTION 2 STARTS -->
@@ -192,23 +190,23 @@
         <!-- SECTION 2 ENDS -->
 
         <!-- SECTION 3 STARTS -->
-            <section class="container-fluid py-5 text-light">
+            <section class="container-fluid py-5 text-light bg-light">
                 <div class="container">
                     <div class="row align-items-center">
-                        <!-- Left Side: Image -->
-                        <div class="col-lg-6 text-center">
-                            <img src="assets/img/Why Choose Mobi-Comm.jpg" class="img-fluid rounded shadow-lg" alt="Mobi-Comm Services" width="420px">
+                        <!-- Left Side: Image (First on Mobile, Left on Desktop) -->
+                        <div class="col-12 col-lg-6 text-center mb-4 mb-lg-0">
+                            <img src="assets/img/Why Choose Mobi-Comm.jpg" class="img-fluid rounded shadow-lg" alt="Mobi-Comm Services" style="max-width: 85%; height: auto;">
                         </div>
             
                         <!-- Right Side: Features -->
-                        <div class="col-lg-6">
-                            <h2 class="fw-bold text-black">Why Choose Mobi-Comm?</h2>
-                            <p class="text-secondary">
+                        <div class="col-12 col-lg-6">
+                            <h2 class="fw-bold text-black text-center text-lg-start">Why Choose Mobi-Comm?</h2>
+                            <p class="text-secondary text-center text-lg-start">
                                 Our cutting-edge technology ensures that you get the best prepaid recharge experience with exclusive benefits.
                             </p>
             
                             <div class="d-flex align-items-start mt-4">
-                                <div class="feature-icon bg-warning text-dark">
+                                <div class="feature-icon bg-warning text-dark p-3 rounded">
                                     <i class="fa-solid fa-wallet fs-3"></i>
                                 </div>
                                 <div class="ms-3">
@@ -218,7 +216,7 @@
                             </div>
             
                             <div class="d-flex align-items-start mt-4">
-                                <div class="feature-icon bg-warning text-dark">
+                                <div class="feature-icon bg-warning text-dark p-3 rounded">
                                     <i class="fa-solid fa-signal fs-3"></i>
                                 </div>
                                 <div class="ms-3">
@@ -228,18 +226,17 @@
                             </div>
             
                             <div class="d-flex align-items-start mt-4">
-                                <div class="feature-icon bg-warning text-dark">
+                                <div class="feature-icon bg-warning text-dark p-3 rounded">
                                     <i class="fa-solid fa-tags fs-3"></i>
                                 </div>
                                 <div class="ms-3">
                                     <h5 class="fw-bold text-black">Affordable Plans</h5>
-                                    <p class="text-secondary small">Get the best budget-friendly recharge plans all users.</p>
+                                    <p class="text-secondary small">Get the best budget-friendly recharge plans for all users.</p>
                                 </div>
                             </div>
-                            
             
                             <div class="d-flex align-items-start mt-4">
-                                <div class="feature-icon bg-warning text-dark">
+                                <div class="feature-icon bg-warning text-dark p-3 rounded">
                                     <i class="fa-solid fa-rocket fs-3"></i>
                                 </div>
                                 <div class="ms-3">
@@ -318,7 +315,7 @@
                 <ul class="list-unstyled" style="color: #1e1e1e; font-size: 1rem;">
                     <li class="mb-2">
                         <i class="fa-solid fa-phone me-2" style="color: #1e1e1e;"></i>
-                        <a href="tel:+18005551234" style="color: #1e1e1e; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#ffc600';" onmouseout="this.style.color='#1e1e1e';">+1-800-555-1234</a>
+                        <a href="tel:+18005551234" style="color: #1e1e1e; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#ffc600';" onmouseout="this.style.color='#1e1e1e';">+91 88552 47719</a>
                     </li>
                     <li>
                         <i class="fa-solid fa-envelope me-2" style="color: #1e1e1e;"></i>
@@ -361,7 +358,6 @@
 
 <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
-<script src="assets/js/script.js"></script>
 
 
 </body>

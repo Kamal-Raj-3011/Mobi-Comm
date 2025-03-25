@@ -38,22 +38,28 @@ public class PaymentHistoryService {
             paymentHistory.setUser(user.get());
             paymentHistory.setPlan(plan.get());
 
-            // ✅ Set Payment & Expiry Date (yyyy-MM-dd format)
-            paymentHistory.setPaymentDate(LocalDateTime.now());
-            LocalDateTime expiryDate = paymentHistory.getPaymentDate().plusDays(plan.get().getValidity());
-            paymentHistory.setExpiryDate(expiryDate);
+            // ✅ Keep manually provided `paymentDate` or set current time
+            if (paymentHistory.getPaymentDate() == null) {
+                paymentHistory.setPaymentDate(LocalDateTime.now());
+            }
+
+            // ✅ Set expiryDate only if not manually provided
+            if (paymentHistory.getExpiryDate() == null) {
+                LocalDateTime expiryDate = paymentHistory.getPaymentDate().plusDays(plan.get().getValidity());
+                paymentHistory.setExpiryDate(expiryDate);
+            }
 
             // ✅ Save to DB
             PaymentHistory savedPayment = paymentHistoryRepository.save(paymentHistory);
 
             // ✅ Send Payment Confirmation Email
             emailService.sendPaymentConfirmation(
-                user.get().getEmailId(),  // User email
-                user.get().getName(),     // User name
-                plan.get().getTag(),      // Plan name
-                String.valueOf(plan.get().getPrice()), // Plan amount
-                expiryDate.toLocalDate().toString(), // Expiry Date (yyyy-MM-dd format)
-                savedPayment.getTransactionId() // Payment ID
+                user.get().getEmailId(),
+                user.get().getName(),
+                plan.get().getTag(),
+                String.valueOf(plan.get().getPrice()),
+                savedPayment.getExpiryDate().toLocalDate().toString(),
+                savedPayment.getTransactionId()
             );
 
             return savedPayment;

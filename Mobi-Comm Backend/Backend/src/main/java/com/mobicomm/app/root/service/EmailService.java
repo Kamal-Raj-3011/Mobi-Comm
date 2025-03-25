@@ -37,7 +37,7 @@ public class EmailService {
                     + "<p style='font-size: 16px; text-align: center;'>Your payment has been successfully processed! 🎉</p>"
                     + "<div style='border-radius: 8px; background-color: #f8f9fa; padding: 15px; margin-top: 10px;'>"
                     + "<table style='width: 100%; border-collapse: collapse; font-size: 16px;'>"
-                    + "<tr><td style='padding: 10px; font-weight: bold;'>📌 Payment ID:</td>"
+                    + "<tr><td style='padding: 10px; font-weight: bold;'>📌 Transaction ID:</td>"
                     + "<td style='padding: 10px; text-align: right;'>" + paymentId + "</td></tr>"
                     + "<tr><td style='padding: 10px; font-weight: bold;'>📦 Plan:</td>"
                     + "<td style='padding: 10px; text-align: right;'>" + planName + "</td></tr>"
